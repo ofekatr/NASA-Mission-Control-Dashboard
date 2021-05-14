@@ -1,6 +1,7 @@
 import parse from 'csv-parse';
 import fs from 'fs';
 import path from 'path';
+import logger from '../logger/logger';
 
 type Planet = any;
 const habitablePlanets: Array<Planet> = [];
@@ -22,11 +23,11 @@ fs.createReadStream(path.join(__dirname, '..', '..', 'data', 'kepler_data.csv'))
     }
   })
   .on('error', (err) => {
-    console.log(err);
+    logger.log(err);
   })
   .on('end', () => {
-    console.log(habitablePlanets.map((planet) => {
+    logger.log(habitablePlanets.map((planet) => {
       return planet['kepler_name'];
     }));
-    console.log(`${habitablePlanets.length} habitable planets found!`);
+    logger.log(`${habitablePlanets.length} habitable planets found!`);
   });
