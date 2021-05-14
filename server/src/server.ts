@@ -1,10 +1,10 @@
-import "dotenv/config";
 import http from "http";
 import createApp from "./app";
+import globalConfig from "./config/global.config";
 import logger from "./logger/logger";
 
 async function startServer() {
-    const port = process.env.PORT || 8080;
+    const { port } = globalConfig;
     const app = await createApp();
     const server = http.createServer(app);
 
