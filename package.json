@@ -1,0 +1,28 @@
+{
+  "name": "nasa-mission-control",
+  "version": "1.0.0",
+  "description": "NASA Mission Control Dashboard Project",
+  "main": "index.js",
+  "scripts": {
+    "watch-server": "npm run dev --prefix server",
+    "watch-client": "npm run start --prefix client",
+    "watch": "concurrently --kill-others \"npm run watch-server\" \"npm run watch-client\"",
+    "install-server": "npm install --prefix server",
+    "install-client": "npm install --prefix client",
+    "install": "npm run install-server && npm run install-client"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ofekatr/NASA-Mission-Control-Dashboard.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ofekatr/NASA-Mission-Control-Dashboard/issues"
+  },
+  "homepage": "https://github.com/ofekatr/NASA-Mission-Control-Dashboard#readme",
+  "devDependencies": {
+    "concurrently": "^6.1.0"
+  }
+}
