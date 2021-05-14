@@ -11,47 +11,25 @@ function isHabitablePlanet(planet: Planet) {
         && planet['koi_prad'] < 1.6;
 }
 
-function createPlanetsReadStream(): parse.Parser {
-    return fs.createReadStream(path.join(__dirname, '..', '..', 'data', 'kepler_data.csv'))
-        .pipe(parse({
-            comment: '#',
-            columns: true,
-        }));
-}
-
-function addPlanetsReadStreamEventHandlers(
-    rs: parse.Parser,
-    promiseArgs: {
-        resolve: (value: unknown) => void,
-        reject: (reason?: any) => void,
-    },
-    habitablePlanets: Planet[]
-) {
-    const { resolve, reject } = promiseArgs;
-    return rs
-        .on('data', (data) => {
-            if (isHabitablePlanet(data)) {
-                habitablePlanets.push(data);
-            }
-        })
-        .on('error', (err) => {
-            console.log(err);
-            reject(err);
-        })
-        .on('end', () => {
-            console.log(habitablePlanets.map((planet) => {
-                return planet['kepler_name'];
-            }));
-            console.log(`${habitablePlanets.length} habitable planets found!`);
-            resolve(habitablePlanets);
-        });
-}
-
 async function loadHabitablePlanets(habitablePlanets: Planet[]) {
-    const rs = createPlanetsReadStream()
-    return new Promise((resolve, reject) =>
-        addPlanetsReadStreamEventHandlers(rs, { resolve, reject }, habitablePlanets)
-    );
+    return new Promise((resolve, reject) => {
+        fs.createReadStream(path.join(__dirname, '..', '..', 'data', 'kepler_data.csv'))
+            .pipe(parse({
+                comment: '#',
+                columns: true,
+            }))
+            .on('data', (data) => {
+                if (isHabitablePlanet(data)) {
+                    habitablePlanets.push(data);
+                }
+            })
+            .on('error', (err) => {
+                reject(err);
+            })
+            .on('end', () => {
+                resolve(habitablePlanets);
+            });
+    });
 }
 
 async function createPlanetsService() {
