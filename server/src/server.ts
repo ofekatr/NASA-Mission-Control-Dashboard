@@ -2,7 +2,7 @@ import "dotenv/config";
 import http from "http";
 import createApp from "./app";
 
-async function main() {
+async function startServer() {
     const port = process.env.PORT || 8080;
     const app = await createApp();
     const server = http.createServer(app);
@@ -12,4 +12,4 @@ async function main() {
     });
 }
 
-export default main();
+export default startServer();
