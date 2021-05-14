@@ -1,12 +1,14 @@
-import { Router } from "express";
+import { Router, Express } from "express";
 import { PlanetsController } from "./planets.controller";
 
-function createPlanetsRouter(planetsController: PlanetsController) {
+function attachPlanetsRouter(app: Express, planetsController: PlanetsController) {
     const planetsRouter = Router();
 
-    planetsRouter.get('/', (_, res) => res.send(planetsController.getPlanets()));
+    // GET all planets.
+    planetsRouter.get('/', (_, res) => res.send(planetsController.getAllPlanets()));
 
-    return planetsRouter;
+    app.use('/planets', planetsRouter);
+    return app;
 }
 
-export default createPlanetsRouter;
+export default attachPlanetsRouter;

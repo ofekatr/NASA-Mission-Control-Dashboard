@@ -1,10 +1,12 @@
-function createPlanetsService() {
-    function getPlanets(): string {
-        return "Planets!";
+import { PlanetsModel } from "../../models/planets.model";
+
+function createPlanetsService(planetsModel: PlanetsModel) {
+    function getAllPlanets(): PlanetsModel {
+        return planetsModel;
     }
 
     return {
-        getPlanets,
+        getAllPlanets,
     };
 }
 

@@ -1,5 +1,5 @@
-import http from "http";
 import "dotenv/config";
+import http from "http";
 import app from "./app";
 
 const port = process.env.PORT || 8080;

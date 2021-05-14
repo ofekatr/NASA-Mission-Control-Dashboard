@@ -1,12 +1,12 @@
 import { PlanetsService } from "./planets.service";
 
 function createPlanetsController(planetsService: PlanetsService) {
-    function getPlanets(): string {
-        return planetsService.getPlanets();
+    function getAllPlanets() {
+        return planetsService.getAllPlanets();
     }
 
     return {
-        getPlanets,
+        getAllPlanets,
     };
 }
 
