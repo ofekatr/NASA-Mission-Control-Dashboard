@@ -1,3 +1,4 @@
+import path from "path";
 import cors from "cors";
 import express from "express";
 import createPlanetsModel from "./model/planets.model";
@@ -10,6 +11,9 @@ async function createApp() {
     app.use(cors({
         origin: process.env.CLIENT_ENDPOINT,
     }))
+    const publicPath = path.join(__dirname, "..", "public");
+    console.log(publicPath);
+    app.use(express.static(publicPath));
     app.use(express.json());
 
     const planetsModel = await createPlanetsModel();
