@@ -1,11 +1,15 @@
 import "dotenv/config";
 import http from "http";
-import app from "./app";
+import createApp from "./app";
 
-const port = process.env.PORT || 8080;
+async function main() {
+    const port = process.env.PORT || 8080;
+    const app = await createApp();
+    const server = http.createServer(app);
 
-const server = http.createServer(app);
+    return server.listen(port, () => {
+        console.log(`Server started.\nListening on port ${port}...`);
+    });
+}
 
-export default server.listen(port, () => {
-    console.log(`Server started.\nListening on port ${port}...`);
-});
+export default main();
