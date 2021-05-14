@@ -1,5 +1,6 @@
 import cors from "cors";
 import express from "express";
+import createPlanetsModel from "./model/planets.model";
 import createPlanetsController from "./routes/planets/planets.controller";
 import attachPlanetsRouter from "./routes/planets/planets.router";
 import createPlanetsService from "./services/planets.service";
@@ -11,9 +12,9 @@ async function createApp() {
     }))
     app.use(express.json());
 
-    const planetsService = await createPlanetsService();
+    const planetsModel = await createPlanetsModel();
+    const planetsService = createPlanetsService(planetsModel);
     const planetsController = createPlanetsController(planetsService);
-    attachPlanetsRouter(app, planetsController);
 
     app.get("/", (_, res) => res.send("Hello World!"));
     attachPlanetsRouter(app, planetsController);
