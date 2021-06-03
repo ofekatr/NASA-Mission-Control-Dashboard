@@ -3,9 +3,11 @@ import "dotenv/config";
 import { checkIfObjectHasNullProperties } from "@utils/object.util";
 
 const extractGlobalConfigPropsFromObject = ({
+    NODE_ENV = "development",
     PORT: port = 8080,
     CLIENT_ENDPOINT: clientEndpoint,
 }: any) => ({
+    nodeEnv: NODE_ENV,
     port,
     clientEndpoint,
 });
