@@ -1,6 +1,6 @@
 import assert from 'assert';
 import "dotenv/config";
-import { checkIfObjectHasNullProperties } from "../object.util";
+import { checkIfObjectHasNullProperties } from "@utils/object.util";
 
 const extractGlobalConfigPropsFromObject = ({
     PORT: port = 8080,

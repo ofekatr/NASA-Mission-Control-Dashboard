@@ -1,6 +1,6 @@
-import { GeneralObject } from "./types/general";
+import { BasicObject } from "@server-types/general";
 
-function checkIfObjectHasNullProperties(object: GeneralObject): boolean {
+function checkIfObjectHasNullProperties(object: BasicObject): boolean {
     return [...Object.values(object)].some(value => value == null);
 }
 

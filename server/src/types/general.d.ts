@@ -1,1 +1,1 @@
-export type GeneralObject = { [key: string]: any };
+export type BasicObject = { [key: string]: any };

@@ -1,4 +1,4 @@
-import { PlanetsModel } from "../../src/model/planets.model";
+import { PlanetsModel } from "@models/planets.model";
 
 const planetsModelMock: PlanetsModel = {
     getAllPlanets: () => ["Planet1", "Planet2", "Planet3"],

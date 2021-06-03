@@ -1,6 +1,6 @@
 import { expect } from "chai";
-import createPlanetService, { PlanetsService } from "../../../src/services/planets.service";
-import planetsModelMock from "../../mocks/planets-model";
+import createPlanetService, { PlanetsService } from "@services/planets.service";
+import planetsModelMock from "@tests/mocks/planets-model";
 
 describe("Planets Service", function () {
     let planetsService: PlanetsService;

@@ -2,12 +2,7 @@
   "compilerOptions": {
     "target": "es6",
     "module": "commonjs",
-    "lib": [
-      "dom",
-      "es6",
-      "es2017",
-      "esnext.asynciterable"
-    ],
+    "lib": ["dom", "es6", "es2017", "esnext.asynciterable"],
     "sourceMap": true,
     "outDir": "./dist",
     "moduleResolution": "node",
@@ -25,14 +20,26 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "resolveJsonModule": true,
-    "baseUrl": "."
+    "baseUrl": ".",
+    "paths": {
+      "@root/*": ["src/*"],
+      "@services/*": ["src/services/*"],
+      "@routes/*": ["src/routes/*"],
+      "@models/*": ["src/models/*"],
+      "@configs/*": ["src/config/*"],
+      "@logs/*": ["src/logs/*"],
+      "@libs/*": ["src/libs/*"],
+      "@jsons/*": ["src/jsons/*"],
+      "@utils/*": ["src/utils/*"],
+      "@middlewares/*": ["src/middlewares/*"],
+      "@constants/*": ["src/constants/*"],
+      "@loaders/*": ["src/loaders/*"],
+      "@tests/*": ["src/tests/*"],
+      "@server-types/*": ["src/types/*"],
+      "@app": ["src/app.ts"],
+      "@server": ["src/server.ts"]
+    }
   },
-  "exclude": [
-    "node_modules"
-  ],
-  "include": [
-    "./*.ts",
-    "./src/**/*.tsx",
-    "./src/**/*.ts"
-  ]
+  "exclude": ["node_modules"],
+  "include": ["./*.ts", "./src/**/*.tsx", "./src/**/*.ts"]
 }
