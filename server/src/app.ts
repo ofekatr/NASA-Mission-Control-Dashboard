@@ -1,3 +1,4 @@
+import applyMorganMiddleware from "@middlewares/morgan";
 import cors from "cors";
 import express from "express";
 import path from "path";
@@ -10,12 +11,14 @@ async function createApp() {
         origin: serverConfig.clientEndpoint,
     }))
 
+    applyMorganMiddleware(app);
+
     const publicPath = path.join(__dirname, "..", "public");
     app.use(express.static(publicPath));
 
-    app.use(express.json());
+    app.use(express.json() as any);
 
-    app.get("/", (_, res) => res.sendFile(path.join(publicPath, "index.html")));
+    app.get("/", (_req, res) => res.sendFile(path.join(publicPath, "index.html")));
 
     await loadPlanetsModule(app);
 

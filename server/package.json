@@ -15,6 +15,7 @@
     "cors": "^2.8.5",
     "csv-parse": "^4.15.4",
     "express": "^4.17.1",
+    "morgan": "^1.10.0",
     "winston": "^3.3.3"
   },
   "_moduleAliases": {
@@ -24,7 +25,7 @@
     "@middlewares": "src/middlewares",
     "@constants": "src/constants",
     "@definitions": "src/definitions",
-    "@logs": "src/logs",
+    "@logs": "src/helpers/logs",
     "@libs": "src/libs",
     "@loaders": "src/loaders",
     "@jsons": "src/jsons",
@@ -35,6 +36,7 @@
     "@types/chai": "^4.2.18",
     "@types/dotenv": "^8.2.0",
     "@types/mocha": "^8.2.2",
+    "@types/morgan": "^1.9.2",
     "@types/rewire": "^2.5.28",
     "@types/sinon": "^10.0.2",
     "@types/winston": "^2.4.4",

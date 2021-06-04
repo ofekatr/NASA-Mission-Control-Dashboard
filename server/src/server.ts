@@ -10,7 +10,7 @@ async function startServer() {
     const server = http.createServer(app);
 
     return server.listen(port, () => {
-        logger.log(`Server started.\nListening on port ${port}...`);
+        logger.info(`Server started.\nListening on port ${port}...`);
     });
 }
 
