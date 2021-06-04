@@ -22,7 +22,6 @@
     "resolveJsonModule": true,
     "baseUrl": ".",
     "paths": {
-      "@root/*": ["src/*"],
       "@planets/*": ["src/planets/*"],
       "@configs/*": ["src/config/*"],
       "@logs/*": ["src/helpers/logs/*"],
@@ -34,7 +33,8 @@
       "@loaders/*": ["src/loaders/*"],
       "@definitions/*": ["src/definitions/*"],
       "@app": ["src/app.ts"],
-      "@server": ["src/server.ts"]
+      "@server": ["src/server.ts"],
+      "@root/*": ["src/*"],
     }
   },
   "exclude": ["node_modules"],

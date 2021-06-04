@@ -1,12 +1,13 @@
 import cors from "cors";
 import express from "express";
 import path from "path";
+import serverConfig from "./config/server.config";
 import loadPlanetsModule from "./planets";
 
 async function createApp() {
     const app = express();
     app.use(cors({
-        origin: process.env.CLIENT_ENDPOINT,
+        origin: serverConfig.clientEndpoint,
     }))
 
     const publicPath = path.join(__dirname, "..", "public");

@@ -1,8 +1,4 @@
-import { PlanetsDal } from "@definitions/planets";
-
-interface CreatePlanetsServiceParams {
-    planetsDal: PlanetsDal;
-}
+import { CreatePlanetsServiceParams } from "@definitions/planets";
 
 function createPlanetService({ planetsDal }: CreatePlanetsServiceParams) {
     function getAllPlanets() {

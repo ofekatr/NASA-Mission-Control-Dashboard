@@ -1,12 +1,6 @@
-import { Planet } from '@definitions/planets';
-import { deepFreezeAndSeal } from '../helpers/object.helper';
-import { requiredArgument } from '../helpers/validators/required-argument';
-
-interface CreatePlanetsDalRequestParams {
-    parse: any;
-    fs: any;
-    path: any;
-}
+import { CreatePlanetsDalRequestParams, Planet } from '@definitions/planets';
+import { deepFreezeAndSeal } from '@helpers/object.helper';
+import { requiredArgument } from '@helpers/validators/required-argument';
 
 async function createPlanetsModel({
     parse = requiredArgument("parse"), fs = requiredArgument("fs"), path = requiredArgument("path")
