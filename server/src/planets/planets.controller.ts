@@ -1,4 +1,4 @@
-import { PlanetsService } from "@services/planets.service";
+import { PlanetsService } from "@planets/planets.service";
 
 function createPlanetsController(planetsService: PlanetsService) {
     function getAllPlanets() {

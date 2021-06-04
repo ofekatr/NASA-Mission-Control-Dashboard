@@ -1,4 +1,4 @@
-import { PlanetsModel } from "@models/planets.model";
+import { PlanetsModel } from "@planets/planets.model";
 
 function createPlanetService(planetsModel: PlanetsModel){
     function getAllPlanets() {

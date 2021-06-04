@@ -1,10 +1,10 @@
 import path from "path";
 import cors from "cors";
 import express from "express";
-import createPlanetsModel from "@models/planets.model";
-import createPlanetsController from "@routes/planets/planets.controller";
-import attachPlanetsRouter from "@routes/planets/planets.router";
-import createPlanetsService from "@services/planets.service";
+import createPlanetsModel from "@planets/planets.model";
+import createPlanetsController from "@planets/planets.controller";
+import attachPlanetsRouter from "@planets/planets.router";
+import createPlanetsService from "@planets/planets.service";
 
 async function createApp() {
     const app = express();

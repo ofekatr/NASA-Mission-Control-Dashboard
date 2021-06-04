@@ -17,9 +17,7 @@
     "express": "^4.17.1"
   },
   "_moduleAliases": {
-    "@services": "src/services",
-    "@routes": "src/routes",
-    "@models": "src/models",
+    "@planets": "src/planets",
     "@configs": "src/config",
     "@utils": "src/utils",
     "@middlewares": "src/middlewares",
@@ -29,7 +27,6 @@
     "@libs": "src/libs",
     "@loaders": "src/loaders",
     "@jsons": "src/jsons",
-    "@tests": "src/tests",
     "@app": "src/app.ts",
     "@server": "src/server.ts"
   },

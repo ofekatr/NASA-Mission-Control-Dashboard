@@ -23,9 +23,7 @@
     "baseUrl": ".",
     "paths": {
       "@root/*": ["src/*"],
-      "@services/*": ["src/services/*"],
-      "@routes/*": ["src/routes/*"],
-      "@models/*": ["src/models/*"],
+      "@planets/*": ["src/planets/*"],
       "@configs/*": ["src/config/*"],
       "@logs/*": ["src/logs/*"],
       "@libs/*": ["src/libs/*"],
@@ -34,7 +32,6 @@
       "@middlewares/*": ["src/middlewares/*"],
       "@constants/*": ["src/constants/*"],
       "@loaders/*": ["src/loaders/*"],
-      "@tests/*": ["src/tests/*"],
       "@server-types/*": ["src/types/*"],
       "@app": ["src/app.ts"],
       "@server": ["src/server.ts"]

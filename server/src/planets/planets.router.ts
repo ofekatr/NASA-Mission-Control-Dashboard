@@ -1,5 +1,5 @@
 import { Router, Express } from "express";
-import { PlanetsController } from "./planets.controller";
+import { PlanetsController } from "@planets/planets.controller";
 
 function attachPlanetsRouter(app: Express, planetsController: PlanetsController) {
     const planetsRouter = Router();
