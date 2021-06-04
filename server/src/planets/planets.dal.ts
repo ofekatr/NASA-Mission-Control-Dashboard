@@ -1,4 +1,5 @@
 import { Planet } from '@definitions/planets';
+import { deepFreezeAndSeal } from '../helpers/object.helper';
 import { requiredArgument } from '../helpers/validators/required-argument';
 
 interface CreatePlanetsDalRequestParams {
@@ -45,9 +46,9 @@ async function createPlanetsModel({
         return planets;
     }
 
-    return {
+    return deepFreezeAndSeal({
         getAllPlanets,
-    };
+    });
 }
 
 export default createPlanetsModel;
