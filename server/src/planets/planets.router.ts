@@ -1,8 +1,9 @@
 import { ExpandType } from "@definitions/general";
 import { PlanetsController } from "@planets/planets.controller";
 
-type CreatePlanetsRouterParamas = ExpandType<{ 
-    planetsController: PlanetsController 
+type CreatePlanetsRouterParamas = ExpandType<{
+    planetsController: PlanetsController;
+    Router: any;
 }>
 
 function createPlanetsRouter(createParams: CreatePlanetsRouterParamas) {

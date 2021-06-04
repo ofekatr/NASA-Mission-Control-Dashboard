@@ -5,10 +5,6 @@ import { ThenArg } from "./promises";
 
 export type Planet = any;
 
-export interface PlanetsRouterRequestParams {
-    planetsController: PlanetsController;
-}
-
 export type PlanetsService = ReturnType<typeof createPlanetService>;
 
 export type PlanetsModel = ThenArg<ReturnType<typeof createPlanetsModel>>;

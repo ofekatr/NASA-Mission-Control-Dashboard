@@ -1,8 +1,15 @@
 import { Planet } from '@definitions/planets';
+import { requiredArgument } from '../helpers/validators/required-argument';
+
+interface CreatePlanetsDalRequestParams {
+    parse: any;
+    fs: any;
+    path: any;
+}
 
 async function createPlanetsModel({
-    parse, fs, path
-}) {
+    parse = requiredArgument("parse"), fs = requiredArgument("fs"), path = requiredArgument("path")
+}: CreatePlanetsDalRequestParams) {
     function isHabitablePlanet(planet: Planet) {
         return planet['koi_disposition'] === 'CONFIRMED'
             && planet['koi_insol'] > 0.36 && planet['koi_insol'] < 1.11

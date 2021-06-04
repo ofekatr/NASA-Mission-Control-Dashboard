@@ -1,10 +1,14 @@
 import { PlanetsModel } from "@definitions/planets";
 
-function createPlanetService(planetsModel: PlanetsModel){
+interface CreatePlanetsServiceParams {
+    planetsDal: PlanetsModel;
+}
+
+function createPlanetService({ planetsDal }: CreatePlanetsServiceParams) {
     function getAllPlanets() {
-        return planetsModel.getAllPlanets();
+        return planetsDal.getAllPlanets();
     }
-    
+
     return {
         getAllPlanets,
     }

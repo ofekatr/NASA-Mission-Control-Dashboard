@@ -1,6 +1,10 @@
 import { PlanetsService } from "@definitions/planets";
 
-function createPlanetsController(planetsService: PlanetsService) {
+interface CreatePlanetsControllerParams {
+    planetsService: PlanetsService
+}
+
+function createPlanetsController({ planetsService }: CreatePlanetsControllerParams) {
     function getAllPlanets() {
         return planetsService.getAllPlanets();
     }
