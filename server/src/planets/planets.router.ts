@@ -1,11 +1,17 @@
+import { ExpandType } from "@definitions/general";
 import { PlanetsController } from "@planets/planets.controller";
-import { Router } from "express";
 
-function createPlanetsRouter(planetsController: PlanetsController): Router {
+type CreatePlanetsRouterParamas = ExpandType<{ 
+    planetsController: PlanetsController 
+}>
+
+function createPlanetsRouter(createParams: CreatePlanetsRouterParamas) {
+    const { planetsController, Router } = createParams;
+
     const planetsRouter = Router();
 
     // GET all planets.
-    planetsRouter.get('/', (_, res) => res.send(planetsController.getAllPlanets()));
+    planetsRouter.get('/', (_req, res) => res.send(planetsController.getAllPlanets()));
 
     return planetsRouter;
 }

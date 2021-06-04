@@ -1,4 +1,4 @@
-import { PlanetsModel } from "@root/planets/planets.dal";
+import { PlanetsModel } from "@definitions/planets";
 
 function createPlanetService(planetsModel: PlanetsModel){
     function getAllPlanets() {
@@ -10,5 +10,4 @@ function createPlanetService(planetsModel: PlanetsModel){
     }
 }
 
-export type PlanetsService = ReturnType<typeof createPlanetService>;
 export default createPlanetService;

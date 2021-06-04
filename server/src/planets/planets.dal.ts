@@ -1,5 +1,4 @@
 import { Planet } from '@definitions/planets';
-import { ThenArg } from '@definitions/promises';
 
 async function createPlanetsModel({
     parse, fs, path
@@ -44,5 +43,4 @@ async function createPlanetsModel({
     };
 }
 
-export type PlanetsModel = ThenArg<ReturnType<typeof createPlanetsModel>>;
 export default createPlanetsModel;
