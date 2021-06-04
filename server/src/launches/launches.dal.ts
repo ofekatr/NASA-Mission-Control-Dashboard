@@ -1,7 +1,7 @@
 import { Launch } from "@definitions/launches";
 import { deepFreezeAndSeal } from "@helpers/object.helper";
 
-function createLaunchesModel() {
+function createLaunchesDal() {
     const launches: Launch[] = [];
 
     const launch: Launch = {
@@ -17,9 +17,13 @@ function createLaunchesModel() {
 
     launches[launch.flightNumber] = launch;
 
+    function getAllLaunches() {
+        return launches.filter(launch => !!launch);
+    }
+
     return deepFreezeAndSeal({
-        launches,
+        getAllLaunches,
     });
 }
 
-export default createLaunchesModel;
+export default createLaunchesDal;

@@ -1,3 +1,4 @@
+import loadLaunchesModule from "@launches/index";
 import applyMorganMiddleware from "@middlewares/morgan";
 import cors from "cors";
 import express, { RequestHandler } from "express";
@@ -21,6 +22,7 @@ async function createApp() {
     app.get("/", (_req, res) => res.sendFile(path.join(publicPath, "index.html")));
 
     await loadPlanetsModule(app);
+    loadLaunchesModule(app);
 
     return app;
 }

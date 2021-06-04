@@ -23,6 +23,7 @@
     "baseUrl": ".",
     "paths": {
       "@planets/*": ["src/planets/*"],
+      "@launches/*": ["src/launches/*"],
       "@configs/*": ["src/config/*"],
       "@logs/*": ["src/helpers/logs/*"],
       "@libs/*": ["src/libs/*"],

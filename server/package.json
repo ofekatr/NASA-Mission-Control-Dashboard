@@ -20,6 +20,7 @@
   },
   "_moduleAliases": {
     "@planets": "src/planets",
+    "@launches": "src/launches",
     "@configs": "src/config",
     "@helpers": "src/helpers",
     "@middlewares": "src/middlewares",
