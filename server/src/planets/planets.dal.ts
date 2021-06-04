@@ -1,7 +1,7 @@
 import parse from 'csv-parse';
 import fs from 'fs';
 import path from 'path';
-import { ThenArg } from '../types/promises';
+import { ThenArg } from '../definitions/promises';
 
 type Planet = any;
 

@@ -1,6 +1,6 @@
 import assert from 'assert';
 import "dotenv/config";
-import { checkIfObjectHasNullProperties } from "@utils/object.util";
+import { checkIfObjectHasNullProperties } from "@root/helpers/object.helper";
 
 const extractGlobalConfigPropsFromObject = ({
     NODE_ENV = "development",

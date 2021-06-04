@@ -1,8 +1,8 @@
 import "module-alias/register";
 import http from "http";
 import createApp from "@app";
-import globalConfig from "@configs/global.config";
-import logger from "@logs/logger";
+import globalConfig from "@configs/server.config";
+import logger from "@helpers/logs/logger";
 
 async function startServer() {
     const { port } = globalConfig;

@@ -1,4 +1,4 @@
-import { BasicObject } from "@server-types/general";
+import { BasicObject } from "@definitions/general";
 
 function checkIfObjectHasNullProperties(object: BasicObject): boolean {
     return [...Object.values(object)].some(value => value == null);

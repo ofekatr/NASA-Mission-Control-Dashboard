@@ -25,14 +25,14 @@
       "@root/*": ["src/*"],
       "@planets/*": ["src/planets/*"],
       "@configs/*": ["src/config/*"],
-      "@logs/*": ["src/logs/*"],
+      "@logs/*": ["src/helpers/logs/*"],
       "@libs/*": ["src/libs/*"],
       "@jsons/*": ["src/jsons/*"],
-      "@utils/*": ["src/utils/*"],
+      "@helpers/*": ["src/helpers/*"],
       "@middlewares/*": ["src/middlewares/*"],
       "@constants/*": ["src/constants/*"],
       "@loaders/*": ["src/loaders/*"],
-      "@server-types/*": ["src/types/*"],
+      "@definitions/*": ["src/definitions/*"],
       "@app": ["src/app.ts"],
       "@server": ["src/server.ts"]
     }

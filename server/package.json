@@ -19,10 +19,10 @@
   "_moduleAliases": {
     "@planets": "src/planets",
     "@configs": "src/config",
-    "@utils": "src/utils",
+    "@helpers": "src/helpers",
     "@middlewares": "src/middlewares",
     "@constants": "src/constants",
-    "@server-types": "src/types",
+    "@definitions": "src/definitions",
     "@logs": "src/logs",
     "@libs": "src/libs",
     "@loaders": "src/loaders",
