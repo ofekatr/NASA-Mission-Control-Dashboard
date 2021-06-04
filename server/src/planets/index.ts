@@ -1,12 +1,14 @@
 import createPlanetsController from "@planets/planets.controller";
-import createPlanetsService from "@planets/planets.service";
 import createPlanetsModel from "@planets/planets.dal";
-import createPlanetsRouter from "./planets.router";
+import createPlanetsService from "@planets/planets.service";
+import parse from 'csv-parse';
 import { Express } from "express";
-
+import fs from 'fs';
+import path from 'path';
+import createPlanetsRouter from "./planets.router";
 
 async function loadPlanetsModule(app: Express): Promise<Express> {
-    const planetsModel = await createPlanetsModel();
+    const planetsModel = await createPlanetsModel({ parse, fs, path });
     const planetsService = createPlanetsService(planetsModel);
     const planetsController = createPlanetsController(planetsService);
     const planetsRouter = createPlanetsRouter(planetsController);
