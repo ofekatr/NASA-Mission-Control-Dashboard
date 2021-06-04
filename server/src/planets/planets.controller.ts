@@ -1,8 +1,4 @@
-import { PlanetsService } from "@definitions/planets";
-
-interface CreatePlanetsControllerParams {
-    planetsService: PlanetsService
-}
+import { CreatePlanetsControllerParams } from "@definitions/planets";
 
 function createPlanetsController({ planetsService }: CreatePlanetsControllerParams) {
     function getAllPlanets() {

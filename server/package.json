@@ -14,7 +14,8 @@
   "dependencies": {
     "cors": "^2.8.5",
     "csv-parse": "^4.15.4",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "winston": "^3.3.3"
   },
   "_moduleAliases": {
     "@planets": "src/planets",
@@ -36,6 +37,7 @@
     "@types/mocha": "^8.2.2",
     "@types/rewire": "^2.5.28",
     "@types/sinon": "^10.0.2",
+    "@types/winston": "^2.4.4",
     "chai": "^4.3.4",
     "dotenv": "^9.0.2",
     "mocha": "^8.4.0",

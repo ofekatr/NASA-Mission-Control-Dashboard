@@ -5,8 +5,9 @@ import fs from "fs";
 import path from "path";
 import parse from "csv-parse"
 import createPlanetService from "../planets/planets.service";
-import { BasicObject } from "./general";
+import { BasicObject, ExpandType } from "./general";
 import { ThenArg } from "./promises";
+import { Router } from "express";
 
 export interface Planet extends BasicObject { }
 
@@ -26,4 +27,13 @@ export interface CreatePlanetsDalRequestParams {
 
 export interface CreatePlanetsServiceParams {
     planetsDal: PlanetsDal;
+}
+
+export interface CreatePlanetsControllerParams {
+    planetsService: PlanetsService
+}
+
+export interface CreatePlanetsRouterParamas {
+    planetsController: PlanetsController;
+    Router: typeof Router;
 }
