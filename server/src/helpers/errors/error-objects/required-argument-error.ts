@@ -1,4 +1,4 @@
-export class RequiredArgumentError extends Error {
+export default class RequiredArgumentError extends Error {
     constructor(argument: string) {
         super(`${argument} can not be null or undefined.`)
 

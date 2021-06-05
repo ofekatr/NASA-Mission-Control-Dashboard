@@ -27,7 +27,7 @@ logger.error = (err: any) => {
     if (err instanceof Error)
         logger.log({
             level: "error",
-            message: `${err.message} - ${err.stack || err}`,
+            message: `${err.stack}`,
         });
     else if (err instanceof Object)
         logger.log({

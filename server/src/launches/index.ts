@@ -9,7 +9,7 @@ function loadLaunchesModule(app: Express) {
     const launchesModel = createLaunchesModel();
     const launchesDal = createLaunchesDal({});
     const launchesService = createLaunchesService({ launchesDal, launchesModel });
-    const launchesController = createLaunchesController({ launchesService });
+    const launchesController = createLaunchesController({ launchesService, launchesModel });
     const launchesRouter = createLaunchesRouter({ launchesController, Router });
     app.use("/launches", launchesRouter);
     return app;

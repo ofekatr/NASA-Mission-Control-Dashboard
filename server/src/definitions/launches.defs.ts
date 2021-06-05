@@ -26,9 +26,8 @@ export type LaunchesService = ReturnType<typeof createLaunchesService>
 export interface CreateLaunchInfo {
     mission: string;
     rocket: string;
-    launchDate: Date;
+    launchDate: string;
     destination: string;
-    customers: string[];
 }
 
 export interface CreateLaunchesDalParams {
@@ -40,7 +39,8 @@ export interface CreateLaunchesServiceParams {
 }
 
 export interface CreateLaunchControllerParams {
-    launchesService: LaunchesService
+    launchesService: LaunchesService;
+    launchesModel: LaunchesModel;
 }
 
 export interface CreateLaunchRouterParams {

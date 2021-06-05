@@ -1,5 +1,6 @@
 import { CreateLaunchInfo } from "@definitions/launches.defs";
 import { deepFreezeAndSeal } from "@helpers/object.helper";
+import { assertDateInput } from "@helpers/validators/dates";
 import { requiredArgument } from "@helpers/validators/required-argument";
 
 function createLaunchesModel() {
@@ -12,13 +13,12 @@ function createLaunchesModel() {
     }
 
     function validateLaunch({
-        customers: _customers = requiredArgument("customers"),
         destination: _destination = requiredArgument("destination"),
-        launchDate: _launchDate = requiredArgument("launchDate"),
+        launchDate = requiredArgument("launchDate"),
         mission: _mission = requiredArgument("mission"),
         rocket: _rocket = requiredArgument("rocket"),
     }: CreateLaunchInfo = requiredArgument("launchInfo")) {
-        return true;
+        assertDateInput(launchDate);
     }
 
     function normalizeLaunch(launchInfo: CreateLaunchInfo = requiredArgument("launchInfo")) {
@@ -26,7 +26,9 @@ function createLaunchesModel() {
             ...launchInfo,
             flightNumber: ++currentUid,
             upcoming: true,
-            success: true
+            success: true,
+            customers: [],
+            launchDate: new Date(launchInfo.launchDate),
         };
     }
 
