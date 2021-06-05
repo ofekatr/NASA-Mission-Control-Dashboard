@@ -1,4 +1,4 @@
-const API_ENDPOINT = "http://localhost:8081"
+const API_ENDPOINT = "http://localhost:8081";
 
 async function httpGetPlanets() {
   const response = await fetch(`${API_ENDPOINT}/planets`);
@@ -6,13 +6,24 @@ async function httpGetPlanets() {
 }
 
 async function httpGetLaunches() {
-  // TODO: Once API is ready.
-  // Load launches, sort by flight number, and return as JSON.
+  const response = await fetch(`${API_ENDPOINT}/launches`);
+  return response.json();
 }
 
 async function httpSubmitLaunch(launch) {
-  // TODO: Once API is ready.
-  // Submit given launch data to launch system.
+  try {
+    return await fetch(`${API_ENDPOINT}/launches`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(launch),
+    });
+  } catch (err) {
+    return {
+      ok: false,
+    }
+  }
 }
 
 async function httpAbortLaunch(id) {
@@ -20,9 +31,4 @@ async function httpAbortLaunch(id) {
   // Delete launch with given ID.
 }
 
-export {
-  httpGetPlanets,
-  httpGetLaunches,
-  httpSubmitLaunch,
-  httpAbortLaunch,
-};
+export { httpGetPlanets, httpGetLaunches, httpSubmitLaunch, httpAbortLaunch };

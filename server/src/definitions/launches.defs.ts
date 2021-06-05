@@ -9,7 +9,7 @@ export interface Launch {
     mission: string;
     rocket: string;
     launchDate: Date;
-    destination: string;
+    target: string;
     customers: string[];
     upcoming: boolean;
     success: boolean;
@@ -27,7 +27,7 @@ export interface CreateLaunchInfo {
     mission: string;
     rocket: string;
     launchDate: string;
-    destination: string;
+    target: string;
 }
 
 export interface CreateLaunchesDalParams {

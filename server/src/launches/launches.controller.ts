@@ -27,7 +27,7 @@ function createLaunchesController({ launchesService = requiredArgument("launches
                 }
                 throw err;
             }
-            return res.status(201).send(launchesService.createLaunch(launchInfo));
+            return res.status(201).send({ ok: launchesService.createLaunch(launchInfo) });
         } catch (err) {
             return next(err);
         }

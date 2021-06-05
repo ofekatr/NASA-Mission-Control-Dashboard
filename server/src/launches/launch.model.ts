@@ -13,7 +13,7 @@ function createLaunchesModel() {
     }
 
     function assertValidLaunch({
-        destination: _destination = requiredArgument("destination"),
+        target: _target = requiredArgument("target"),
         launchDate = requiredArgument("launchDate"),
         mission: _mission = requiredArgument("mission"),
         rocket: _rocket = requiredArgument("rocket"),
@@ -21,9 +21,9 @@ function createLaunchesModel() {
         assertDateInput(launchDate);
     }
 
-    function normalizeLaunch({ destination, launchDate, mission, rocket }: CreateLaunchInfo = requiredArgument("launchInfo")) {
+    function normalizeLaunch({ target, launchDate, mission, rocket }: CreateLaunchInfo = requiredArgument("launchInfo")) {
         return {
-            destination,
+            target,
             mission,
             rocket,
             flightNumber: ++currentUid,
