@@ -7,12 +7,12 @@ function createLaunchesModel() {
     let currentUid = 99;
 
     function createLaunch(launchInfo: CreateLaunchInfo = requiredArgument("launchInfo")) {
-        validateLaunch(launchInfo);
+        assertValidLaunch(launchInfo);
         const launch = normalizeLaunch(launchInfo);
         return deepFreezeAndSeal(launch);
     }
 
-    function validateLaunch({
+    function assertValidLaunch({
         destination: _destination = requiredArgument("destination"),
         launchDate = requiredArgument("launchDate"),
         mission: _mission = requiredArgument("mission"),
@@ -21,20 +21,22 @@ function createLaunchesModel() {
         assertDateInput(launchDate);
     }
 
-    function normalizeLaunch(launchInfo: CreateLaunchInfo = requiredArgument("launchInfo")) {
+    function normalizeLaunch({ destination, launchDate, mission, rocket }: CreateLaunchInfo = requiredArgument("launchInfo")) {
         return {
-            ...launchInfo,
+            destination,
+            mission,
+            rocket,
             flightNumber: ++currentUid,
             upcoming: true,
             success: true,
             customers: [],
-            launchDate: new Date(launchInfo.launchDate),
+            launchDate: new Date(launchDate),
         };
     }
 
     return {
         createLaunch,
-        validateLaunch,
+        assertValidLaunch,
         normalizeLaunch,
     }
 }

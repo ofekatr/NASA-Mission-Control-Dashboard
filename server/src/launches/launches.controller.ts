@@ -1,4 +1,6 @@
 import { CreateLaunchControllerParams, CreateLaunchInfo } from "@definitions/launches.defs";
+import CustomError from "@helpers/errors/error-objects/custom-error";
+import { createInvalidRequestHttpError } from "@helpers/errors/error-objects/custom-http-error";
 import { deepFreezeAndSeal } from "@helpers/object.helper";
 import { requiredArgument } from "@helpers/validators/required-argument";
 import { NextFunction, Request, Response } from "express";
@@ -15,8 +17,16 @@ function createLaunchesController({ launchesService = requiredArgument("launches
 
     function httpCreateLaunch(req: Request, res: Response, next: NextFunction) {
         try {
-            const launchInfo: CreateLaunchInfo = req.body ?? requiredArgument("launchInfo");
-            launchesModel.validateLaunch(launchInfo);
+            let launchInfo: CreateLaunchInfo;
+            try {
+                launchInfo = req.body ?? requiredArgument("launchInfo");
+                launchesModel.assertValidLaunch(launchInfo);
+            } catch (err) {
+                if (err instanceof CustomError) {
+                    throw createInvalidRequestHttpError(err.message);
+                }
+                throw err;
+            }
             return res.status(201).send(launchesService.createLaunch(launchInfo));
         } catch (err) {
             return next(err);

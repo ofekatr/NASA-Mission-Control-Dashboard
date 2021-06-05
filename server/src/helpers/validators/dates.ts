@@ -1,9 +1,9 @@
-import InvalidDateInput from "@helpers/errors/error-objects/invalid-date-input-error";
+import { createInvalidDateInputError } from "@helpers/errors/error-objects/custom-error";
 import { isNumber } from "@helpers/number.helper";
 
 function assertDateInput(dateInput: string | number): asserts dateInput {
     if (!validateDateInput(dateInput)) {
-        throw new InvalidDateInput(dateInput);
+        throw createInvalidDateInputError(dateInput);
     }
 }
 
