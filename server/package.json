@@ -4,8 +4,8 @@
   "description": "NASA Mission Control API",
   "main": "index.js",
   "scripts": {
-    "start": "tsc && node -r tsconfig-paths/register dist/server.js",
-    "dev": "cross-env TS_NODE_PROJECT='./tsconfig.tsnode.json' ts-node-dev -r tsconfig-paths/register --respawn src/server.ts",
+    "start": "tsc && cross-env TS_NODE_PROJECT='tsconfig.prod.json' node -r tsconfig-paths/register dist/server.js",
+    "dev": "ts-node-dev -r tsconfig-paths/register --respawn src/server.ts",
     "test": "mocha -r ts-node/register **/*.test.ts"
   },
   "keywords": [],
