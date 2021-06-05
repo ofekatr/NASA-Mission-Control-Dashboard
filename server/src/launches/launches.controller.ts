@@ -1,8 +1,9 @@
 import { CreateLaunchControllerParams } from "@definitions/launches";
 import { deepFreezeAndSeal } from "@helpers/object.helper";
+import { requiredArgument } from "@helpers/validators/required-argument";
 import { NextFunction, Request, Response } from "express";
 
-function createLaunchesController({ launchesService }: CreateLaunchControllerParams) {
+function createLaunchesController({ launchesService = requiredArgument("launchesService") }: CreateLaunchControllerParams) {
 
     function getAllLaunches(_req: Request, res: Response, next: NextFunction) {
         try {

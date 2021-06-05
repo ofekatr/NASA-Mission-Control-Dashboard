@@ -1,17 +1,12 @@
 import loadLaunchesModule from "@launches/index";
 import applyErrorHandlingMiddleware from "@middlewares/error-handler.middleware";
 import applyMorganMiddleware from "@middlewares/morgan.middleware";
-import cors from "cors";
 import express, { RequestHandler } from "express";
 import path from "path";
-import serverConfig from "./config/server.config";
 import loadPlanetsModule from "./planets";
 
 async function createApp() {
     const app = express();
-    app.use(cors({
-        origin: serverConfig.clientEndpoint,
-    }))
 
     applyMorganMiddleware(app);
 

@@ -1,15 +1,13 @@
+import { checkIfObjectHasNullProperties } from "@helpers/object.helper";
 import assert from 'assert';
 import "dotenv/config";
-import { checkIfObjectHasNullProperties } from "@helpers/object.helper";
 
 const extractGlobalConfigPropsFromObject = ({
     NODE_ENV = "development",
-    PORT: port = 8080,
-    CLIENT_ENDPOINT: clientEndpoint,
+    PORT = 8080,
 }: any) => ({
     nodeEnv: NODE_ENV,
-    port,
-    clientEndpoint,
+    port: PORT,
 });
 
 const globalConfig = extractGlobalConfigPropsFromObject(process.env);
