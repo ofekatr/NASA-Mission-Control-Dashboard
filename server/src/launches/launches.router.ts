@@ -6,6 +6,8 @@ function createLaunchesRouter({ launchesController = requiredArgument("launchesC
 
     launchesRouter.get("/", launchesController.httpGetAllLaunches);
 
+    launchesRouter.post("/", launchesController.httpCreateLaunch);
+
     return launchesRouter;
 }
 

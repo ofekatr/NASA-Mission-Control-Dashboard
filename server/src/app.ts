@@ -4,9 +4,17 @@ import applyMorganMiddleware from "@middlewares/morgan.middleware";
 import loadPlanetsModule from "@planets/index";
 import express, { RequestHandler } from "express";
 import path from "path";
+import { json, urlencoded } from "body-parser";
 
 async function createApp() {
     const app = express();
+
+    app.use(
+        json(),
+        urlencoded({
+            extended: true,
+        })
+    );
 
     applyMorganMiddleware(app);
 

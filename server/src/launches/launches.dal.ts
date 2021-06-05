@@ -1,28 +1,29 @@
-import { Launch } from "@definitions/launches.defs";
+import { CreateLaunchesDalParams, CreateLaunchInfo, Launch } from "@definitions/launches.defs";
+import handleError from "@helpers/errors/error-handler";
 import { deepFreezeAndSeal } from "@helpers/object.helper";
+import { requiredArgument } from "@helpers/validators/required-argument";
 
-function createLaunchesDal() {
+function createLaunchesDal({ launchesModel = requiredArgument("launchesModel") }: CreateLaunchesDalParams) {
     const launches: Launch[] = [];
-
-    const launch: Launch = {
-        flightNumber: 100,
-        mission: "Kepler Exploration X",
-        rocket: "Explorer IS1",
-        launchDate: new Date("December 27, 2030"),
-        destination: "Kepler-442 b",
-        customers: ["ZTM", "NASA"],
-        upcoming: true,
-        success: true,
-    };
-
-    launches[launch.flightNumber] = launch;
 
     function getAllLaunches() {
         return launches.filter(launch => !!launch);
     }
 
+    function addLaunch(launchInfo: CreateLaunchInfo) {
+        try {
+            const launch = launchesModel.createLaunch(launchInfo);
+            launches[launch.flightNumber] = launch;
+            return true;
+        } catch (err) {
+            handleError(err);
+            return false;
+        }
+    }
+
     return deepFreezeAndSeal({
         getAllLaunches,
+        createLaunch: addLaunch,
     });
 }
 
