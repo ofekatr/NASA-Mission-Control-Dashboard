@@ -7,8 +7,8 @@ import { Express, Router } from "express";
 
 function loadLaunchesModule(app: Express) {
     const launchesModel = createLaunchesModel();
-    const launchesDal = createLaunchesDal({ launchesModel });
-    const launchesService = createLaunchesService({ launchesDal });
+    const launchesDal = createLaunchesDal({});
+    const launchesService = createLaunchesService({ launchesDal, launchesModel });
     const launchesController = createLaunchesController({ launchesService });
     const launchesRouter = createLaunchesRouter({ launchesController, Router });
     app.use("/launches", launchesRouter);

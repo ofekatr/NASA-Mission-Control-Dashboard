@@ -2,14 +2,15 @@ import { CreateLaunchesServiceParams, CreateLaunchInfo } from "@definitions/laun
 import { deepFreezeAndSeal } from "@helpers/object.helper";
 import { requiredArgument } from "@helpers/validators/required-argument";
 
-function createLaunchesService({ launchesDal = requiredArgument("launchesDal") }: CreateLaunchesServiceParams) {
+function createLaunchesService({ launchesModel = requiredArgument("launchesModel"), launchesDal = requiredArgument("launchesDal") }: CreateLaunchesServiceParams) {
 
     function getAllLaunches() {
         return launchesDal.getAllLaunches();
     }
 
     function createLaunch(launchInfo: CreateLaunchInfo) {
-        return launchesDal.createLaunch(launchInfo);
+        const launch = launchesModel.createLaunch(launchInfo);
+        return launchesDal.addLaunch(launch);
     }
 
     return deepFreezeAndSeal({

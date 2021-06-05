@@ -32,10 +32,10 @@ export interface CreateLaunchInfo {
 }
 
 export interface CreateLaunchesDalParams {
-    launchesModel: LaunchesModel;
 }
 
 export interface CreateLaunchesServiceParams {
+    launchesModel: LaunchesModel;
     launchesDal: LaunchesDal;
 }
 

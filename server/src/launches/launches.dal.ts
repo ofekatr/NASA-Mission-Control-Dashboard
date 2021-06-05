@@ -1,18 +1,17 @@
-import { CreateLaunchesDalParams, CreateLaunchInfo, Launch } from "@definitions/launches.defs";
+import { CreateLaunchesDalParams, Launch } from "@definitions/launches.defs";
 import handleError from "@helpers/errors/error-handler";
 import { deepFreezeAndSeal } from "@helpers/object.helper";
 import { requiredArgument } from "@helpers/validators/required-argument";
 
-function createLaunchesDal({ launchesModel = requiredArgument("launchesModel") }: CreateLaunchesDalParams) {
+function createLaunchesDal({ }: CreateLaunchesDalParams = requiredArgument("createLaunchesDalParams")) {
     const launches: Launch[] = [];
 
     function getAllLaunches() {
         return launches.filter(launch => !!launch);
     }
 
-    function addLaunch(launchInfo: CreateLaunchInfo) {
+    function addLaunch(launch: Launch = requiredArgument("launch")) {
         try {
-            const launch = launchesModel.createLaunch(launchInfo);
             launches[launch.flightNumber] = launch;
             return true;
         } catch (err) {
@@ -23,7 +22,7 @@ function createLaunchesDal({ launchesModel = requiredArgument("launchesModel") }
 
     return deepFreezeAndSeal({
         getAllLaunches,
-        createLaunch: addLaunch,
+        addLaunch,
     });
 }
 

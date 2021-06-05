@@ -21,7 +21,7 @@ function createLaunchesModel() {
         return true;
     }
 
-    function normalizeLaunch(launchInfo: CreateLaunchInfo) {
+    function normalizeLaunch(launchInfo: CreateLaunchInfo = requiredArgument("launchInfo")) {
         return {
             ...launchInfo,
             flightNumber: ++currentUid,
