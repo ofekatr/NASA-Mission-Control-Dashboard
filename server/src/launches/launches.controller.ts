@@ -1,4 +1,4 @@
-import { CreateLaunchControllerParams } from "@definitions/launches";
+import { CreateLaunchControllerParams } from "@definitions/launches.defs";
 import { deepFreezeAndSeal } from "@helpers/object.helper";
 import { requiredArgument } from "@helpers/validators/required-argument";
 import { NextFunction, Request, Response } from "express";

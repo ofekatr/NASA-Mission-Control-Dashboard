@@ -1,4 +1,4 @@
-import { CreateLaunchRouterParams } from "@definitions/launches";
+import { CreateLaunchRouterParams } from "@definitions/launches.defs";
 import { requiredArgument } from "@helpers/validators/required-argument";
 
 function createLaunchesRouter({ launchesController = requiredArgument("launchesController"), Router = requiredArgument("Router") }: CreateLaunchRouterParams) {

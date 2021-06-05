@@ -1,5 +1,3 @@
-import { checkIfObjectHasNullProperties } from "@helpers/object.helper";
-import assert from 'assert';
 import "dotenv/config";
 
 const extractGlobalConfigPropsFromObject = ({
@@ -11,9 +9,5 @@ const extractGlobalConfigPropsFromObject = ({
 });
 
 const globalConfig = extractGlobalConfigPropsFromObject(process.env);
-assert.ok(
-    !checkIfObjectHasNullProperties(globalConfig),
-    "Invalid Server Configuration"
-);
 
 export default globalConfig;

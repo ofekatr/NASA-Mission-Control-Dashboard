@@ -1,5 +1,5 @@
 import serverConfig from "@configs/server.config";
-import { Environment } from "@definitions/configs";
+import { Environment } from "@definitions/configs.defs";
 import { createLogger, format, transports } from "winston";
 
 const myFormat = format.printf(({ level, message, timestamp }) => {

@@ -21,7 +21,7 @@
     "experimentalDecorators": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
-    "baseUrl": "./dist",
+    "baseUrl": "./src",
     "paths": {
       "@planets/*": ["planets/*"],
       "@launches/*": ["launches/*"],

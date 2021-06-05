@@ -1,5 +1,5 @@
 import serverConfig from "@configs/server.config";
-import { Environment } from "@definitions/configs";
+import { Environment } from "@definitions/configs.defs";
 import WinstonWriteStream from "@logs/winston-write-stream";
 import { Express, RequestHandler } from "express";
 import morgan from "morgan";

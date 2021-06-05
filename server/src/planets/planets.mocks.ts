@@ -1,7 +1,7 @@
-import { PlanetsModel } from "@root/planets/planets.dal";
+import { PlanetsDal } from "@definitions/planets.defs";
 
-const planetsModelMock: PlanetsModel = {
-    getAllPlanets: () => ["Planet1", "Planet2", "Planet3"],
+const planetsDalMock: PlanetsDal = {
+    getAllPlanets: () => ["Planet1", "Planet2", "Planet3"] as any,
 };
 
-export default planetsModelMock;
+export default planetsDalMock;

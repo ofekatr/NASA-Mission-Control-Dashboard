@@ -1,4 +1,4 @@
-import { CreatePlanetsServiceParams } from "@definitions/planets";
+import { CreatePlanetsServiceParams } from "@definitions/planets.defs";
 
 function createPlanetService({ planetsDal }: CreatePlanetsServiceParams) {
     function getAllPlanets() {

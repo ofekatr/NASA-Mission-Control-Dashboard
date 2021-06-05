@@ -1,4 +1,4 @@
-import { CreateLaunchesServiceParams } from "@definitions/launches";
+import { CreateLaunchesServiceParams } from "@definitions/launches.defs";
 import { deepFreezeAndSeal } from "@helpers/object.helper";
 import { requiredArgument } from "@helpers/validators/required-argument";
 

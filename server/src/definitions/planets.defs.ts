@@ -1,13 +1,13 @@
 import createPlanetsController from "@planets/planets.controller";
 import createPlanetsDal from "@planets/planets.dal";
 import createPlanetsRouter from "@planets/planets.router";
+import parse from "csv-parse";
+import { Router } from "express";
 import fs from "fs";
 import path from "path";
-import parse from "csv-parse"
 import createPlanetService from "../planets/planets.service";
-import { BasicObject, ExpandType } from "./general";
-import { ThenArg } from "./promises";
-import { Router } from "express";
+import { BasicObject } from "./general.defs";
+import { ThenArg } from "./promises.defs";
 
 export interface Planet extends BasicObject { }
 

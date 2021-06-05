@@ -1,4 +1,4 @@
-import { CreatePlanetsRouterParamas } from "@definitions/planets";
+import { CreatePlanetsRouterParamas } from "@definitions/planets.defs";
 
 function createPlanetsRouter(createParams: CreatePlanetsRouterParamas) {
     const { planetsController, Router } = createParams;

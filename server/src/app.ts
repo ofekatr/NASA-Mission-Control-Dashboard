@@ -1,9 +1,9 @@
 import loadLaunchesModule from "@launches/index";
 import applyErrorHandlingMiddleware from "@middlewares/error-handler.middleware";
 import applyMorganMiddleware from "@middlewares/morgan.middleware";
+import loadPlanetsModule from "@planets/index";
 import express, { RequestHandler } from "express";
 import path from "path";
-import loadPlanetsModule from "./planets";
 
 async function createApp() {
     const app = express();

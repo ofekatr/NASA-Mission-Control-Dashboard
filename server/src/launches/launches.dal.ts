@@ -1,4 +1,4 @@
-import { Launch } from "@definitions/launches";
+import { Launch } from "@definitions/launches.defs";
 import { deepFreezeAndSeal } from "@helpers/object.helper";
 
 function createLaunchesDal() {

@@ -1,11 +1,11 @@
-import "module-alias/register";
-import http from "http";
+import serverConfig from "@configs/server.config";
 import createApp from "@app";
-import globalConfig from "@configs/server.config";
 import logger from "@helpers/logs/logger";
+import http from "http";
+
 
 async function startServer() {
-    const { port } = globalConfig;
+    const { port } = serverConfig;
     const app = await createApp();
     const server = http.createServer(app);
 

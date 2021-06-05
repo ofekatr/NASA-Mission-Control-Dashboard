@@ -1,4 +1,4 @@
-import createLaunchesController from "@root/launches/launches.controller";
+import createLaunchesController from "@launches/launches.controller";
 import createLaunchesDal from "@launches/launches.dal";
 import { Router } from "express";
 import createLaunchesService from "@launches/launches.service";

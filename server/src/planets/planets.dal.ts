@@ -1,4 +1,4 @@
-import { CreatePlanetsDalRequestParams, Planet } from '@definitions/planets';
+import { CreatePlanetsDalRequestParams, Planet } from '@definitions/planets.defs';
 import { deepFreezeAndSeal } from '@helpers/object.helper';
 import { requiredArgument } from '@helpers/validators/required-argument';
 
