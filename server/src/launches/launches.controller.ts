@@ -36,9 +36,8 @@ function createLaunchesController({ launchesService = requiredArgument("launches
 
     function httpAbortLaunch(req: Request, res: Response, next: NextFunction) {
         try {
-            const flightNumber = +req.params.flightNumber ?? requiredArgument("flightNumber");
             try {
-                assertNumber(flightNumber);
+                assertNumber(req.params.flightNumber);
             } catch (err) {
                 if (verifyCustomError(err)) {
                     throw new CustomHttpError("invalidRequest", err.message);
@@ -47,6 +46,7 @@ function createLaunchesController({ launchesService = requiredArgument("launches
                 throw err;
             }
 
+            const flightNumber = +req.params.flightNumber ?? requiredArgument("flightNumber");
             try {
                 return res.status(200).json({
                     ok: launchesService.abortLaunch(flightNumber)
@@ -55,6 +55,8 @@ function createLaunchesController({ launchesService = requiredArgument("launches
                 if (verifyCustomErrorType(err, "notFound")) {
                     throw new CustomHttpError("notFound", err.message);
                 }
+
+                throw err;
             }
         } catch (err) {
             return next(err);

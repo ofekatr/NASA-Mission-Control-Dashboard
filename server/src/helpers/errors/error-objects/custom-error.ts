@@ -23,7 +23,7 @@ export const customErrorTypeToDataMap: CustomErrorTypeToDataMap = {
         toString: (dateInput) => `${dateInput} is an invalid date input.`,
     },
     invalidNumber: {
-        toString: (value) => `${value} is required to be a number`,
+        toString: (value) => `${value} is not a valid number`,
     }
 }
 

@@ -24,13 +24,13 @@ export const customHttpErrorTypeToData: CustomHttpErrorTypeToDataMap = {
 }
 
 export default class CustomHttpError extends BaseAbstractCustomError {
-    public readonly status: number;
+    public readonly httpStatus: number;
 
     constructor(
         customHttpErrorType: CustomHttpErrorType = "default",
         ...args: any[]
     ) {
         super(customHttpErrorTypeToData[customHttpErrorType]?.toString(args));
-        this.status = customHttpErrorTypeToData[customHttpErrorType]?.httpStatus ?? 500;
+        this.httpStatus = customHttpErrorTypeToData[customHttpErrorType]?.httpStatus ?? 500;
     }
 }
