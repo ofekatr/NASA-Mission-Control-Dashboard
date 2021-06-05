@@ -20,6 +20,8 @@ async function createApp() {
     await loadPlanetsModule(app);
     loadLaunchesModule(app);
 
+    app.get("/*", (_req, res) => res.sendFile(path.join(publicPath, "index.html")));
+
     applyErrorHandlingMiddleware(app);
 
     return app;
