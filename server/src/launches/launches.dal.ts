@@ -10,6 +10,10 @@ function createLaunchesDal({ }: CreateLaunchesDalParams = requiredArgument("crea
         return launches.filter(launch => !!launch);
     }
 
+    function verifyLaunchExists(flightNumber: number = requiredArgument("flightNumber")) {
+        return !!launches[flightNumber];
+    }
+
     function addLaunch(launch: Launch = requiredArgument("launch")) {
         try {
             launches[launch.flightNumber] = launch;
@@ -34,6 +38,7 @@ function createLaunchesDal({ }: CreateLaunchesDalParams = requiredArgument("crea
         getAllLaunches,
         addLaunch,
         deleteLaunch,
+        verifyLaunchExists,
     });
 }
 

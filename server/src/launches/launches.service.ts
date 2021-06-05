@@ -1,4 +1,5 @@
 import { CreateLaunchesServiceParams, CreateLaunchInfo } from "@definitions/launches.defs";
+import CustomError from "@helpers/errors/error-objects/custom-error";
 import { deepFreezeAndSeal } from "@helpers/object.helper";
 import { requiredArgument } from "@helpers/validators/required-argument";
 
@@ -14,6 +15,10 @@ function createLaunchesService({ launchesModel = requiredArgument("launchesModel
     }
 
     function abortLaunch(flightNumber: number) {
+        if (!launchesDal.verifyLaunchExists(flightNumber)) {
+            throw new CustomError("notFound");
+        }
+
         return launchesDal.deleteLaunch(flightNumber);
     }
 
