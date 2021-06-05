@@ -5,7 +5,7 @@ import { NextFunction, Request, Response } from "express";
 
 function createLaunchesController({ launchesService = requiredArgument("launchesService") }: CreateLaunchControllerParams) {
 
-    function getAllLaunches(_req: Request, res: Response, next: NextFunction) {
+    function httpGetAllLaunches(_req: Request, res: Response, next: NextFunction) {
         try {
             return res.send(launchesService.getAllLaunches());
         } catch (err) {
@@ -14,7 +14,7 @@ function createLaunchesController({ launchesService = requiredArgument("launches
     }
 
     return deepFreezeAndSeal({
-        getAllLaunches,
+        httpGetAllLaunches,
     });
 }
 

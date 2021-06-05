@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import { CreatePlanetsControllerParams } from "@definitions/planets.defs";
 
 function createPlanetsController({ planetsService }: CreatePlanetsControllerParams) {
-    function getAllPlanets(_req: Request, res: Response, next: NextFunction) {
+    function httpGetAllPlanets(_req: Request, res: Response, next: NextFunction) {
         try {
             return res.send(planetsService.getAllPlanets());
         } catch (err) {
@@ -11,7 +11,7 @@ function createPlanetsController({ planetsService }: CreatePlanetsControllerPara
     }
 
     return {
-        getAllPlanets,
+        httpGetAllPlanets,
     };
 }
 
