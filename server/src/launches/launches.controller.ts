@@ -1,6 +1,7 @@
 import { CreateLaunchControllerParams, CreateLaunchInfo } from "@definitions/launches.defs";
 import CustomError, { createInvalidNumberError } from "@helpers/errors/error-objects/custom-error";
 import { createCustomHttpErrorFromCustomError, createInvalidRequestHttpError } from "@helpers/errors/error-objects/custom-http-error";
+import { assertNumber } from "@helpers/number.helper";
 import { deepFreezeAndSeal } from "@helpers/object.helper";
 import { requiredArgument } from "@helpers/validators/required-argument";
 import { NextFunction, Request, Response } from "express";
@@ -36,11 +37,14 @@ function createLaunchesController({ launchesService = requiredArgument("launches
     function httpAbortLaunch(req: Request, res: Response, next: NextFunction) {
         try {
             const flightNumber = +req.params.flightNumber ?? requiredArgument("flightNumber");
-            if (isNaN(flightNumber)) {
-                return createCustomHttpErrorFromCustomError(
-                    400,
-                    createInvalidNumberError(req.params.flightNumber)
-                );
+            try {
+                assertNumber(flightNumber);
+            } catch (err) {
+                if (err instanceof CustomError) {
+                    throw createInvalidRequestHttpError(err.message);
+                }
+
+                throw err;
             }
 
             return res.status(200).json({
