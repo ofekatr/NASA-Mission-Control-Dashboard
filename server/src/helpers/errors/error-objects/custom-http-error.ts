@@ -1,20 +1,36 @@
-import CustomError from "@helpers/errors/error-objects/custom-error";
+import { CustomHttpErrorType, CustomHttpErrorTypeToDataMap } from "@definitions/errors.defs";
+import { BaseAbstractCustomError } from "@helpers/errors/error-objects/custom-error";
+import { createUnion } from "@helpers/union.helper";
 
-export default class CustomHttpError extends CustomError {
-    constructor(
-        public httpStatus: number = 500,
-        errorMessage: string,
-    ) {
-        super(errorMessage);
+export const CustomHttpErrorsUnion = createUnion(
+    "default",
+    "invalidRequest",
+    "notFound",
+);
+
+export const customHttpErrorTypeToData: CustomHttpErrorTypeToDataMap = {
+    default: {
+        httpStatus: 500,
+        toString: () => "Internal Error",
+    },
+    invalidRequest: {
+        httpStatus: 400,
+        toString: (message) => `Invalid request - ${message}`
+    },
+    notFound: {
+        httpStatus: 404,
+        toString: () => "Resource not found",
     }
 }
 
-export function createInvalidRequestHttpError(message: string) {
-    return new CustomHttpError(400, `Invalid request - ${message}`);
-}
+export default class CustomHttpError extends BaseAbstractCustomError {
+    public readonly status: number;
 
-export function createCustomHttpErrorFromCustomError(
-    status: number = 500,
-    customError: CustomError = new CustomError()) {
-        return new CustomHttpError(status, customError.message);
+    constructor(
+        customHttpErrorType: CustomHttpErrorType = "default",
+        ...args: any[]
+    ) {
+        super(customHttpErrorTypeToData[customHttpErrorType]?.toString(args));
+        this.status = customHttpErrorTypeToData[customHttpErrorType]?.httpStatus ?? 500;
+    }
 }

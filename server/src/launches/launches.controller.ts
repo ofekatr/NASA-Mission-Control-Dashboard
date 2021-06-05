@@ -1,6 +1,6 @@
 import { CreateLaunchControllerParams, CreateLaunchInfo } from "@definitions/launches.defs";
-import CustomError, { createInvalidNumberError } from "@helpers/errors/error-objects/custom-error";
-import { createCustomHttpErrorFromCustomError, createInvalidRequestHttpError } from "@helpers/errors/error-objects/custom-http-error";
+import { verifyCustomError, verifyCustomErrorType } from "@helpers/errors/error-objects/custom-error";
+import CustomHttpError from "@helpers/errors/error-objects/custom-http-error";
 import { assertNumber } from "@helpers/number.helper";
 import { deepFreezeAndSeal } from "@helpers/object.helper";
 import { requiredArgument } from "@helpers/validators/required-argument";
@@ -23,8 +23,8 @@ function createLaunchesController({ launchesService = requiredArgument("launches
                 launchInfo = req.body ?? requiredArgument("launchInfo");
                 launchesModel.assertValidLaunch(launchInfo);
             } catch (err) {
-                if (err instanceof CustomError) {
-                    throw createInvalidRequestHttpError(err.message);
+                if (verifyCustomError(err)) {
+                    throw new CustomHttpError("invalidRequest", err.message);
                 }
                 throw err;
             }
@@ -40,16 +40,22 @@ function createLaunchesController({ launchesService = requiredArgument("launches
             try {
                 assertNumber(flightNumber);
             } catch (err) {
-                if (err instanceof CustomError) {
-                    throw createInvalidRequestHttpError(err.message);
+                if (verifyCustomError(err)) {
+                    throw new CustomHttpError("invalidRequest", err.message);
                 }
 
                 throw err;
             }
 
-            return res.status(200).json({
-                ok: launchesService.abortLaunch(flightNumber)
-            })
+            try {
+                return res.status(200).json({
+                    ok: launchesService.abortLaunch(flightNumber)
+                })
+            } catch (err) {
+                if (verifyCustomErrorType(err, "notFound")) {
+                    throw new CustomHttpError("notFound", err.message);
+                }
+            }
         } catch (err) {
             return next(err);
         }

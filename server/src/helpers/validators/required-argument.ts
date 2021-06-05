@@ -1,5 +1,5 @@
-import { createRequiredArgumentError } from "@helpers/errors/error-objects/custom-error";
+import CustomError from "@helpers/errors/error-objects/custom-error";
 
 export function requiredArgument(argument: string): never {
-    throw createRequiredArgumentError(argument);
+    throw new CustomError("requiredArgument", argument);
 }
