@@ -1,8 +1,13 @@
+import { Request, Response, NextFunction } from "express";
 import { CreatePlanetsControllerParams } from "@definitions/planets";
 
 function createPlanetsController({ planetsService }: CreatePlanetsControllerParams) {
-    function getAllPlanets() {
-        return planetsService.getAllPlanets();
+    function getAllPlanets(_req: Request, res: Response, next: NextFunction) {
+        try {
+            return res.send(planetsService.getAllPlanets());
+        } catch (err) {
+            return next(err);
+        }
     }
 
     return {

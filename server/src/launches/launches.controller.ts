@@ -1,16 +1,14 @@
 import { CreateLaunchControllerParams } from "@definitions/launches";
 import { deepFreezeAndSeal } from "@helpers/object.helper";
-import logger from "@logs/logger";
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 
 function createLaunchesController({ launchesService }: CreateLaunchControllerParams) {
 
-    function getAllLaunches(_req: Request, res: Response) {
+    function getAllLaunches(_req: Request, res: Response, next: NextFunction) {
         try {
-            return res.send(launchesService.getAllLaunches());   
-        } catch (error) {
-            logger.error(error);
-            return;
+            return res.send(launchesService.getAllLaunches());
+        } catch (err) {
+            return next(err);
         }
     }
 

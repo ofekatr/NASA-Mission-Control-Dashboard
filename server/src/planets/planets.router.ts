@@ -6,7 +6,7 @@ function createPlanetsRouter(createParams: CreatePlanetsRouterParamas) {
     const planetsRouter = Router();
 
     // GET all planets.
-    planetsRouter.get('/', (_req, res) => res.send(planetsController.getAllPlanets()));
+    planetsRouter.get('/', planetsController.getAllPlanets);
 
     return planetsRouter;
 }

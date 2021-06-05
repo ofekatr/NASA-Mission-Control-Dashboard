@@ -1,5 +1,6 @@
 import loadLaunchesModule from "@launches/index";
-import applyMorganMiddleware from "@middlewares/morgan";
+import applyErrorHandlingMiddleware from "@middlewares/error-handler.middleware";
+import applyMorganMiddleware from "@middlewares/morgan.middleware";
 import cors from "cors";
 import express, { RequestHandler } from "express";
 import path from "path";
@@ -23,6 +24,8 @@ async function createApp() {
 
     await loadPlanetsModule(app);
     loadLaunchesModule(app);
+
+    applyErrorHandlingMiddleware(app);
 
     return app;
 }
