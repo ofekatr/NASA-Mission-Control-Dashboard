@@ -1,7 +1,12 @@
 # NASA-Mission-Control-Dashboard
 
 ## Running Instructions:
+
+1. Install:
 ```
-1. `npm run install`
-2. `npm run deploy`
+npm run install
+```
+2. Run:
+```
+npm run deploy
 ```
