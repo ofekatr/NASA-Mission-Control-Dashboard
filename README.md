@@ -10,3 +10,6 @@ npm run install
 ```
 npm run deploy
 ```
+3. If not defined otherwise, browse to http://localhost:8080/
+
+4. Enjoy!
