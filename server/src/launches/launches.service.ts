@@ -8,14 +8,19 @@ function createLaunchesService({ launchesModel = requiredArgument("launchesModel
         return launchesDal.getAllLaunches();
     }
 
-    function createLaunch(launchInfo: CreateLaunchInfo) {
+    function addNewLaunch(launchInfo: CreateLaunchInfo) {
         const launch = launchesModel.createLaunch(launchInfo);
         return launchesDal.addLaunch(launch);
     }
 
+    function abortLaunch(flightNumber: number) {
+        return launchesDal.deleteLaunch(flightNumber);
+    }
+
     return deepFreezeAndSeal({
         getAllLaunches,
-        createLaunch,
+        addNewLaunch,
+        abortLaunch,
     });
 }
 

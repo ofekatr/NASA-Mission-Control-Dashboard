@@ -1,6 +1,6 @@
 import { CreateLaunchControllerParams, CreateLaunchInfo } from "@definitions/launches.defs";
-import CustomError from "@helpers/errors/error-objects/custom-error";
-import { createInvalidRequestHttpError } from "@helpers/errors/error-objects/custom-http-error";
+import CustomError, { createInvalidNumberError } from "@helpers/errors/error-objects/custom-error";
+import { createCustomHttpErrorFromCustomError, createInvalidRequestHttpError } from "@helpers/errors/error-objects/custom-http-error";
 import { deepFreezeAndSeal } from "@helpers/object.helper";
 import { requiredArgument } from "@helpers/validators/required-argument";
 import { NextFunction, Request, Response } from "express";
@@ -27,7 +27,25 @@ function createLaunchesController({ launchesService = requiredArgument("launches
                 }
                 throw err;
             }
-            return res.status(201).send({ ok: launchesService.createLaunch(launchInfo) });
+            return res.status(201).send({ ok: launchesService.addNewLaunch(launchInfo) });
+        } catch (err) {
+            return next(err);
+        }
+    }
+
+    function httpAbortLaunch(req: Request, res: Response, next: NextFunction) {
+        try {
+            const flightNumber = +req.params.flightNumber ?? requiredArgument("flightNumber");
+            if (isNaN(flightNumber)) {
+                return createCustomHttpErrorFromCustomError(
+                    400,
+                    createInvalidNumberError(req.params.flightNumber)
+                );
+            }
+
+            return res.status(200).json({
+                ok: launchesService.abortLaunch(flightNumber)
+            })
         } catch (err) {
             return next(err);
         }
@@ -36,6 +54,7 @@ function createLaunchesController({ launchesService = requiredArgument("launches
     return deepFreezeAndSeal({
         httpGetAllLaunches,
         httpCreateLaunch,
+        httpAbortLaunch,
     });
 }
 

@@ -1,5 +1,5 @@
 export default class CustomError extends Error {
-    constructor(value: any) {
+    constructor(value: any = "An error has occured") {
         super(value);
 
         if (Error.captureStackTrace) {
@@ -14,4 +14,8 @@ export function createRequiredArgumentError(argument: string) {
 
 export function createInvalidDateInputError(dateInput: any) {
     return new CustomError(`${dateInput} is an invalid date input.`);
+}
+
+export function createInvalidNumberError(value: any) {
+    return new CustomError(`${value} is required to be a number`);
 }

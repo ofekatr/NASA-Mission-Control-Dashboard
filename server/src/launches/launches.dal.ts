@@ -20,9 +20,20 @@ function createLaunchesDal({ }: CreateLaunchesDalParams = requiredArgument("crea
         }
     }
 
+    function deleteLaunch(flightNumber: number = requiredArgument("flightNumber")) {
+        try {
+            delete launches[flightNumber];
+            return true;
+        } catch (err) {
+            handleError(err);
+            return false;
+        }
+    }
+
     return deepFreezeAndSeal({
         getAllLaunches,
         addLaunch,
+        deleteLaunch,
     });
 }
 

@@ -22,13 +22,20 @@ async function httpSubmitLaunch(launch) {
   } catch (err) {
     return {
       ok: false,
-    }
+    };
   }
 }
 
 async function httpAbortLaunch(id) {
-  // TODO: Once API is ready.
-  // Delete launch with given ID.
+  try {
+    return await fetch(`${API_ENDPOINT}/launches/${id}`, {
+      method: "DELETE",
+    });
+  } catch (err) {
+    return {
+      ok: false,
+    };
+  }
 }
 
 export { httpGetPlanets, httpGetLaunches, httpSubmitLaunch, httpAbortLaunch };

@@ -8,6 +8,8 @@ function createLaunchesRouter({ launchesController = requiredArgument("launchesC
 
     launchesRouter.post("/", launchesController.httpCreateLaunch);
 
+    launchesRouter.delete("/:flightNumber", launchesController.httpAbortLaunch);
+
     return launchesRouter;
 }
 
