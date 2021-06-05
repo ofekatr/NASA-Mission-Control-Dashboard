@@ -1,5 +1,4 @@
-import { CreateLaunchInfo } from "@definitions/launches.defs";
-import { deepFreezeAndSeal } from "@helpers/object.helper";
+import { CreateLaunchInfo, Launch } from "@definitions/launches.defs";
 import { assertDateInput } from "@helpers/validators/dates";
 import { requiredArgument } from "@helpers/validators/required-argument";
 
@@ -9,7 +8,12 @@ function createLaunchesModel() {
     function createLaunch(launchInfo: CreateLaunchInfo = requiredArgument("launchInfo")) {
         assertValidLaunch(launchInfo);
         const launch = normalizeLaunch(launchInfo);
-        return deepFreezeAndSeal(launch);
+        return launch;
+    }
+
+    function abortLaunch(launch: Launch) {
+        launch.success = false;
+        launch.upcoming = false;
     }
 
     function assertValidLaunch({
@@ -38,6 +42,7 @@ function createLaunchesModel() {
         createLaunch,
         assertValidLaunch,
         normalizeLaunch,
+        abortLaunch,
     }
 }
 

@@ -48,8 +48,9 @@ function createLaunchesController({ launchesService = requiredArgument("launches
 
             const flightNumber = +req.params.flightNumber ?? requiredArgument("flightNumber");
             try {
+                launchesService.abortLaunch(flightNumber);
                 return res.status(200).json({
-                    ok: launchesService.abortLaunch(flightNumber)
+                    ok: true,
                 })
             } catch (err) {
                 if (verifyCustomErrorType(err, "notFound")) {
