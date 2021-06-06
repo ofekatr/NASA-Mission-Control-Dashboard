@@ -15,5 +15,4 @@ function createPlanetsController({ planetsService }: CreatePlanetsControllerPara
     };
 }
 
-export type PlanetsController = ReturnType<typeof createPlanetsController>;
 export default createPlanetsController;
