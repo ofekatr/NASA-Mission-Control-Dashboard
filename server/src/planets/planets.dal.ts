@@ -2,15 +2,9 @@ import { CreatePlanetsDalRequestParams, Planet } from '@definitions/planets.defs
 import { deepFreezeAndSeal } from '@helpers/object.helper';
 import { requiredArgument } from '@helpers/validators/required-argument';
 
-async function createPlanetsModel({
-    parse = requiredArgument("parse"), fs = requiredArgument("fs"), path = requiredArgument("path")
+async function createPlanetsDal({
+    planetsModel = requiredArgument("planetsModel"), parse = requiredArgument("parse"), fs = requiredArgument("fs"), path = requiredArgument("path")
 }: CreatePlanetsDalRequestParams) {
-    function isHabitablePlanet(planet: Planet) {
-        return planet['koi_disposition'] === 'CONFIRMED'
-            && planet['koi_insol'] > 0.36 && planet['koi_insol'] < 1.11
-            && planet['koi_prad'] < 1.6;
-    }
-
     async function loadHabitablePlanets(habitablePlanets: Planet[]) {
         return new Promise((resolve, reject) => {
             fs.createReadStream(path.join(__dirname, '..', '..', 'data', 'kepler_data.csv'))
@@ -19,8 +13,8 @@ async function createPlanetsModel({
                     columns: true,
                 }))
                 .on('data', (data) => {
-                    if (isHabitablePlanet(data)) {
-                        habitablePlanets.push(data);
+                    if (planetsModel.verifyHabitablePlanet(data)) {
+                        habitablePlanets.push(planetsModel.createPlanet(data));
                     }
                 })
                 .on('error', (err) => {
@@ -45,4 +39,4 @@ async function createPlanetsModel({
     });
 }
 
-export default createPlanetsModel;
+export default createPlanetsDal;
