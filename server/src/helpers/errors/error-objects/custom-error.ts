@@ -28,12 +28,14 @@ export const customErrorTypeToDataMap: CustomErrorTypeToDataMap = {
 }
 
 export abstract class BaseAbstractCustomError extends Error {
-
+    constructor(public customErrorType: string, message: string) {
+        super(message);
+    }
 }
 
 export default class CustomError extends BaseAbstractCustomError {
-    constructor(public customErrorType: CustomErrorType = "default", ...args: any) {
-        super(customErrorTypeToDataMap[customErrorType]?.toString(args));
+    constructor(customErrorType: CustomErrorType = "default", ...args: any) {
+        super(customErrorType, customErrorTypeToDataMap[customErrorType]?.toString(args)!);
 
         if (Error.captureStackTrace) {
             Error.captureStackTrace(this, CustomError);
@@ -41,10 +43,10 @@ export default class CustomError extends BaseAbstractCustomError {
     }
 }
 
-export function verifyCustomError(err: Error) {
+export function verifyCustomError(err: Error): err is BaseAbstractCustomError {
     return err instanceof BaseAbstractCustomError;
 }
 
 export function verifyCustomErrorType(err: Error, customErrorType: CustomErrorType) {
-    return verifyCustomError(err) && (err as CustomError).customErrorType === customErrorType
+    return verifyCustomError(err) && err.customErrorType === customErrorType
 }

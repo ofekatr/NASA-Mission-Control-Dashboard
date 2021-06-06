@@ -27,10 +27,14 @@ export default class CustomHttpError extends BaseAbstractCustomError {
     public readonly httpStatus: number;
 
     constructor(
-        customHttpErrorType: CustomHttpErrorType = "default",
+        customErrorType: CustomHttpErrorType = "default",
         ...args: any[]
     ) {
-        super(customHttpErrorTypeToData[customHttpErrorType]?.toString(args));
-        this.httpStatus = customHttpErrorTypeToData[customHttpErrorType]?.httpStatus ?? 500;
+        super(customErrorType, customHttpErrorTypeToData[customErrorType]?.toString(args)!);
+        this.httpStatus = customHttpErrorTypeToData[customErrorType]?.httpStatus ?? 500;
     }
+}
+
+export function verifyCustomHttpError(err: Error): err is CustomHttpError {
+    return err instanceof CustomHttpError;
 }

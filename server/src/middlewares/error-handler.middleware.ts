@@ -1,11 +1,11 @@
 import handleError from "@helpers/errors/error-handler";
-import CustomHttpError from "@helpers/errors/error-objects/custom-http-error";
-import { Request, Response, NextFunction, Express } from "express";
+import { verifyCustomHttpError } from "@helpers/errors/error-objects/custom-http-error";
+import { Express, NextFunction, Request, Response } from "express";
 
 function errorHandlerMiddleware(err: Error, _req: Request, res: Response, _next: NextFunction) {
     handleError(err);
 
-    if (err instanceof CustomHttpError) {
+    if (verifyCustomHttpError(err)) {
         return res.status((err.httpStatus)).json({ error: err.message });
     }
 

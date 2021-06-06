@@ -5,15 +5,16 @@ import { requiredArgument } from "@helpers/validators/required-argument";
 function createLaunchesModel() {
     let currentUid = 99;
 
-    function createLaunch(launchInfo: CreateLaunchInfo = requiredArgument("launchInfo")) {
+    function createLaunch(launchInfo: CreateLaunchInfo = requiredArgument("launchInfo")): Launch {
         assertValidLaunch(launchInfo);
         const launch = normalizeLaunch(launchInfo);
         return launch;
     }
 
-    function abortLaunch(launch: Launch) {
+    function abortLaunch(launch: Launch = requiredArgument("launch")): Launch {
         launch.success = false;
         launch.upcoming = false;
+        return launch
     }
 
     function assertValidLaunch({
@@ -25,7 +26,7 @@ function createLaunchesModel() {
         assertDateInput(launchDate);
     }
 
-    function normalizeLaunch({ target, launchDate, mission, rocket }: CreateLaunchInfo = requiredArgument("launchInfo")) {
+    function normalizeLaunch({ target, launchDate, mission, rocket }: CreateLaunchInfo = requiredArgument("launchInfo")): Launch {
         return {
             target,
             mission,

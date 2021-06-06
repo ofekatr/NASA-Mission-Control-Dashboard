@@ -19,8 +19,9 @@ function createLaunchesService({ launchesModel = requiredArgument("launchesModel
             throw new CustomError("notFound");
         }
 
-        const launch = launchesDal.getLaunchByFlightNumber(flightNumber);
-        launchesModel.abortLaunch(launch);
+        let launch = launchesDal.getLaunchByFlightNumber(flightNumber);
+        launch = launchesModel.abortLaunch(launch);
+        launchesDal.addLaunch(launch);
     }
 
     return deepFreezeAndSeal({
