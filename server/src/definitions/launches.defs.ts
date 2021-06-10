@@ -55,7 +55,6 @@ export interface CreateEntityForExistingLaunchParams {
 
 export interface CreateLaunchesDalParams {
     db: LaunchDao;
-    launchesModel: LaunchesModel;
 }
 
 export interface CreateLaunchesServiceParams {

@@ -2,7 +2,7 @@ import { CreateLaunchesServiceParams, CreateLaunchParams } from "@definitions/la
 import CustomError from "@helpers/errors/error-objects/custom-error";
 import { deepFreezeAndSeal } from "@helpers/object.helper";
 import createLaunchesDal from "@launches/launches.dal";
-import createLaunchesModel from "@launches/launch.model";
+import createLaunchesModel from "@launches/launch.entity";
 
 
 function createLaunchesService({

@@ -1,4 +1,4 @@
-import createLaunchesModel from "@launches/launch.model";
+import createLaunchesModel from "@launches/launch.entity";
 import createLaunchesController from "@launches/launches.controller";
 import createLaunchesDal from "@launches/launches.dal";
 import Launch from "@launches/launches.mongo";
