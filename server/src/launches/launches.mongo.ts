@@ -1,7 +1,7 @@
-import { Launch } from "@definitions/launches.defs";
+import { CreateEntityForExistingLaunchParams } from "@definitions/launches.defs";
 import { model, Schema } from "mongoose";
 
-const Launch = model<Launch>(
+const Launch = model<CreateEntityForExistingLaunchParams>(
     'Launch',
     new Schema(
         {

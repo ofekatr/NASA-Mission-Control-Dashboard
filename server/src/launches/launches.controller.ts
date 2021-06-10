@@ -1,12 +1,17 @@
-import { CreateLaunchControllerParams, CreateLaunchParams } from "@definitions/launches.defs";
+import { CreateLaunchParams } from "@definitions/launches.defs";
 import { verifyCustomError, verifyCustomErrorType } from "@helpers/errors/error-objects/custom-error";
 import CustomHttpError from "@helpers/errors/error-objects/custom-http-error";
 import { assertNumber } from "@helpers/number.helper";
 import { deepFreezeAndSeal } from "@helpers/object.helper";
 import { requiredArgument } from "@helpers/validators/required-argument";
+import createLaunchesService from "@launches/launches.service";
 import { NextFunction, Request, Response } from "express";
 
-function createLaunchesController({ launchesService = requiredArgument("launchesService"), launchesModel = requiredArgument("launchesModel") }: CreateLaunchControllerParams) {
+function createLaunchesController(
+    {
+        launchesService = createLaunchesService(),
+    } = {}
+) {
 
     async function httpGetAllLaunches(_req: Request, res: Response, next: NextFunction) {
         try {
@@ -21,7 +26,12 @@ function createLaunchesController({ launchesService = requiredArgument("launches
             let launchInfo: CreateLaunchParams;
             try {
                 launchInfo = req.body ?? requiredArgument("launchInfo");
-                launchesModel.assertValidLaunch(launchInfo);
+                let {
+                    launchDate: _launchDate = requiredArgument("launchDate"),
+                    mission: _mission = requiredArgument("mission"),
+                    rocket: _rocket = requiredArgument("rocket"),
+                    target: _target = requiredArgument("target"),
+                } = launchInfo;
             } catch (err) {
                 if (verifyCustomError(err)) {
                     throw new CustomHttpError("invalidRequest", err.message);

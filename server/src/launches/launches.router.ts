@@ -1,7 +1,11 @@
-import { CreateLaunchRouterParams } from "@definitions/launches.defs";
-import { requiredArgument } from "@helpers/validators/required-argument";
+import createLaunchesController from "@launches/launches.controller";
+import { Router as expressRouter } from "express";
 
-function createLaunchesRouter({ launchesController = requiredArgument("launchesController"), Router = requiredArgument("Router") }: CreateLaunchRouterParams) {
+function createLaunchesRouter(
+    {
+        launchesController = createLaunchesController(),
+        Router = expressRouter
+    } = {}) {
     const launchesRouter = Router();
 
     launchesRouter.get("/", launchesController.httpGetAllLaunches);

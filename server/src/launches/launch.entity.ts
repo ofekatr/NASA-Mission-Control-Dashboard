@@ -1,4 +1,5 @@
-import { CreateEntityForExistingLaunchParams, CreateLaunchParams, Launch, LaunchEntity } from "@definitions/launches.defs";
+import { CreateEntityForExistingLaunchParams, CreateLaunchParams, LaunchEntity } from "@definitions/launches.defs";
+import { deepFreezeAndSeal } from "@helpers/object.helper";
 import { assertDateInput } from "@helpers/validators/dates";
 import { requiredArgument } from "@helpers/validators/required-argument";
 
@@ -13,7 +14,7 @@ function createEntityForNewLaunch(
     return buildLaunchEntity(launch);
 }
 
-function createEntityForExistingLaunch(
+function createLaunchEntityForExisting(
     params: CreateEntityForExistingLaunchParams,
 ): LaunchEntity {
     assertValidBuildLaunchEntityForExistingLaunchParams(params);
@@ -43,21 +44,21 @@ function buildLaunchEntity(
         upcoming,
         customers,
     }: CreateEntityForExistingLaunchParams = requiredArgument("buildLaunchEntityParams")
-): LaunchEntity {
-    return {
-        getFlightNumber: () => flightNumber,
-        getMission: () => mission,
-        getTarget: () => target,
-        getRocket: () => rocket,
-        getLaunchDate: () => launchDate,
-        getSuccess: () => success,
-        getUpcoming: () => upcoming,
-        getCustomers: () => customers,
+) {
+    return deepFreezeAndSeal({
+        flightNumber,
+        mission,
+        target,
+        rocket,
+        launchDate,
+        success,
+        upcoming,
+        customers,
         abortLaunch: () => {
             success = false;
             upcoming = false;
         }
-    }
+    });
 }
 
 function assertValidCreateLaunchInfo({
@@ -90,6 +91,6 @@ function normalizeLaunch(
 
 export {
     createEntityForNewLaunch,
-    createEntityForExistingLaunch,
+    createLaunchEntityForExisting,
 };
 

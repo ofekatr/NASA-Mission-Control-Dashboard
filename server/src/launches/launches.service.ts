@@ -1,21 +1,21 @@
-import { CreateLaunchesServiceParams, CreateLaunchParams } from "@definitions/launches.defs";
+import { createEntityForNewLaunch } from "@launches/launch.entity";
+import { CreateLaunchParams } from "@definitions/launches.defs";
 import CustomError from "@helpers/errors/error-objects/custom-error";
 import { deepFreezeAndSeal } from "@helpers/object.helper";
 import createLaunchesDal from "@launches/launches.dal";
-import createLaunchesModel from "@launches/launch.entity";
 
 
 function createLaunchesService({
-    launchesModel = createLaunchesModel(),
-    launchesDal = createLaunchesDal()
-}) {
+    launchesDal = createLaunchesDal(),
+    createLaunch = createEntityForNewLaunch,
+} = {}) {
 
     async function getAllLaunches() {
         return await launchesDal.getAllLaunches();
     }
 
     async function addNewLaunch(launchInfo: CreateLaunchParams) {
-        const launch = launchesModel.createLaunch(launchInfo);
+        const launch = createLaunch(launchInfo);
         return await launchesDal.saveLaunch(launch);
     }
 
@@ -25,7 +25,7 @@ function createLaunchesService({
         }
 
         let launch = await launchesDal.getLaunchByFlightNumber(flightNumber);
-        launch = launchesModel.abortLaunch(launch);
+        launch.abortLaunch();
         launchesDal.saveLaunch(launch);
     }
 

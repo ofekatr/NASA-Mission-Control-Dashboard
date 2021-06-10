@@ -1,33 +1,18 @@
 import createLaunchesController from "@launches/launches.controller";
 import createLaunchesDal from "@launches/launches.dal";
-import LaunchDao from "@launches/launches.mongo";
 import createLaunchesService from "@launches/launches.service";
-import { Router } from "express";
-
-export interface Launch {
-    flightNumber: number;
-    mission: string;
-    rocket: string;
-    launchDate: Date;
-    target: string;
-    customers: string[];
-    upcoming: boolean;
-    success: boolean;
-}
 
 export interface LaunchEntity {
-    getFlightNumber: () => number;
-    getMission: () => string;
-    getTarget: () => string;
-    getRocket: () => string;
-    getLaunchDate: () => Date;
-    getSuccess: () => boolean;
-    getUpcoming: () => boolean;
-    getCustomers: () => string[] | undefined;
+    flightNumber: number;
+    mission: string;
+    target: string;
+    rocket: string;
+    launchDate: Date;
+    success: boolean;
+    upcoming: boolean;
+    customers: string[] | undefined;
     abortLaunch: () => void;
 }
-
-export type LaunchDao = typeof LaunchDao;
 
 export type LaunchesDal = ReturnType<typeof createLaunchesDal>;
 
@@ -51,23 +36,4 @@ export interface CreateEntityForExistingLaunchParams {
     upcoming: boolean;
     success: boolean;
     customers?: string[];
-}
-
-export interface CreateLaunchesDalParams {
-    db: LaunchDao;
-}
-
-export interface CreateLaunchesServiceParams {
-    launchesModel: LaunchesModel;
-    launchesDal: LaunchesDal;
-}
-
-export interface CreateLaunchControllerParams {
-    launchesService: LaunchesService;
-    launchesModel: LaunchesModel;
-}
-
-export interface CreateLaunchRouterParams {
-    launchesController: LaunchesController;
-    Router: typeof Router;
 }
