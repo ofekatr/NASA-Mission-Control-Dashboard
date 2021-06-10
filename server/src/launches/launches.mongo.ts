@@ -1,6 +1,6 @@
 import { model, Schema } from "mongoose";
 
-export default model(
+const Launch = model(
     'Launch',
     new Schema(
         {
@@ -37,4 +37,6 @@ export default model(
             customers: [String],
         }
     )
-)
+);
+
+export default Launch;
