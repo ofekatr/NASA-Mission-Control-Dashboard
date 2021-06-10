@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 
 
 async function loadDbConnection() {
-    const CONNECTION_STRING = `mongodb+srv://${serverConfig.db.user}:${serverConfig.db.password}@nasa.gnmt3.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
+    const CONNECTION_STRING = `mongodb+srv://${serverConfig.db.user}:${serverConfig.db.password}@nasa.gnmt3.mongodb.net/nasa?retryWrites=true&w=majority`;
     await mongoose.connect(CONNECTION_STRING, { useNewUrlParser: true, useUnifiedTopology: true });
     logger.info("Successfully connected to database.");
 }
