@@ -1,6 +1,7 @@
+import { Launch } from "@definitions/launches.defs";
 import { model, Schema } from "mongoose";
 
-const Launch = model(
+const Launch = model<Launch>(
     'Launch',
     new Schema(
         {

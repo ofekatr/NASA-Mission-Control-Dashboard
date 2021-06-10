@@ -2,29 +2,30 @@ import { CreateLaunchesDalParams, Launch } from "@definitions/launches.defs";
 import { deepFreezeAndSeal } from "@helpers/object.helper";
 import { requiredArgument } from "@helpers/validators/required-argument";
 
-function createLaunchesDal({ }: CreateLaunchesDalParams = requiredArgument("createLaunchesDalParams")) {
-    const launches: Launch[] = [];
-
-    function getAllLaunches() {
-        return launches.filter(launch => !!launch);
+function createLaunchesDal({ db, launchesModel }: CreateLaunchesDalParams = requiredArgument("")) {
+    async function getAllLaunches(): Promise<Launch[]> {
+        return (await db.find()).map(dbLaunch => launchesModel.createLaunch(dbLaunch as any));
     }
 
-    function verifyLaunchExists(flightNumber: number = requiredArgument("flightNumber")) {
-        return !!launches[flightNumber];
+    async function getLaunchByFlightNumber(flightNumber: number = requiredArgument("flightNumber")): Promise<Launch> {
+        return await db.findOne({ flightNumber }) as any;
     }
 
-    function getLaunchByFlightNumber(flightNumber: number = requiredArgument("flightNumber")) {
-        return launches[flightNumber];
+    async function verifyLaunchExists(flightNumber: number = requiredArgument("flightNumber")) {
+        return !!(await getLaunchByFlightNumber(flightNumber));
     }
 
-    function addLaunch(launch: Launch = requiredArgument("launch")) {
-        launches[launch.flightNumber] = launch;
-        return true;
+    async function saveLaunch(launch: Launch) {
+        await db.findOneAndUpdate(
+            { flightNumber: launch.flightNumber },
+            launch,
+            { upsert: true }
+        );
     }
 
     return deepFreezeAndSeal({
+        saveLaunch,
         getAllLaunches,
-        addLaunch,
         getLaunchByFlightNumber,
         verifyLaunchExists,
     });

@@ -1,4 +1,4 @@
-import { CreateLaunchControllerParams, CreateLaunchInfo } from "@definitions/launches.defs";
+import { CreateLaunchControllerParams, CreateLaunchParams } from "@definitions/launches.defs";
 import { verifyCustomError, verifyCustomErrorType } from "@helpers/errors/error-objects/custom-error";
 import CustomHttpError from "@helpers/errors/error-objects/custom-http-error";
 import { assertNumber } from "@helpers/number.helper";
@@ -8,17 +8,17 @@ import { NextFunction, Request, Response } from "express";
 
 function createLaunchesController({ launchesService = requiredArgument("launchesService"), launchesModel = requiredArgument("launchesModel") }: CreateLaunchControllerParams) {
 
-    function httpGetAllLaunches(_req: Request, res: Response, next: NextFunction) {
+    async function httpGetAllLaunches(_req: Request, res: Response, next: NextFunction) {
         try {
-            return res.status(200).json(launchesService.getAllLaunches());
+            return res.status(200).json(await launchesService.getAllLaunches());
         } catch (err) {
             return next(err);
         }
     }
 
-    function httpCreateLaunch(req: Request, res: Response, next: NextFunction) {
+    async function httpCreateLaunch(req: Request, res: Response, next: NextFunction) {
         try {
-            let launchInfo: CreateLaunchInfo;
+            let launchInfo: CreateLaunchParams;
             try {
                 launchInfo = req.body ?? requiredArgument("launchInfo");
                 launchesModel.assertValidLaunch(launchInfo);
@@ -28,13 +28,14 @@ function createLaunchesController({ launchesService = requiredArgument("launches
                 }
                 throw err;
             }
-            return res.status(201).send({ ok: launchesService.addNewLaunch(launchInfo) });
+            await launchesService.addNewLaunch(launchInfo);
+            return res.status(201).send({ ok: true });
         } catch (err) {
             return next(err);
         }
     }
 
-    function httpAbortLaunch(req: Request, res: Response, next: NextFunction) {
+    async function httpAbortLaunch(req: Request, res: Response, next: NextFunction) {
         try {
             try {
                 assertNumber(req.params.flightNumber);
@@ -48,7 +49,7 @@ function createLaunchesController({ launchesService = requiredArgument("launches
 
             const flightNumber = +req.params.flightNumber ?? requiredArgument("flightNumber");
             try {
-                launchesService.abortLaunch(flightNumber);
+                await launchesService.abortLaunch(flightNumber);
                 return res.status(200).json({
                     ok: true,
                 })

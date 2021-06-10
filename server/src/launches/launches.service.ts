@@ -1,27 +1,32 @@
-import { CreateLaunchesServiceParams, CreateLaunchInfo } from "@definitions/launches.defs";
+import { CreateLaunchesServiceParams, CreateLaunchParams } from "@definitions/launches.defs";
 import CustomError from "@helpers/errors/error-objects/custom-error";
 import { deepFreezeAndSeal } from "@helpers/object.helper";
-import { requiredArgument } from "@helpers/validators/required-argument";
+import createLaunchesDal from "@launches/launches.dal";
+import createLaunchesModel from "@launches/launch.model";
 
-function createLaunchesService({ launchesModel = requiredArgument("launchesModel"), launchesDal = requiredArgument("launchesDal") }: CreateLaunchesServiceParams) {
 
-    function getAllLaunches() {
-        return launchesDal.getAllLaunches();
+function createLaunchesService({
+    launchesModel = createLaunchesModel(),
+    launchesDal = createLaunchesDal()
+}) {
+
+    async function getAllLaunches() {
+        return await launchesDal.getAllLaunches();
     }
 
-    function addNewLaunch(launchInfo: CreateLaunchInfo) {
+    async function addNewLaunch(launchInfo: CreateLaunchParams) {
         const launch = launchesModel.createLaunch(launchInfo);
-        return launchesDal.addLaunch(launch);
+        return await launchesDal.saveLaunch(launch);
     }
 
-    function abortLaunch(flightNumber: number) {
-        if (!launchesDal.verifyLaunchExists(flightNumber)) {
+    async function abortLaunch(flightNumber: number) {
+        if (!(await launchesDal.verifyLaunchExists(flightNumber))) {
             throw new CustomError("notFound");
         }
 
-        let launch = launchesDal.getLaunchByFlightNumber(flightNumber);
+        let launch = await launchesDal.getLaunchByFlightNumber(flightNumber);
         launch = launchesModel.abortLaunch(launch);
-        launchesDal.addLaunch(launch);
+        launchesDal.saveLaunch(launch);
     }
 
     return deepFreezeAndSeal({

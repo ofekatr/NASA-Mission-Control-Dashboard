@@ -1,13 +1,15 @@
 import CustomError from "@helpers/errors/error-objects/custom-error";
 import { isNumber } from "@helpers/number.helper";
 
-function assertDateInput(dateInput: string | number): asserts dateInput {
+function assertDateInput(dateInput: string | number | Date): asserts dateInput {
     if (!validateDateInput(dateInput)) {
         throw new CustomError("invalidDateInput", dateInput);
     }
 }
 
-function validateDateInput(dateInput: string | number) {
+function validateDateInput(dateInput: string | number | Date) {
+    if (dateInput instanceof Date)
+        return true;
     switch (typeof dateInput) {
         case "string":
             return validateDateString(dateInput);
