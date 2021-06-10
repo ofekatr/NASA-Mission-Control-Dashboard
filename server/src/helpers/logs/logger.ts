@@ -1,4 +1,4 @@
-import serverConfig from "@configs/server.config";
+import serverConfig from "@configs";
 import { Environment } from "@definitions/configs.defs";
 import { createLogger, format, transports } from "winston";
 

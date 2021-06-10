@@ -1,7 +1,7 @@
-import loadLaunchesModule from "@launches/index";
+import loadLaunchesModule from "@launches";
 import applyErrorHandlingMiddleware from "@middlewares/error-handler.middleware";
 import applyMorganMiddleware from "@middlewares/morgan.middleware";
-import loadPlanetsModule from "@planets/index";
+import loadPlanetsModule from "@planets";
 import express, { RequestHandler } from "express";
 import path from "path";
 import { json, urlencoded } from "body-parser";
