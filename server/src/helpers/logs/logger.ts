@@ -1,14 +1,23 @@
 import serverConfig from "@configs";
 import { Environment } from "@definitions/configs.defs";
+import { BasicObject } from "@definitions/general.defs";
 import { createLogger, format, transports } from "winston";
 
+function prettyStringify(obj: BasicObject) {
+    return JSON.stringify(obj, null, 2);
+}
+
 const myFormat = format.printf(({ level, message, timestamp }) => {
-    return `${timestamp} ${level}: ${message}`;
+    return `${timestamp} ${level}: ${typeof message === "object" ? prettyStringify(message) : message }`;
 });
 
 const defaultConfig = {
     level: "silly",
-    format: format.combine(format.timestamp(), format.colorize(), myFormat),
+    format: format.combine(
+        format.timestamp(),
+        format.colorize(),
+        myFormat,
+    ),
     transports: [new transports.Console()],
 };
 
@@ -32,7 +41,7 @@ logger.error = (err: any) => {
     else if (err instanceof Object)
         logger.log({
             level: "error",
-            message: JSON.stringify(err),
+            message: prettyStringify(err),
         });
     else
         logger.log({

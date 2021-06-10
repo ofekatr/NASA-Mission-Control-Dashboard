@@ -48,6 +48,6 @@
     }
   },
   "exclude": ["node_modules"],
-  "include": ["./*.ts", "./src/**/*.tsx", "./src/**/*.ts"]
+  "include": ["./*.ts", "./src/**/*.tsx", "./src/**/*.ts", "src/definitions/loaders.defsts"]
 }
 

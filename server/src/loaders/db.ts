@@ -2,11 +2,19 @@ import serverConfig from '@configs';
 import logger from '@logs/logger';
 import mongoose from 'mongoose';
 
-
 async function loadDbConnection() {
     const CONNECTION_STRING = `mongodb+srv://${serverConfig.db.user}:${serverConfig.db.password}@nasa.gnmt3.mongodb.net/nasa?retryWrites=true&w=majority`;
-    await mongoose.connect(CONNECTION_STRING, { useNewUrlParser: true, useUnifiedTopology: true });
-    logger.info("Successfully connected to database.");
+
+    mongoose.connection
+    .once("open", () => logger.info("DB connection ready."))
+    .on("error", (err) => logger.error(err));
+
+    await mongoose.connect(CONNECTION_STRING, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useFindAndModify: false,
+        useCreateIndex: true,
+    });
 }
 
 export default loadDbConnection;

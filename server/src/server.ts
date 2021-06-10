@@ -13,7 +13,7 @@ async function startServer() {
     await loadDbConnection();
 
     return server.listen(port, () => {
-        logger.info(`Server started.\nListening on port ${port}...`);
+        logger.info(`Server listening on port ${port}...`);
     });
 }
 
