@@ -1,6 +1,6 @@
-import serverConfig from "@app/shared/config";
+import serverConfig from "@infra/config";
 import { Environment } from "@app/shared/definitions/configs.defs";
-import WinstonWriteStream from "@app/shared/logs/winston-write-stream";
+import WinstonWriteStream from "@infra/logs/winston-write-stream";
 import { Express, RequestHandler } from "express";
 import morgan from "morgan";
 

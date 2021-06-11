@@ -1,4 +1,4 @@
-import logger from "@app/shared/logs/logger";
+import logger from "@infra/logs/logger";
 
 
 export default class WinstonWriteStream implements WritableStream {

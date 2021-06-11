@@ -1,7 +1,7 @@
-import serverConfig from "@app/shared/config";
-import logger from "@app/shared/logs/logger";
+import serverConfig from "@infra/config";
+import logger from "@infra/logs/logger";
 import createApp from "@infra/http/app";
-import loadDbConnection from "@infra/loaders/db";
+import loadDbConnection from "@infra/data/db/mongo/mongo.loader";
 import http from "http";
 
 

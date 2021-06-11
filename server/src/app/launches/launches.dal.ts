@@ -1,5 +1,5 @@
 import { LaunchEntity } from "@app/launches/launches.defs";
-import LaunchesDao from "@app/launches/launches.mongo";
+import LaunchesDao from "@infra/data/db/mongo/models/launch";
 import { deepFreezeAndSeal } from "@app/shared/utils/object.utils";
 import notFound from "@app/shared/validators/not-found";
 import { requiredArgument } from "@app/shared/validators/required-argument";

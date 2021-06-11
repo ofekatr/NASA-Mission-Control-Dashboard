@@ -1,5 +1,5 @@
-import serverConfig from '@app/shared/config';
-import logger from '@app/shared/logs/logger';
+import serverConfig from '@infra/config';
+import logger from '@infra/logs/logger';
 import mongoose from 'mongoose';
 
 async function loadDbConnection() {

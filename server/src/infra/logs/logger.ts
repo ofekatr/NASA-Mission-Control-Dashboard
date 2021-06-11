@@ -1,5 +1,5 @@
 
-import serverConfig from "@app/shared/config";
+import serverConfig from "@infra/config";
 import { Environment } from "@app/shared/definitions/configs.defs";
 import { BasicObject } from "@app/shared/definitions/general.defs";
 import { createLogger, format, transports } from "winston";

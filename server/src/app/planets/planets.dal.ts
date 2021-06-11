@@ -1,7 +1,7 @@
 import { CreatePlanetsDalRequestParams, Planet } from "@app/planets/planets.defs";
 import { deepFreezeAndSeal } from "@app/shared/utils/object.utils";
 import { requiredArgument } from "@app/shared/validators/required-argument";
-import createPlanetsLoader from "@infra/loaders/planets";
+import createPlanetsLoader from "@infra/data/kepler/kepler.loader";
 
 
 async function createPlanetsDal({
