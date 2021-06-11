@@ -1,10 +1,10 @@
-import getLaunchRepoInstance from "@launch/launch.repo";
+import launchRepoFactory from "@launch/launch.repo";
 import { singletonify } from "@shared/utils/singleton.utils";
 import notFound from "@shared/validators/not-found";
 
-function createAbortLaunchInstance(
+function createAbortLaunch(
     {
-        launchRepo = getLaunchRepoInstance(),
+        launchRepo = launchRepoFactory(),
     } = {}
 ) {
     return async function abortLaunch(flightNumber: number) {
@@ -17,6 +17,6 @@ function createAbortLaunchInstance(
     }
 }
 
-const getAbortLaunchInstance = singletonify(createAbortLaunchInstance);
+const abortLaunchFactory = singletonify(createAbortLaunch);
 
-export default getAbortLaunchInstance;
+export default abortLaunchFactory;

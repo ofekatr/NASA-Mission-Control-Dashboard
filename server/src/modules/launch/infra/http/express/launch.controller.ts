@@ -9,7 +9,7 @@ import { singletonify } from "@shared/utils/singleton.utils";
 import { requiredArgument } from "@shared/validators/required-argument";
 import { NextFunction, Request, Response } from "express";
 
-function createLaunchControllerInstance(
+function createLaunchController(
     {
         launchUseCases = launchUseCasesDep,
     } = {}
@@ -84,6 +84,6 @@ function createLaunchControllerInstance(
     });
 }
 
-const getLaunchControllerInstance = singletonify(createLaunchControllerInstance);
+const launchControllerFactory = singletonify(createLaunchController);
 
-export default getLaunchControllerInstance;
+export default launchControllerFactory;

@@ -1,11 +1,11 @@
 import { createEntityForNewLaunch } from "@launch/domain/launch";
 import { CreateLaunchParams } from "@launch/launch.defs";
-import getLaunchRepoInstance from "@launch/launch.repo";
+import launchRepoFactory from "@launch/launch.repo";
 import { singletonify } from "@shared/utils/singleton.utils";
 
-function createAddNewLaunchInstance(
+function createAddNewLaunch(
     {
-        launchRepo = getLaunchRepoInstance(),
+        launchRepo = launchRepoFactory(),
         createLaunch = createEntityForNewLaunch,
     } = {}
 ) {
@@ -15,6 +15,6 @@ function createAddNewLaunchInstance(
     }
 }
 
-const getAddNewLaunchInstance = singletonify(createAddNewLaunchInstance);
+const addNewLaunchFactory = singletonify(createAddNewLaunch);
 
-export default getAddNewLaunchInstance;
+export default addNewLaunchFactory;

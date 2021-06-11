@@ -1,7 +1,7 @@
-import getPlanetRepoInstance from "@planet/planet.repo";
+import planetRepoFactory from "@planet/planet.repo";
 import { singletonify } from "@shared/utils/singleton.utils";
 
-function createPlanetService({ planetRepo = getPlanetRepoInstance() } = {}) {
+function createPlanetService({ planetRepo = planetRepoFactory() } = {}) {
     function getAllPlanet() {
         return planetRepo.getAllPlanet();
     }
@@ -11,6 +11,6 @@ function createPlanetService({ planetRepo = getPlanetRepoInstance() } = {}) {
     }
 }
 
-const getPlanetServiceInstance = singletonify(createPlanetService);
+const planetServiceFactory = singletonify(createPlanetService);
 
-export default getPlanetServiceInstance;
+export default planetServiceFactory;

@@ -6,7 +6,7 @@ import { singletonify } from "@shared/utils/singleton.utils";
 import notFound from "@shared/validators/not-found";
 import { requiredArgument } from "@shared/validators/required-argument";
 
-function createLaunchRepoInstance({
+function createLaunchRepo({
     db = LaunchMongo,
     fillLaunch = createLaunchEntityForExisting,
 } = {}) {
@@ -60,6 +60,6 @@ function createLaunchRepoInstance({
     });
 }
 
-const getLaunchRepoInstance = singletonify(createLaunchRepoInstance);
+const launchRepoFactory = singletonify(createLaunchRepo);
 
-export default getLaunchRepoInstance;
+export default launchRepoFactory;

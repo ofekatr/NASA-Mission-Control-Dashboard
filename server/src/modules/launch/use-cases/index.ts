@@ -1,12 +1,12 @@
-import getAbortLaunchInstance from "@launch/use-cases/abort-launch";
-import getAddNewLaunchInstance from "@launch/use-cases/add-new-launch";
-import getGetAllLaunchesInstance from "@launch/use-cases/get-all-launches";
+import abortLaunchFactory from "@launch/use-cases/abort-launch";
+import addNewLaunchFactory from "@launch/use-cases/add-new-launch";
+import getAllLaunchesFactory from "@launch/use-cases/get-all-launches";
 
-const getAllLaunches = getGetAllLaunchesInstance();
+const getAllLaunches = getAllLaunchesFactory();
 
-const addNewLaunch = getAddNewLaunchInstance();
+const addNewLaunch = addNewLaunchFactory();
 
-const abortLaunch = getAbortLaunchInstance();
+const abortLaunch = abortLaunchFactory();
 
 export {
     abortLaunch,

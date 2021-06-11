@@ -1,7 +1,4 @@
-import { PlanetDal } from "planet/planet.defs";
-
-
-const planetRepoMock: PlanetDal = {
+const planetRepoMock = {
     getAllPlanet: () => ["Planet1", "Planet2", "Planet3"] as any,
 };
 
