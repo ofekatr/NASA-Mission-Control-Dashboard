@@ -1,15 +1,15 @@
-import { createEntityForNewLaunch } from "@launch/domain/launch";
-import { CreateLaunchParams } from "@launch/launch.defs";
+import { CreateLaunchProps } from "@launch/launch.defs";
 import launchRepoFactory from "@launch/launch.repo";
 import { createSingletonFactory } from "@shared/utils/singleton.utils";
+import Launch from "@launch/domain/launch";
 
 function createAddNewLaunch(
     {
         launchRepo = launchRepoFactory(),
-        createLaunch = createEntityForNewLaunch,
+        createLaunch = Launch.createLaunch,
     } = {}
 ) {
-    return async function addNewLaunch(launchInfo: CreateLaunchParams) {
+    return async function addNewLaunch(launchInfo: CreateLaunchProps) {
         const launch = createLaunch(launchInfo);
         return await launchRepo.saveLaunch(launch);
     }

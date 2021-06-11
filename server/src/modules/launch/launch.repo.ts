@@ -1,24 +1,26 @@
-import LaunchMongo from "@core/infra/data/db/mongo/models/launch";
-import { createLaunchEntityForExisting } from "@launch/domain/launch";
-import { LaunchEntity } from "@launch/launch.defs";
+import { getRepository } from "@core/infra/data/db/typeorm/mongo";
 import { deepFreezeAndSeal } from "@shared/utils/object.utils";
 import { createSingletonFactory } from "@shared/utils/singleton.utils";
 import notFound from "@shared/validators/not-found";
 import { requiredArgument } from "@shared/validators/required-argument";
+import Launch from "@launch/domain/launch";
 
 function createLaunchRepo({
-    db = LaunchMongo,
-    fillLaunch = createLaunchEntityForExisting,
+    db = getRepository(Launch),
 } = {}) {
-    async function getAllLaunches(): Promise<LaunchEntity[]> {
-        return (await db.find()).map(dbLaunch => fillLaunch(dbLaunch));
+    async function getAllLaunches(): Promise<Launch[]> {
+        return await db.find();
     }
 
     async function getLaunchByFlightNumber(
         flightNumber: number = requiredArgument("flightNumber")
-    ): Promise<LaunchEntity> {
-        const dbLaunch = await db.findOne({ flightNumber }) ?? notFound(`Launch flight number: ${flightNumber}`);
-        return fillLaunch(dbLaunch!);
+    ): Promise<Launch> {
+        const dbLaunch = await db.findOneOrFail({
+            where: {
+                flightNumber
+            }
+        }) ?? notFound(`Launch flight number: ${flightNumber}`);
+        return dbLaunch;
     }
 
     async function verifyLaunchExists(
@@ -27,29 +29,8 @@ function createLaunchRepo({
         return !!(await getLaunchByFlightNumber(flightNumber));
     }
 
-    async function saveLaunch({
-        flightNumber,
-        target,
-        customers,
-        launchDate,
-        mission,
-        rocket,
-        getSuccess,
-        getUpcoming,
-    }: LaunchEntity) {
-        await db.findOneAndUpdate(
-            { flightNumber },
-            {
-                target,
-                launchDate,
-                mission,
-                rocket,
-                upcoming: getUpcoming(),
-                success: getSuccess(),
-                customers,
-            },
-            { upsert: true }
-        );
+    async function saveLaunch(launch: Launch) {
+        await db.save(launch);
     }
 
     return deepFreezeAndSeal({

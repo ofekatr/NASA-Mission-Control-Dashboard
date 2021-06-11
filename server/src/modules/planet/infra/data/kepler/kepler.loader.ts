@@ -1,25 +1,21 @@
-import {
-    createPlanet as createPlanetDep,
-    verifyHabitablePlanet as verifyHabitablePlanetDep
-} from "planet/domain/planet";
-import { Planet } from "planet/planet.defs";
 import { getBasePath } from "@shared/utils/path.utils";
 import parseDep from "csv-parse";
-import fsDep from "fs";
-import pathDep from "path";
+import { createReadStream as createReadStreamDep } from "fs";
+import { join as joinDep } from "path";
+import Planet from "@planet/domain/planet";
 
 function createPlanetLoader(
     {
-        fs = fsDep,
-        path = pathDep,
+        createReadStream = createReadStreamDep,
+        join = joinDep,
         parse = parseDep,
-        verifyValidPlanet = verifyHabitablePlanetDep,
-        createPlanet = createPlanetDep,
+        verifyValidPlanet = Planet.verifyHabitablePlanet,
+        createPlanet = Planet.createPlanet,
     } = {}
 ) {
     async function loadHabitablePlanet(habitablePlanet: Planet[]) {
         return new Promise((resolve, reject) => {
-            fs.createReadStream(path.join(getBasePath(), 'data', 'kepler_data.csv'))
+            createReadStream(join(getBasePath(), 'data', 'kepler_data.csv'))
                 .pipe(parse({
                     comment: '#',
                     columns: true,

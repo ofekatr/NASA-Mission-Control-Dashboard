@@ -1,4 +1,4 @@
-import { CreateLaunchParams } from "@launch/launch.defs";
+import { CreateLaunchProps } from "@launch/launch.defs";
 import { verifyCustomError } from "@shared/errors/error-objects/custom-error";
 import CustomHttpError from "@shared/errors/error-objects/custom-http-error";
 import { requiredArgument } from "@shared/validators/required-argument";
@@ -13,7 +13,7 @@ function createHttpAddNewLaunch(
 ) {
     return async function httpAddNewLaunch(req: Request, res: Response, next: NextFunction) {
         try {
-            let launchInfo: CreateLaunchParams;
+            let launchInfo: CreateLaunchProps;
             try {
                 launchInfo = req.body ?? requiredArgument("launchInfo");
                 let {

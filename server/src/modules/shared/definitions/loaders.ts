@@ -1,5 +1,5 @@
 
-import { Planet } from "planet/planet.defs";
+import Planet from "@planet/domain/planet"
 import parse from "csv-parse";
 import fs from "fs";
 import path from "path";

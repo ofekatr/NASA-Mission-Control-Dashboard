@@ -1,3 +1,3 @@
-export interface Planet {
-    keplerName: string,
+export interface CreatePlanetProps {
+    keplerName: string;
 }

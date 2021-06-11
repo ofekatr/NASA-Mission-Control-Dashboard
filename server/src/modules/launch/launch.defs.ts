@@ -1,30 +1,6 @@
-
-export interface LaunchEntity {
-    flightNumber: number;
-    mission: string;
-    target: string;
-    rocket: string;
-    launchDate: Date;
-    getSuccess: () => boolean;
-    getUpcoming: () => boolean;
-    customers: string[] | undefined;
-    abortLaunch: () => void;
-}
-
-export interface CreateLaunchParams {
+export interface CreateLaunchProps {
     mission: string;
     rocket: string;
-    launchDate: string;
+    launchDate: string | Date | number;
     target: string;
-}
-
-export interface CreateEntityForExistingLaunchParams {
-    flightNumber: number;
-    mission: string;
-    rocket: string;
-    launchDate: Date;
-    target: string;
-    upcoming: boolean;
-    success: boolean;
-    customers?: string[];
 }
