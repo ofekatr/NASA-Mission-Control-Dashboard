@@ -1,7 +1,6 @@
 import applyErrorHandlingMiddleware from "@core/infra/http/express/middlewares/error-handler";
 import applyMorganMiddleware from "@core/infra/http/express/middlewares/morgan";
-import { loadLaunchApi } from "@launch";
-import { loadPlanetApi } from "@planet";
+import { loadLaunchApi, loadPlanetApi } from "@modules";
 import { getBasePath } from "@shared/utils/path.utils";
 import { json, urlencoded } from "body-parser";
 import express, { RequestHandler } from "express";
