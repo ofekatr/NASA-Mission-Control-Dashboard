@@ -1,6 +1,8 @@
-import loadServerConfig from "@infra/loaders/config";
+import "dotenv/config";
+import db from "@infra/config/db";
+import server from "@infra/config/server";
 
-
-const serverConfig = loadServerConfig();
-
-export default serverConfig;
+export default {
+    ...server,
+    db,
+}

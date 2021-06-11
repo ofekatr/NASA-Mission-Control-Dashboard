@@ -1,7 +1,7 @@
 
-import serverConfig from "@infra/config";
 import { Environment } from "@app/shared/definitions/configs.defs";
 import { BasicObject } from "@app/shared/definitions/general.defs";
+import config from "@infra/config";
 import { createLogger, format, transports } from "winston";
 
 function prettyStringify(obj: BasicObject) {
@@ -30,7 +30,7 @@ const envToLoggerConfigsMap: Partial<{ [key in Environment]: any }> = {
 };
 
 const logger = createLogger(
-    envToLoggerConfigsMap[serverConfig.nodeEnv as Environment] ?? defaultConfig
+    envToLoggerConfigsMap[config.nodeEnv as Environment] ?? defaultConfig
 );
 
 logger.error = (err: any) => {

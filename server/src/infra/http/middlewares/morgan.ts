@@ -1,5 +1,5 @@
-import serverConfig from "@infra/config";
 import { Environment } from "@app/shared/definitions/configs.defs";
+import config from "@infra/config";
 import WinstonWriteStream from "@infra/logs/winston-write-stream";
 import { Express, RequestHandler } from "express";
 import morgan from "morgan";
@@ -15,7 +15,7 @@ const envToFormatMap: EnvToFormatMap = {
 const DEFAULT_FORMAT = "common";
 
 function createMorganMiddleware() {
-    const format = envToFormatMap[serverConfig.nodeEnv] ?? DEFAULT_FORMAT;
+    const format = envToFormatMap[config.nodeEnv] ?? DEFAULT_FORMAT;
     return morgan(format, {
         stream: new WinstonWriteStream(),
     });
