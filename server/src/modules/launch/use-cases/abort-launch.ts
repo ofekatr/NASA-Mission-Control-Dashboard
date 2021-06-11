@@ -1,5 +1,5 @@
 import launchRepoFactory from "@launch/launch.repo";
-import { singletonify } from "@shared/utils/singleton.utils";
+import { createSingletonFactory } from "@shared/utils/singleton.utils";
 import notFound from "@shared/validators/not-found";
 
 function createAbortLaunch(
@@ -17,6 +17,6 @@ function createAbortLaunch(
     }
 }
 
-const abortLaunchFactory = singletonify(createAbortLaunch);
+const abortLaunchFactory = createSingletonFactory(createAbortLaunch);
 
 export default abortLaunchFactory;

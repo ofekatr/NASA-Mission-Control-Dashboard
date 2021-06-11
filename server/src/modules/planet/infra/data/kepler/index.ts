@@ -9,12 +9,12 @@ async function loadPlanets() {
     isLoaded = true;
 }
 
-function getPlanets() {
+function getKeplerPlanets() {
     assert(isLoaded, "Planets are not loaded");
     return planets;
 }
 
 export {
-    getPlanets,
+    getKeplerPlanets,
     loadPlanets,
 }

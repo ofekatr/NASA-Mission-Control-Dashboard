@@ -1,4 +1,4 @@
-function singletonify<P, T>(createInstance: (props?: P) => T) {
+function createSingletonFactory<P, T>(createInstance: (props?: P) => T) {
     let instance: T;
 
     return function buildInstance(isOverride = false, props?: P) {
@@ -10,6 +10,6 @@ function singletonify<P, T>(createInstance: (props?: P) => T) {
 }
 
 export {
-    singletonify,
+    createSingletonFactory,
 };
 

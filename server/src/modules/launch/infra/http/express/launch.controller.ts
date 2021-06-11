@@ -5,7 +5,7 @@ import { verifyCustomError, verifyCustomErrorType } from "@shared/errors/error-o
 import CustomHttpError from "@shared/errors/error-objects/custom-http-error";
 import { assertNumber } from "@shared/utils/number.utils";
 import { deepFreezeAndSeal } from "@shared/utils/object.utils";
-import { singletonify } from "@shared/utils/singleton.utils";
+import { createSingletonFactory } from "@shared/utils/singleton.utils";
 import { requiredArgument } from "@shared/validators/required-argument";
 import { NextFunction, Request, Response } from "express";
 
@@ -84,6 +84,6 @@ function createLaunchController(
     });
 }
 
-const launchControllerFactory = singletonify(createLaunchController);
+const launchControllerFactory = createSingletonFactory(createLaunchController);
 
 export default launchControllerFactory;

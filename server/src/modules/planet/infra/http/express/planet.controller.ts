@@ -1,13 +1,17 @@
 
-import { singletonify } from "@shared/utils/singleton.utils";
+import { createSingletonFactory } from "@shared/utils/singleton.utils";
 import { NextFunction, Request, Response } from "express";
-import planetServiceFactory from "planet/planet.service";
+import { getAllPlanets as getAllPlanetsDep } from "@planet/use-cases";
 
 
-function createPlanetController({ planetService = planetServiceFactory() } = {}) {
+function createPlanetController(
+    {
+        getAllPlanets = getAllPlanetsDep,
+    } = {}
+) {
     function httpGetAllPlanet(_req: Request, res: Response, next: NextFunction) {
         try {
-            return res.status(200).json(planetService.getAllPlanet());
+            return res.status(200).json(getAllPlanets());
         } catch (err) {
             return next(err);
         }
@@ -18,6 +22,6 @@ function createPlanetController({ planetService = planetServiceFactory() } = {})
     };
 }
 
-const planetControllerFactory = singletonify(createPlanetController);
+const planetControllerFactory = createSingletonFactory(createPlanetController);
 
 export default planetControllerFactory;

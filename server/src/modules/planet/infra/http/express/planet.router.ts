@@ -1,4 +1,4 @@
-import { singletonify } from "@shared/utils/singleton.utils";
+import { createSingletonFactory } from "@shared/utils/singleton.utils";
 import { Router as RouterDep } from "express";
 import planetControllerFactory from "planet/infra/http/express/planet.controller";
 
@@ -17,6 +17,6 @@ function createPlanetRouter(
     return planetRouter;
 }
 
-const planetRouterFactory = singletonify(createPlanetRouter);
+const planetRouterFactory = createSingletonFactory(createPlanetRouter);
 
 export default planetRouterFactory;

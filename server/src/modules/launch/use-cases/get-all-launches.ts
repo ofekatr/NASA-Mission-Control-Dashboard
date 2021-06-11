@@ -1,5 +1,5 @@
 import launchRepoFactory from "@launch/launch.repo";
-import { singletonify } from "@shared/utils/singleton.utils";
+import { createSingletonFactory } from "@shared/utils/singleton.utils";
 
 function createGetAllLaunches(
     {
@@ -13,6 +13,6 @@ function createGetAllLaunches(
     return getAllLaunches;
 }
 
-const getAllLaunchesFactory = singletonify(createGetAllLaunches);
+const getAllLaunchesFactory = createSingletonFactory(createGetAllLaunches);
 
 export default getAllLaunchesFactory;
