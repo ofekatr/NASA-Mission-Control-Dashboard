@@ -1,7 +1,8 @@
-import createLaunchController from "@launch/infra/http/express/launch.controller";
-import createLaunchDal from "@launch/launch.repo";
-import createLaunchService from "@launch/launch.service";
-
+import {
+    createLaunchController,
+    createLaunchRepo,
+    createLaunchService
+} from "@launch";
 
 
 export interface LaunchEntity {
@@ -16,7 +17,7 @@ export interface LaunchEntity {
     abortLaunch: () => void;
 }
 
-export type LaunchDal = ReturnType<typeof createLaunchDal>;
+export type LaunchDal = ReturnType<typeof createLaunchRepo>;
 
 export type LaunchController = ReturnType<typeof createLaunchController>;
 

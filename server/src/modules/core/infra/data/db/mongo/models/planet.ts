@@ -1,6 +1,6 @@
 import { model, Schema } from "mongoose";
 
-const PlanetDb = model(
+const PlanetMongo = model(
     'Planet',
     new Schema(
         {
@@ -12,4 +12,4 @@ const PlanetDb = model(
     )
 );
 
-export default PlanetDb;
+export default PlanetMongo;

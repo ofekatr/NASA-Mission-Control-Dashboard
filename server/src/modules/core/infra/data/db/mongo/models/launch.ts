@@ -2,7 +2,7 @@ import { CreateEntityForExistingLaunchParams } from "@launch/launch.defs";
 import { model, Schema } from "mongoose";
 
 
-const Launch = model<CreateEntityForExistingLaunchParams>(
+const LaunchMongo = model<CreateEntityForExistingLaunchParams>(
     'Launch',
     new Schema(
         {
@@ -41,4 +41,4 @@ const Launch = model<CreateEntityForExistingLaunchParams>(
     )
 );
 
-export default Launch;
+export default LaunchMongo;

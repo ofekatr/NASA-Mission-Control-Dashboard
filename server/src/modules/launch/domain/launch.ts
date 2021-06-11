@@ -1,4 +1,8 @@
-import { CreateEntityForExistingLaunchParams, CreateLaunchParams, LaunchEntity } from "@launch/launch.defs";
+import {
+    CreateEntityForExistingLaunchParams,
+    CreateLaunchParams,
+    LaunchEntity
+} from "@launch/launch.defs";
 import { deepFreezeAndSeal } from "@shared/utils/object.utils";
 import { assertDateInput } from "@shared/validators/dates";
 import { requiredArgument } from "@shared/validators/required-argument";

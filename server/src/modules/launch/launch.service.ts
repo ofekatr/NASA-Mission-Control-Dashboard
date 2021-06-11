@@ -1,6 +1,6 @@
 import { createEntityForNewLaunch } from "@launch/domain/launch";
 import { CreateLaunchParams } from "@launch/launch.defs";
-import createLaunchRepo from "@launch/launch.repo";
+import { createLaunchRepo } from "@launch";
 import CustomError from "@shared/errors/error-objects/custom-error";
 import { deepFreezeAndSeal } from "@shared/utils/object.utils";
 

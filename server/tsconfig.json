@@ -25,10 +25,10 @@
     "paths": {
       "@core/*": ["core/*"],
       "@shared/*": ["shared/*"],
-      "@planet/*": ["planet/*"],
       "@planet": ["planet"],
-      "@launch/*": ["launch/*"],
+      "@planet/*": ["planet/*"],
       "@launch": ["launch"],
+      "@launch/*": ["launch/*"],
       "@modules": ["."],
       
     }

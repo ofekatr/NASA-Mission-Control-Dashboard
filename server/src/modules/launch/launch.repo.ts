@@ -1,12 +1,12 @@
-import LaunchDao from "@core/infra/data/db/mongo/models/launch";
+import LaunchMongo from "@core/infra/data/db/mongo/models/launch";
 import { createLaunchEntityForExisting } from "@launch/domain/launch";
 import { LaunchEntity } from "@launch/launch.defs";
 import { deepFreezeAndSeal } from "@shared/utils/object.utils";
 import notFound from "@shared/validators/not-found";
 import { requiredArgument } from "@shared/validators/required-argument";
 
-function createLaunchDal({
-    db = LaunchDao,
+function createLaunchRepo({
+    db = LaunchMongo,
     fillLaunch = createLaunchEntityForExisting,
 } = {}) {
     async function getAllLaunch(): Promise<LaunchEntity[]> {
@@ -59,4 +59,4 @@ function createLaunchDal({
     });
 }
 
-export default createLaunchDal;
+export default createLaunchRepo;
