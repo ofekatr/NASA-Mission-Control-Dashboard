@@ -1,5 +1,4 @@
-import { loadLaunchApi } from "@launch";
-import { loadPlanetApi, loadPlanetData } from "@planet";
+import { loadPlanetData } from "@planet";
 
 async function loadModulesData() {
     await loadPlanetData();
@@ -7,6 +6,4 @@ async function loadModulesData() {
 
 export {
     loadModulesData,
-    loadLaunchApi,
-    loadPlanetApi
-};
+}
