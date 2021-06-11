@@ -1,6 +1,6 @@
 import config from "@shared/config";
 import loadDbConnection from "core/infra/data/db/mongo/mongo.loader";
-import createApp from "core/infra/http/app";
+import createApp from "@core/infra/http/express/app";
 import logger from "core/infra/logs/logger";
 import http from "http";
 

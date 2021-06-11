@@ -1,4 +1,5 @@
-import createLaunchesController from "@launches/infra/http/launches.controller";
+
+import createLaunchesController from "@launches/infra/http/express/launches.controller";
 import { Router as expressRouter } from "express";
 
 function createLaunchesRouter(

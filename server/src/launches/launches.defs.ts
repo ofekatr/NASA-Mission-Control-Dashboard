@@ -1,4 +1,4 @@
-import createLaunchesController from "@launches/infra/http/launches.controller";
+import createLaunchesController from "@launches/infra/http/express/launches.controller";
 import createLaunchesDal from "@launches/launches.repo";
 import createLaunchesService from "@launches/launches.service";
 
