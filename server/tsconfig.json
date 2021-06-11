@@ -21,14 +21,15 @@
     "experimentalDecorators": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
-    "baseUrl": "./src",
+    "baseUrl": "./src/modules",
     "paths": {
       "@core/*": ["core/*"],
       "@shared/*": ["shared/*"],
-      "@planets/*": ["planets/*"],
-      "@planets": ["planets"],
-      "@launches/*": ["launches/*"],
-      "@launches": ["launches"]
+      "@planet/*": ["planet/*"],
+      "@planet": ["planet"],
+      "@launch/*": ["launch/*"],
+      "@launch": ["launch"],
+      "@modules": ["."],
       
     }
   },

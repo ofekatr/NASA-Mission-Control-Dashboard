@@ -1,2 +1,0 @@
-describe("Planets Model", function () {
-});

@@ -1,3 +1,9 @@
-import startServer from "core/infra/http/server";
+import startServer from "@core/infra/http/server";
+import { loadModulesData } from "index";
 
-startServer();
+async function main() {
+    await loadModulesData();
+    startServer();
+}
+
+main();
