@@ -23,31 +23,13 @@
     "skipLibCheck": true,
     "baseUrl": "./src",
     "paths": {
-      "@planets/*": ["planets/*"],
-      "@planets": ["planets"],
-      "@launches/*": ["launches/*"],
-      "@launches": ["launches"],
-      "@configs/*": ["config/*"],
-      "@configs": ["config"],
-      "@logs/*": ["helpers/logs/*"],
-      "@logs": ["helpers/logs"],
-      "@jsons/*": ["jsons/*"],
-      "@jsons": ["jsons"],
-      "@helpers/*": ["helpers/*"],
-      "@helpers": ["helpers"],
-      "@middlewares/*": ["middlewares/*"],
-      "@middlewares": ["middlewares"],
-      "@constants/*": ["constants/*"],
-      "@constants": ["constants"],
-      "@loaders/*": ["loaders/*"],
-      "@loaders": ["loaders"],
-      "@definitions/*": ["definitions/*"],
-      "@definitions": ["definitions"],
-      "@app": ["app"],
-      "@server": ["server"],
+      "@app/*": ["app/*"],
+      "@domain/*": ["domain/*"],
+      "@infra/*": ["infra/*"],
+      "@server": ["infra/http/server"]
     }
   },
   "exclude": ["node_modules"],
-  "include": ["./*.ts", "./src/**/*.tsx", "./src/**/*.ts", "src/definitions/loaders.defsts"]
+  "include": ["./*.ts", "./src/**/*.tsx", "./src/**/*.ts"]
 }
 
