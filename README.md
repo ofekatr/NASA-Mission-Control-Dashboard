@@ -5,7 +5,7 @@ A NASA dashboard app for managing and monitoring flights to habitable planets in
 
 ## Architecture details:
 * Server
-    * Applies the principles and concepts of the Clean Architecture.
+    * Applies the Clean Architecture's concepts and principles.
     * Follows the Domain-Driven-Development approach.
 
 ## Implementation details:
