@@ -18,10 +18,4 @@ export default class Planet {
     static createPlanet(props: CreatePlanetProps): Planet {
         return new Planet(props);
     }
-
-    static verifyHabitablePlanet(planet: any) {
-        return planet['koi_disposition'] === 'CONFIRMED'
-            && planet['koi_insol'] > 0.36 && planet['koi_insol'] < 1.11
-            && planet['koi_prad'] < 1.6;
-    }
 }

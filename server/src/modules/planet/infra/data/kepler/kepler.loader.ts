@@ -1,15 +1,16 @@
+import { verifyHabitablePlanet as verifyHabitablePlanetDep } from "@planet/domain/kepler-planet";
+import Planet from "@planet/domain/planet";
 import { getBasePath } from "@shared/utils/path.utils";
 import parseDep from "csv-parse";
 import { createReadStream as createReadStreamDep } from "fs";
 import { join as joinDep } from "path";
-import Planet from "@planet/domain/planet";
 
 function createPlanetLoader(
     {
         createReadStream = createReadStreamDep,
         join = joinDep,
         parse = parseDep,
-        verifyValidPlanet = Planet.verifyHabitablePlanet,
+        verifyValidPlanet = verifyHabitablePlanetDep,
         createPlanet = Planet.createPlanet,
     } = {}
 ) {
