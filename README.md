@@ -3,12 +3,18 @@
 ## Description:
 A NASA dashboard app for managing and monitoring flights to habitable planets in the observable universe.
 
+## Architecture details:
+* Server
+    * Applies the principles and concepts of the Clean Architecture.
+    * Follows the Domain-Driven-Development approach.
+
 ## Implementation details:
 * Server
     * REST API, implemented in TypeScript, using Express.js.
     * Persistence using MongoDB via TypeORM.
-    * Applies principles and concepts of the Clean Architecture.
-    * Follows the Domain-Driven-Development approach.
+    * Consumes planets related data provided by public NASA resources.
+* Web App
+   *  Implemented in TypeScript, using React.
 
 ## Running Instructions:
 
