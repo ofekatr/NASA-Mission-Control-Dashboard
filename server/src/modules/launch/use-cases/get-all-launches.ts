@@ -1,8 +1,9 @@
-import createLaunchRepo from "@launch/launch.repo";
+import getLaunchRepoInstance from "@launch/launch.repo";
+import { singletonify } from "@shared/utils/singleton.utils";
 
-function createGetAllLaunches(
+function createGetAllLaunchesInstance(
     {
-        launchRepo = createLaunchRepo(),
+        launchRepo = getLaunchRepoInstance(),
     } = {},
 ) {
     async function getAllLaunches() {
@@ -12,4 +13,6 @@ function createGetAllLaunches(
     return getAllLaunches;
 }
 
-export default createGetAllLaunches;
+const getGetAllLaunchesInstance = singletonify(createGetAllLaunchesInstance);
+
+export default getGetAllLaunchesInstance;

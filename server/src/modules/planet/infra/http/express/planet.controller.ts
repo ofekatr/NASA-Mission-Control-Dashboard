@@ -1,9 +1,10 @@
 
+import { singletonify } from "@shared/utils/singleton.utils";
 import { NextFunction, Request, Response } from "express";
-import createPlanetService from "planet/planet.service";
+import getPlanetServiceInstance from "planet/planet.service";
 
 
-function createPlanetController({ planetService = createPlanetService() } = {}) {
+function createPlanetControllerInstance({ planetService = getPlanetServiceInstance() } = {}) {
     function httpGetAllPlanet(_req: Request, res: Response, next: NextFunction) {
         try {
             return res.status(200).json(planetService.getAllPlanet());
@@ -17,4 +18,6 @@ function createPlanetController({ planetService = createPlanetService() } = {}) 
     };
 }
 
-export default createPlanetController;
+const getPlanetControllerInstance = singletonify(createPlanetControllerInstance);
+
+export default getPlanetControllerInstance;

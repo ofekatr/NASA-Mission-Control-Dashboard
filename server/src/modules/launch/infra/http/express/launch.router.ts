@@ -1,10 +1,11 @@
 
-import createLaunchController from "@launch/infra/http/express/launch.controller";
+import getLaunchControllerInstance from "@launch/infra/http/express/launch.controller";
+import { singletonify } from "@shared/utils/singleton.utils";
 import { Router as expressRouter } from "express";
 
-function createLaunchRouter(
+function createLaunchRouterInstance(
     {
-        launchController = createLaunchController(),
+        launchController = getLaunchControllerInstance(),
         Router = expressRouter
     } = {}) {
     const launchRouter = Router();
@@ -18,4 +19,6 @@ function createLaunchRouter(
     return launchRouter;
 }
 
-export default createLaunchRouter;
+const getLaunchRouterInstance = singletonify(createLaunchRouterInstance);
+
+export default getLaunchRouterInstance;

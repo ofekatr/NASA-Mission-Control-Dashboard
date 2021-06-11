@@ -1,14 +1,15 @@
 
 import { CreateLaunchParams } from "@launch/launch.defs";
+import * as launchUseCasesDep from "@launch/use-cases";
 import { verifyCustomError, verifyCustomErrorType } from "@shared/errors/error-objects/custom-error";
 import CustomHttpError from "@shared/errors/error-objects/custom-http-error";
 import { assertNumber } from "@shared/utils/number.utils";
 import { deepFreezeAndSeal } from "@shared/utils/object.utils";
+import { singletonify } from "@shared/utils/singleton.utils";
 import { requiredArgument } from "@shared/validators/required-argument";
 import { NextFunction, Request, Response } from "express";
-import * as launchUseCasesDep from "@launch/use-cases";
 
-function createLaunchController(
+function createLaunchControllerInstance(
     {
         launchUseCases = launchUseCasesDep,
     } = {}
@@ -83,4 +84,6 @@ function createLaunchController(
     });
 }
 
-export default createLaunchController;
+const getLaunchControllerInstance = singletonify(createLaunchControllerInstance);
+
+export default getLaunchControllerInstance;

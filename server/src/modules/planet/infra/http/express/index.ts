@@ -1,10 +1,10 @@
 
-import createPlanetRouter from 'planet/infra/http/express/planet.router';
+import getPlanetRouterInstance from 'planet/infra/http/express/planet.router';
 import { Express } from "express";
 
 
 function loadPlanetApi(app: Express): Express {
-    const planetRouter = createPlanetRouter();
+    const planetRouter = getPlanetRouterInstance();
     app.use("/planet", planetRouter);
     return app;
 }

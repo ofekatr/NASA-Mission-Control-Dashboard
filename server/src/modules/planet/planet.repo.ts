@@ -1,8 +1,9 @@
 
 import { getPlanets } from "@planet/infra/data/kepler";
 import { deepFreezeAndSeal } from "@shared/utils/object.utils";
+import { singletonify } from "@shared/utils/singleton.utils";
 
-function createPlanetRepo() {
+function createPlanetRepoInstance() {
     function getAllPlanet() {
         return getPlanets();
     }
@@ -12,4 +13,6 @@ function createPlanetRepo() {
     });
 }
 
-export default createPlanetRepo;
+const getPlanetRepoInstance = singletonify(createPlanetRepoInstance);
+
+export default getPlanetRepoInstance;

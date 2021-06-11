@@ -1,9 +1,9 @@
 
-import createLaunchRouter from "@launch/infra/http/express/launch.router";
+import getLaunchRouterInstance from "@launch/infra/http/express/launch.router";
 import { Express } from "express";
 
 function loadLaunchApi(app: Express) {
-    const launchRouter = createLaunchRouter();
+    const launchRouter = getLaunchRouterInstance();
     app.use("/launch", launchRouter);
     return app;
 }

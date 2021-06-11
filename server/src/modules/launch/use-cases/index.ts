@@ -1,26 +1,12 @@
-import createAbourtLaunch from "@launch/use-cases/abort-launch";
-import createAddNewLaunch from "@launch/use-cases/add-new-launch";
-import { createEntityForNewLaunch } from "@launch/domain/launch";
-import createGetAllLaunches from "@launch/use-cases/get-all-launches";
-import createLaunchRepo from "@launch/launch.repo";
+import getAbortLaunchInstance from "@launch/use-cases/abort-launch";
+import getAddNewLaunchInstance from "@launch/use-cases/add-new-launch";
+import getGetAllLaunchesInstance from "@launch/use-cases/get-all-launches";
 
-const launchRepo = createLaunchRepo();
-const createLaunch = createEntityForNewLaunch;
+const getAllLaunches = getGetAllLaunchesInstance();
 
-const getAllLaunches = createGetAllLaunches({
-    launchRepo,
-});
+const addNewLaunch = getAddNewLaunchInstance();
 
-const addNewLaunch = createAddNewLaunch(
-    {
-        launchRepo,
-        createLaunch,
-    }
-);
-
-const abortLaunch = createAbourtLaunch({
-    launchRepo,
-});
+const abortLaunch = getAbortLaunchInstance();
 
 export {
     abortLaunch,

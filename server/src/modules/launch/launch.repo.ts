@@ -2,10 +2,11 @@ import LaunchMongo from "@core/infra/data/db/mongo/models/launch";
 import { createLaunchEntityForExisting } from "@launch/domain/launch";
 import { LaunchEntity } from "@launch/launch.defs";
 import { deepFreezeAndSeal } from "@shared/utils/object.utils";
+import { singletonify } from "@shared/utils/singleton.utils";
 import notFound from "@shared/validators/not-found";
 import { requiredArgument } from "@shared/validators/required-argument";
 
-function createLaunchRepo({
+function createLaunchRepoInstance({
     db = LaunchMongo,
     fillLaunch = createLaunchEntityForExisting,
 } = {}) {
@@ -59,4 +60,6 @@ function createLaunchRepo({
     });
 }
 
-export default createLaunchRepo;
+const getLaunchRepoInstance = singletonify(createLaunchRepoInstance);
+
+export default getLaunchRepoInstance;
