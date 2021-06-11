@@ -23,10 +23,13 @@
     "skipLibCheck": true,
     "baseUrl": "./src",
     "paths": {
-      "@app/*": ["app/*"],
-      "@domain/*": ["domain/*"],
-      "@infra/*": ["infra/*"],
-      "@server": ["infra/http/server"]
+      "@core/*": ["core/*"],
+      "@shared/*": ["shared/*"],
+      "@planets/*": ["planets/*"],
+      "@planets": ["planets"],
+      "@launches/*": ["launches/*"],
+      "@launches": ["launches"]
+      
     }
   },
   "exclude": ["node_modules"],

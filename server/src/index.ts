@@ -1,3 +1,3 @@
-import startServer from "@infra/http/server";
+import startServer from "core/infra/http/server";
 
 startServer();
