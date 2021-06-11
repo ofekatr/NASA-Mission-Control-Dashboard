@@ -1,6 +1,6 @@
 
-import { Environment } from "@app/shared/definitions/configs.defs";
-import { BasicObject } from "@app/shared/definitions/general.defs";
+import { Environment } from "@app/shared/definitions/configs";
+import { BasicObject } from "@app/shared/definitions/general";
 import config from "@infra/config";
 import { createLogger, format, transports } from "winston";
 

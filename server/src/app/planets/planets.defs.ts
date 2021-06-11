@@ -6,8 +6,8 @@ import parse from "csv-parse";
 import { Router } from "express";
 import fs from "fs";
 import path from "path";
-import { BasicObject } from "../shared/definitions/general.defs";
-import { ThenArg } from "../shared/definitions/promises.defs";
+import { BasicObject } from "../shared/definitions/general";
+import { ThenArg } from "../shared/definitions/promises";
 import createPlanetService from "./planets.service";
 
 export interface Planet extends BasicObject { }

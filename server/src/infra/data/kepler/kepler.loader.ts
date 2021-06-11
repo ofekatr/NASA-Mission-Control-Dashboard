@@ -1,5 +1,5 @@
 import { Planet } from "@app/planets/planets.defs";
-import { CreatePlanetsLoaderParams } from "@app/shared/definitions/loaders.defs";
+import { CreatePlanetsLoaderParams } from "@app/shared/definitions/loaders";
 import { getBasePath } from "@app/shared/utils/path.utils";
 
 function createPlanetsLoader({

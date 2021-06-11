@@ -1,5 +1,5 @@
 
-import { CustomHttpErrorType, CustomHttpErrorTypeToDataMap } from "@app/shared/definitions/errors.defs";
+import { CustomHttpErrorType, CustomHttpErrorTypeToDataMap } from "@app/shared/definitions/errors";
 import { BaseAbstractCustomError } from "@app/shared/errors/error-objects/custom-error";
 import { createUnion } from "@app/shared/utils/union.utils";
 

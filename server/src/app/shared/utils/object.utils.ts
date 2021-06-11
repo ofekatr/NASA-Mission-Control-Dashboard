@@ -1,4 +1,4 @@
-import { BasicObject } from "@app/shared/definitions/general.defs";
+import { BasicObject } from "@app/shared/definitions/general";
 
 function checkIfObjectHasNullProperties(object: BasicObject): boolean {
     return [...Object.values(object)].some(value => value == null);

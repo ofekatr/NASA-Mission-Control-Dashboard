@@ -1,4 +1,5 @@
-import { Environment } from "@app/shared/definitions/configs.defs";
+
+import { Environment } from "@app/shared/definitions/configs";
 import config from "@infra/config";
 import WinstonWriteStream from "@infra/logs/winston-write-stream";
 import { Express, RequestHandler } from "express";

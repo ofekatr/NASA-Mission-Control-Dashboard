@@ -1,4 +1,4 @@
-import { CustomErrorType, CustomErrorTypeToDataMap } from "@app/shared/definitions/errors.defs";
+import { CustomErrorType, CustomErrorTypeToDataMap } from "@app/shared/definitions/errors";
 import { createUnion } from "@app/shared/utils/union.utils";
 
 
