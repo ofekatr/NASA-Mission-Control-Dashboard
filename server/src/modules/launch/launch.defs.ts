@@ -1,9 +1,3 @@
-import {
-    createLaunchController,
-    createLaunchRepo,
-    createLaunchService
-} from "@launch";
-
 
 export interface LaunchEntity {
     flightNumber: number;
@@ -16,12 +10,6 @@ export interface LaunchEntity {
     customers: string[] | undefined;
     abortLaunch: () => void;
 }
-
-export type LaunchDal = ReturnType<typeof createLaunchRepo>;
-
-export type LaunchController = ReturnType<typeof createLaunchController>;
-
-export type LaunchService = ReturnType<typeof createLaunchService>
 
 export interface CreateLaunchParams {
     mission: string;

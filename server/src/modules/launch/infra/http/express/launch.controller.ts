@@ -1,22 +1,22 @@
 
 import { CreateLaunchParams } from "@launch/launch.defs";
-import createLaunchService from "@launch/launch.service";
 import { verifyCustomError, verifyCustomErrorType } from "@shared/errors/error-objects/custom-error";
 import CustomHttpError from "@shared/errors/error-objects/custom-http-error";
 import { assertNumber } from "@shared/utils/number.utils";
 import { deepFreezeAndSeal } from "@shared/utils/object.utils";
 import { requiredArgument } from "@shared/validators/required-argument";
 import { NextFunction, Request, Response } from "express";
+import * as launchUseCasesDep from "@launch/use-cases";
 
 function createLaunchController(
     {
-        launchService = createLaunchService(),
+        launchUseCases = launchUseCasesDep,
     } = {}
 ) {
 
     async function httpGetAllLaunch(_req: Request, res: Response, next: NextFunction) {
         try {
-            return res.status(200).json(await launchService.getAllLaunch());
+            return res.status(200).json(await launchUseCases.getAllLaunches());
         } catch (err) {
             return next(err);
         }
@@ -39,7 +39,7 @@ function createLaunchController(
                 }
                 throw err;
             }
-            await launchService.addNewLaunch(launchInfo);
+            await launchUseCases.addNewLaunch(launchInfo);
             return res.status(201).send({ ok: true });
         } catch (err) {
             return next(err);
@@ -60,7 +60,7 @@ function createLaunchController(
 
             const flightNumber = +req.params.flightNumber ?? requiredArgument("flightNumber");
             try {
-                await launchService.abortLaunch(flightNumber);
+                await launchUseCases.abortLaunch(flightNumber);
                 return res.status(200).json({
                     ok: true,
                 })

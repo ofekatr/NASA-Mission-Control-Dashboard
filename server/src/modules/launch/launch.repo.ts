@@ -9,7 +9,7 @@ function createLaunchRepo({
     db = LaunchMongo,
     fillLaunch = createLaunchEntityForExisting,
 } = {}) {
-    async function getAllLaunch(): Promise<LaunchEntity[]> {
+    async function getAllLaunches(): Promise<LaunchEntity[]> {
         return (await db.find()).map(dbLaunch => fillLaunch(dbLaunch));
     }
 
@@ -53,7 +53,7 @@ function createLaunchRepo({
 
     return deepFreezeAndSeal({
         saveLaunch,
-        getAllLaunch,
+        getAllLaunches,
         getLaunchByFlightNumber,
         verifyLaunchExists,
     });
