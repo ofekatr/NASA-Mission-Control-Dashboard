@@ -1,12 +1,10 @@
 import { requiredArgument } from "@shared/validators/required-argument";
 
 function extractDbConfigFromEnv({
-    DB_USER = "user0",
-    DB_PASSWORD = requiredArgument("DB_PASSWORD"),
+    DB_URL = requiredArgument("DB_URL"),
 }: any) {
     return {
-        user: DB_USER,
-        password: DB_PASSWORD,
+        url: DB_URL,
     }
 };
 
