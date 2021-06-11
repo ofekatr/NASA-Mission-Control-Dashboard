@@ -1,10 +1,11 @@
 import { createSingletonFactory } from "@shared/utils/singleton.utils";
 import { Router as RouterDep } from "express";
-import planetControllerFactory from "planet/infra/http/express/planet.controller";
+import { httpGetAllPlanets as httpGetAllPlanetsDep } from "@planet/infra/http/express/controller";
+
 
 function createPlanetRouter(
     {
-        planetController = planetControllerFactory(),
+        httpGetAllPlanets = httpGetAllPlanetsDep,
         Router = RouterDep,
     } = {}
 ) {
@@ -12,7 +13,7 @@ function createPlanetRouter(
     const planetRouter = Router();
 
     // GET all planet.
-    planetRouter.get('/', planetController.httpGetAllPlanet);
+    planetRouter.get('/', httpGetAllPlanets);
 
     return planetRouter;
 }

@@ -1,9 +1,9 @@
+import planetRepoFactory from "@planet/planet.repo";
 import { createSingletonFactory } from "@shared/utils/singleton.utils";
-import { dbGetAllPlanets as dbGetAllPlanetsDep } from "@planet/repo";
 
 function createGetAllPlanets(
     {
-        dbGetAllPlanets = dbGetAllPlanetsDep,
+        planetRepo: { dbGetAllPlanets } = planetRepoFactory(),
     } = {}
 ) {
     return function getAllPlanets() {
