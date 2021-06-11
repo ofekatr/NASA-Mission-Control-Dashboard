@@ -34,8 +34,8 @@ function createLaunchRepo({
         launchDate,
         mission,
         rocket,
-        success,
-        upcoming,
+        getSuccess,
+        getUpcoming,
     }: LaunchEntity) {
         await db.findOneAndUpdate(
             { flightNumber },
@@ -44,8 +44,8 @@ function createLaunchRepo({
                 launchDate,
                 mission,
                 rocket,
-                upcoming,
-                success,
+                upcoming: getUpcoming(),
+                success: getSuccess(),
                 customers,
             },
             { upsert: true }

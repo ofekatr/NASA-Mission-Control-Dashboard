@@ -7,7 +7,11 @@ function createGetAllLaunches(
     } = {},
 ) {
     async function getAllLaunches() {
-        return await launchRepo.getAllLaunches();
+        return (await launchRepo.getAllLaunches()).map((launch) => ({
+            ...launch,
+            success: launch.getSuccess(),
+            upcoming: launch.getUpcoming(),
+        }));
     }
 
     return getAllLaunches;

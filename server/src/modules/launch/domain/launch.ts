@@ -54,8 +54,8 @@ function buildLaunchEntity(
         target,
         rocket,
         launchDate,
-        success,
-        upcoming,
+        getSuccess: () => success,
+        getUpcoming: () => upcoming,
         customers,
         abortLaunch: () => {
             success = false;

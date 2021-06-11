@@ -5,8 +5,8 @@ export interface LaunchEntity {
     target: string;
     rocket: string;
     launchDate: Date;
-    success: boolean;
-    upcoming: boolean;
+    getSuccess: () => boolean;
+    getUpcoming: () => boolean;
     customers: string[] | undefined;
     abortLaunch: () => void;
 }
