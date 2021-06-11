@@ -1,7 +1,7 @@
 import applyErrorHandlingMiddleware from "@core/infra/http/express/middlewares/error-handler";
 import applyMorganMiddleware from "@core/infra/http/express/middlewares/morgan";
-import { loadLaunchApi } from "@launch";
-import { loadPlanetApi } from "@planet";
+import { applyLaunchApi } from "@launch";
+import { applyPlanetApi } from "@planet";
 import { getBasePath } from "@shared/utils/path.utils";
 import { json, urlencoded } from "body-parser";
 import express, { RequestHandler } from "express";
@@ -26,8 +26,8 @@ function createApp() {
 
     app.get("/", (_req, res) => res.sendFile(path.join(publicPath, "index.html")));
 
-    loadPlanetApi(app);
-    loadLaunchApi(app);
+    applyPlanetApi(app);
+    applyLaunchApi(app);
 
     app.get("/*", (_req, res) => res.sendFile(path.join(publicPath, "index.html")));
 

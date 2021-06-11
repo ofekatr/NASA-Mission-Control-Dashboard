@@ -1,5 +1,5 @@
-import loadLaunchApi from "@launch/infra/http/express";
+import applyLaunchApi from "@launch/infra/http/express";
 
 export {
-    loadLaunchApi,
+    applyLaunchApi,
 }

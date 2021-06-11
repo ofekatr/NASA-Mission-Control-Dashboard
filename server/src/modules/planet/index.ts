@@ -1,4 +1,4 @@
-import loadPlanetApi from "@planet/infra/http/express";
+import applyPlanetApi from "@planet/infra/http/express";
 import { loadPlanets } from "@planet/infra/data/kepler";
 
 async function loadPlanetData() {
@@ -7,5 +7,5 @@ async function loadPlanetData() {
 
 export {
     loadPlanetData,
-    loadPlanetApi,
+    applyPlanetApi,
 }
