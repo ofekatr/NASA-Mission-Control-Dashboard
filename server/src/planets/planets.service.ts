@@ -1,7 +1,7 @@
-import { CreatePlanetsServiceParams } from "@planets/planets.defs";
+import createPlanetsDal from "@planets/planets.dal";
 
-
-function createPlanetService({ planetsDal }: CreatePlanetsServiceParams) {
+async function createPlanetService({ planetsDalPromise = createPlanetsDal() } = {}) {
+    const planetsDal = await planetsDalPromise;
     function getAllPlanets() {
         return planetsDal.getAllPlanets();
     }

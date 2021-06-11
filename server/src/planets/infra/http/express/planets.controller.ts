@@ -1,9 +1,10 @@
 
-import { CreatePlanetsControllerParams } from "@planets/planets.defs";
+import createPlanetService from "@planets/planets.service";
 import { NextFunction, Request, Response } from "express";
 
 
-function createPlanetsController({ planetsService }: CreatePlanetsControllerParams) {
+async function createPlanetsController({ planetsServicePromise = createPlanetService() } = {}) {
+    const planetsService = await planetsServicePromise
     function httpGetAllPlanets(_req: Request, res: Response, next: NextFunction) {
         try {
             return res.status(200).json(planetsService.getAllPlanets());
