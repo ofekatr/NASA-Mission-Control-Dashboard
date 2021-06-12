@@ -6,6 +6,7 @@ import { deepFreezeAndSeal } from "@shared/utils/object.utils";
 import { createSingletonFactory } from "@shared/utils/singleton.utils";
 import notFound from "@shared/validators/not-found";
 import { requiredArgument } from "@shared/validators/required-argument";
+import assert from "assert";
 import { Collection } from "mongodb";
 
 function createLaunchRepo({
@@ -13,7 +14,7 @@ function createLaunchRepo({
     mapMongoDtoToDomain = mapMongoDtoToDomainFactory(),
     mapDomainToMongoDto = mapDomainToMongoDtoFactory(),
 } = {}) {
-    async function getAllLaunches(): Promise<Launch[]> {
+    async function dbGetAllLaunches(): Promise<Launch[]> {
         return await Promise.all(
             await db
                 .find()
@@ -24,7 +25,7 @@ function createLaunchRepo({
         );
     }
 
-    async function getLaunchByFlightNumber(
+    async function dbGetLaunchByFlightNumber(
         flightNumber: string = requiredArgument("flightNumber")
     ): Promise<Launch> {
         const dbLaunch = (
@@ -38,7 +39,7 @@ function createLaunchRepo({
         return await mapMongoDtoToDomain(dbLaunch);
     }
 
-    async function verifyLaunchExists(
+    async function dbVerifyLaunchExists(
         flightNumber: string = requiredArgument("flightNumber")
     ) {
         return !!(
@@ -52,9 +53,9 @@ function createLaunchRepo({
         );
     }
 
-    async function saveLaunch(launch: Launch) {
+    async function dbSaveLaunch(launch: Launch) {
         const dbLaunch = mapDomainToMongoDto(launch);
-        await db.findOneAndUpdate(
+        const { result } = await db.updateOne(
             {
                 flightNumber: dbLaunch.flightNumber
             },
@@ -65,13 +66,16 @@ function createLaunchRepo({
                 upsert: true,
             }
         );
+
+        assert(result.ok === 1 && result.nModified === 1,
+            `Flight Number: ${launch.flightNumber} - Failed to save launch`);
     }
 
     return deepFreezeAndSeal({
-        saveLaunch,
-        getAllLaunches,
-        getLaunchByFlightNumber,
-        verifyLaunchExists,
+        dbSaveLaunch,
+        dbGetAllLaunches,
+        dbGetLaunchByFlightNumber,
+        dbVerifyLaunchExists,
     });
 }
 

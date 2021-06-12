@@ -6,19 +6,19 @@ import { NextFunction, Request, Response } from "express";
 
 function createHttpAddNewLaunch(
     {
-        addNewLaunch = addNewLaunchFactory()
+        addNewLaunch = addNewLaunchFactory(),
     } = {}
 ) {
     return async function httpAddNewLaunch(req: Request, res: Response, next: NextFunction) {
         try {
-            let launchInfo: AddNewLaunchDTO = req.body ?? requiredArgument("launchInfo");
+            let addNewLaunchDto: AddNewLaunchDTO = req.body ?? requiredArgument("launchInfo");
             let {
                 launchDate: _launchDate = requiredArgument("launchDate"),
                 mission: _mission = requiredArgument("mission"),
                 rocket: _rocket = requiredArgument("rocket"),
                 target: _target = requiredArgument("target"),
-            } = launchInfo;
-            await addNewLaunch(launchInfo);
+            } = addNewLaunchDto;
+            await addNewLaunch(addNewLaunchDto);
             return res.status(201).send({ ok: true });
         } catch (err) {
             return next(err);

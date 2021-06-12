@@ -32,7 +32,7 @@ function createPlanetRepo(
 
     async function dbSavePlanet(planet: Planet) {
         const dbPlanet = mapDomainToMongoDto(planet);
-        await db.updateOne(
+        const { result } = await db.updateOne(
             {
                 keplerName: dbPlanet.keplerName,
             },
@@ -43,6 +43,8 @@ function createPlanetRepo(
                 upsert: true,
             },
         );
+
+        return result.nModified === 1 && result.ok === 1;
     }
 
     async function dbVerifyPlanetExistsByKeplerName(

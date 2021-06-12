@@ -7,7 +7,7 @@ function createGetAllLaunches(
     } = {},
 ) {
     async function getAllLaunches() {
-        return await launchRepo.getAllLaunches();
+        return await launchRepo.dbGetAllLaunches();
     }
 
     return getAllLaunches;
