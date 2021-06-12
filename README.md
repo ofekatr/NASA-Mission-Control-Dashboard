@@ -11,7 +11,7 @@ A NASA dashboard app for managing and monitoring spaceflights to habitable plane
 ## Implementation details:
 * Server
     * REST API - Implemented in TypeScript, using Express.js.
-    * Persistence by MongoDB via TypeORM.
+    * Persistence by MongoDB.
     * Includes a Dependency Injection mechanism implementation.
     * Consumes planets related data provided by public NASA resources.
 * Web App
