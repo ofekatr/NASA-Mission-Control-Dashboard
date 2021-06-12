@@ -7,12 +7,12 @@ A NASA dashboard app for managing and monitoring spaceflights to habitable plane
 * Server
     * Applies the Clean Architecture's concepts and principles.
     * Follows the Domain-Driven-Development approach.
-    * Includes a Dependency Injection mechanism implementation.
 
 ## Implementation details:
 * Server
     * REST API - Implemented in TypeScript, using Express.js.
     * Persistence by MongoDB via TypeORM.
+    * Includes a Dependency Injection mechanism implementation.
     * Consumes planets related data provided by public NASA resources.
 * Web App
    *  Implemented in TypeScript, using React.
