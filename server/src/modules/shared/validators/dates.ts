@@ -2,7 +2,7 @@ import CustomError from "@shared/errors/error-objects/custom-error";
 import { isNumber } from "@shared/utils/number.utils";
 
 
-function assertDateInput(dateInput: string | number | Date): asserts dateInput {
+function assertDateInput(dateInput: string | number | Date) {
     if (!validateDateInput(dateInput)) {
         throw new CustomError("invalidDateInput", dateInput);
     }

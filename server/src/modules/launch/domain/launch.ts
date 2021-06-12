@@ -5,7 +5,7 @@ export interface CreateLaunchProps {
     flightNumber: string;
     mission: string;
     rocket: string;
-    launchDate: string | Date | number;
+    launchDate: Date;
     target: string;
 }
 
@@ -60,7 +60,6 @@ export default class Launch {
     ) {
         return new Launch({
             ...extractCreateLaunchProps(props),
-            launchDate: new Date(props.launchDate),
         });
     }
 

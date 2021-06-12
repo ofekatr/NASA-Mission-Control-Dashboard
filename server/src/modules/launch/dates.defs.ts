@@ -1,0 +1,1 @@
+export type DateInput = string | number | Date;

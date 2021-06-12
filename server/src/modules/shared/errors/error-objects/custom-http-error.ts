@@ -1,7 +1,8 @@
 
-import { CustomHttpErrorType, CustomHttpErrorTypeToDataMap } from "@shared/definitions/errors";
-import { BaseAbstractCustomError } from "@shared/errors/error-objects/custom-error";
+import { CustomErrorType, CustomHttpErrorType, CustomHttpErrorTypeToDataMap } from "@shared/definitions/errors";
+import CustomError, { BaseAbstractCustomError } from "@shared/errors/error-objects/custom-error";
 import { createUnion } from "@shared/utils/union.utils";
+import { requiredArgument } from "@shared/validators/required-argument";
 
 export const CustomHttpErrorsUnion = createUnion(
     "default",
@@ -38,4 +39,21 @@ export default class CustomHttpError extends BaseAbstractCustomError {
 
 export function verifyCustomHttpError(err: Error): err is CustomHttpError {
     return err instanceof CustomHttpError;
+}
+
+const customErrorTypeToCustomHttpErrorType: Partial<{ [key in CustomErrorType]: CustomHttpErrorType }> = {
+    invalidDateInput: "invalidRequest",
+    invalidNumber: "invalidRequest",
+    requiredArgument: "invalidRequest",
+    notFound: "notFound",
+    default: "default",
+}
+
+export function mapCustomErrorToCustomHttpError(
+    customError: CustomError = requiredArgument("customError")
+) {
+    const customHttpErrorType: CustomHttpErrorType =
+        customErrorTypeToCustomHttpErrorType[customError.customErrorType] ?? "default";
+
+    return new CustomHttpError(customHttpErrorType);
 }

@@ -44,10 +44,14 @@ export default class CustomError extends BaseAbstractCustomError {
     }
 }
 
-export function verifyCustomError(err: Error): err is BaseAbstractCustomError {
+export function verifyBaseCustomError(err: Error): err is BaseAbstractCustomError {
     return err instanceof BaseAbstractCustomError;
 }
 
+export function verifyCustomError(err: Error): err is CustomError {
+    return err instanceof CustomError;
+}
+
 export function verifyCustomErrorType(err: Error, customErrorType: CustomErrorType) {
-    return verifyCustomError(err) && err.customErrorType === customErrorType
+    return verifyBaseCustomError(err) && err.customErrorType === customErrorType
 }
