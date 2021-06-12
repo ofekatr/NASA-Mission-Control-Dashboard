@@ -1,42 +1,63 @@
-import { getRepository } from "@core/infra/data/db/typeorm/mongo";
-import Launch from "@launch/domain/launch";
+import { getRepository } from "@core/infra/data/db";
+import Launch from "@launch/domain/models/launch";
+import ILaunchMongoDto from "@launch/infra/data/db/mongo/launch.dto";
+import { mapMongoDtoToDomainFactory } from "@launch/infra/data/db/mongo/launch.mapper";
 import { deepFreezeAndSeal } from "@shared/utils/object.utils";
 import { createSingletonFactory } from "@shared/utils/singleton.utils";
 import notFound from "@shared/validators/not-found";
 import { requiredArgument } from "@shared/validators/required-argument";
+import { Collection } from "mongodb";
 
 function createLaunchRepo({
-    db = getRepository(Launch),
+    db = getRepository("launches") as Collection<ILaunchMongoDto>,
+    mapMongoDtoToDomain = mapMongoDtoToDomainFactory(),
 } = {}) {
     async function getAllLaunches(): Promise<Launch[]> {
-        return await db.find();
+        return await db
+            .find()
+            .map(
+                (dbLaunch) => mapMongoDtoToDomain(dbLaunch)
+            )
+            .toArray();
     }
 
     async function getLaunchByFlightNumber(
-        flightNumber: number = requiredArgument("flightNumber")
+        flightNumber: string = requiredArgument("flightNumber")
     ): Promise<Launch> {
-        const dbLaunch = await db.findOneOrFail({
+        const dbLaunch = await db.findOne({
             where: {
                 flightNumber
             }
         }) ?? notFound(`Launch flight number: ${flightNumber}`);
-        return dbLaunch;
+        return mapMongoDtoToDomain(dbLaunch);
     }
 
     async function verifyLaunchExists(
-        flightNumber: number = requiredArgument("flightNumber")
+        flightNumber: string = requiredArgument("flightNumber")
     ) {
         return !!(
             await db.findOne(
+                { flightNumber },
                 {
-                    where: { flightNumber }, select: ["flightNumber"]
-                }
-            )
+                    projection: {
+                        _id: 1
+                    }
+                })
         );
     }
 
     async function saveLaunch(launch: Launch) {
-        await db.save(launch);
+        await db.findOneAndUpdate(
+            {
+                flightNumber: launch.flightNumber
+            },
+            {
+                ...launch,
+            },
+            {
+                 upsert: true,
+            }
+        );
     }
 
     return deepFreezeAndSeal({

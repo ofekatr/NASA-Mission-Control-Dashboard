@@ -1,5 +1,5 @@
 import { getRepository } from "@core/infra/data/db/typeorm";
-import Planet from "@planet/domain/planet";
+import Planet from "@planet/domain/models/planet";
 import { deepFreezeAndSeal } from "@shared/utils/object.utils";
 import { createSingletonFactory } from "@shared/utils/singleton.utils";
 

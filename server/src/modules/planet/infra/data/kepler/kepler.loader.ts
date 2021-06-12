@@ -1,5 +1,5 @@
-import { verifyHabitablePlanet as verifyHabitablePlanetDep } from "@planet/domain/kepler-planet";
-import Planet from "@planet/domain/planet";
+import { verifyHabitablePlanet as verifyHabitablePlanetDep } from "@planet/domain/models/kepler-planet";
+import Planet from "@planet/domain/models/planet";
 import { getBasePath } from "@shared/utils/path.utils";
 import { createSingletonFactory } from "@shared/utils/singleton.utils";
 import parseDep from "csv-parse";

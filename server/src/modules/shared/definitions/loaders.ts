@@ -1,5 +1,5 @@
 
-import Planet from "@planet/domain/planet"
+import Planet from "@planet/domain/models/planet"
 import parse from "csv-parse";
 import fs from "fs";
 import path from "path";

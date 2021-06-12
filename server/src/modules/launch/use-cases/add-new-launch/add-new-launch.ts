@@ -1,5 +1,5 @@
 import createFlightNumberFactory from "@launch/domain/values/flight-number";
-import Launch, { CreateLaunchProps } from "@launch/domain/launch";
+import Launch, { CreateLaunchProps } from "@launch/domain/models/launch";
 import createLaunchDateFactory from "@launch/domain/values/launch-date";
 import { AddNewLaunchDTO } from "@launch/launch.defs";
 import launchRepoFactory from "@launch/launch.repo";

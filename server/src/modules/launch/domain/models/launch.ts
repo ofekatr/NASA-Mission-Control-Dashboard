@@ -1,5 +1,4 @@
 import { requiredArgument } from "@shared/validators/required-argument";
-import { Column, Entity, ObjectIdColumn } from "typeorm";
 
 export interface CreateLaunchProps {
     flightNumber: string;
@@ -7,6 +6,9 @@ export interface CreateLaunchProps {
     rocket: string;
     launchDate: Date;
     target: string;
+    success?: boolean;
+    upcoming?: boolean;
+    customers?: string[];
 }
 
 function extractCreateLaunchProps({
@@ -15,6 +17,8 @@ function extractCreateLaunchProps({
     mission = requiredArgument("mission"),
     rocket = requiredArgument("rocket"),
     target = requiredArgument("target"),
+    success = true,
+    upcoming = true,
 }: CreateLaunchProps = requiredArgument("createLaunchProps")) {
     return {
         flightNumber,
@@ -22,33 +26,19 @@ function extractCreateLaunchProps({
         mission,
         rocket,
         target,
+        success,
+        upcoming,
     }
 }
 
-@Entity()
 export default class Launch {
-    @ObjectIdColumn()
     flightNumber: string;
-
-    @Column()
     mission: string;
-
-    @Column()
     target: string;
-
-    @Column()
     rocket: string;
-
-    @Column()
     launchDate: Date;
-
-    @Column("boolean", { default: true })
     upcoming: boolean = true;
-
-    @Column("boolean", { default: true })
     success: boolean = true;
-
-    @Column("string", { array: true, nullable: true })
     customers?: string[];
 
     private constructor(props: CreateLaunchProps) {

@@ -1,4 +1,4 @@
-import { getRepository, loadDbConnection } from "@core/infra/data/db/typeorm";
+import { getRepository, loadDbConnection } from "@core/infra/data/db/mongo";
 
 export {
     getRepository,
