@@ -9,7 +9,7 @@ async function main() {
     await loadDbConnection();
 
     const startServerFactory = require("@core/infra/http/server").default;
-    const loadModuleDataFactory = require("@modules/modules-data.loader").default;
+    const loadModuleDataFactory = require("@modules/load-modules-data").default;
     
     const startServer = startServerFactory();
     startServer();

@@ -1,13 +1,14 @@
+import loadAndSavePlanetsFactory from "@planet/infra/data/kepler";
 import applyPlanetApiFactory from "@planet/infra/http/express";
 import { createSingletonFactory } from "@shared/utils/singleton.utils";
 
 function createLoadPlanetData(
     {
-        // loadAndSavePlanets = loadAndSavePlanetsFactory()
+        loadAndSavePlanets = loadAndSavePlanetsFactory()
     } = {}
 ) {
     return async function loadPlanetData() {
-        // await loadAndSavePlanets();
+        await loadAndSavePlanets();
     }
 }
 

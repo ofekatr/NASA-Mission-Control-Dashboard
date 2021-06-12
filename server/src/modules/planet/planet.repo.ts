@@ -16,10 +16,34 @@ function createPlanetRepo(
         await db.save(planets);
     }
 
-    return deepFreezeAndSeal({
-        dbGetAllPlanets,
-        dbSavePlanets,
-    })
+    async function dbUpsertPlanet(planet: Planet) {
+        await db.updateOne(
+            {
+                keplerName: planet.keplerName,
+            },
+            {
+                keplerName: planet.keplerName,
+            },
+            {
+                upsert: true,
+            },
+        );
+}
+
+async function dbUpsertPlanets(planets: Planet[]) {
+    await Promise.all(
+        planets.map(
+            async (planet) => await dbUpsertPlanet(planet),
+        )
+    );
+}
+
+return deepFreezeAndSeal({
+    dbGetAllPlanets,
+    dbSavePlanets,
+    dbUpsertPlanet,
+    dbUpsertPlanets,
+})
 }
 
 const planetRepoFactory = createSingletonFactory(createPlanetRepo);

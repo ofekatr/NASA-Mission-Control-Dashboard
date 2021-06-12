@@ -5,12 +5,12 @@ import { createSingletonFactory } from "@shared/utils/singleton.utils";
 function createLoadAndSavePlanets(
     {
         loadKeplerPlanets = loadKeplerPlanetsFactory(),
-        planetRepo = planetRepoFactory(),
+        planetRepo: { dbUpsertPlanets } = planetRepoFactory(),
     } = {}
 ) {
     return async function loadPlanets() {
         const planets = await loadKeplerPlanets();
-        await planetRepo.dbSavePlanets(planets);
+        await dbUpsertPlanets(planets);
     }
 
 }

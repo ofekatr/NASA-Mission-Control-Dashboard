@@ -1,6 +1,6 @@
-import createFlightNumberFactory from "@launch/domain/flight-number";
-import createLaunchDateFactory from "@launch/domain/launch-date";
+import createFlightNumberFactory from "@launch/domain/values/flight-number";
 import Launch, { CreateLaunchProps } from "@launch/domain/launch";
+import createLaunchDateFactory from "@launch/domain/values/launch-date";
 import { AddNewLaunchDTO } from "@launch/launch.defs";
 import launchRepoFactory from "@launch/launch.repo";
 import { createSingletonFactory } from "@shared/utils/singleton.utils";
