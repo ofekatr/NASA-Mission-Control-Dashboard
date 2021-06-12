@@ -1,12 +1,13 @@
 # NASA-Mission-Control-Dashboard
 
 ## Description:
-A NASA dashboard app for managing and monitoring flights to habitable planets in the observable universe.
+A NASA dashboard app for managing and monitoring spaceflights to habitable planets in the observable universe.
 
 ## Architecture details:
 * Server
     * Applies the Clean Architecture's concepts and principles.
     * Follows the Domain-Driven-Development approach.
+    * Includes a Dependency Injection mechanism implementation.
 
 ## Implementation details:
 * Server
