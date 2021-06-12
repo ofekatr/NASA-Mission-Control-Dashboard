@@ -35,7 +35,7 @@ function createLaunchRepo({
             )
         ) ?? notFound(`Launch flight number: ${flightNumber}`);
 
-        return mapMongoDtoToDomain(dbLaunch);
+        return await mapMongoDtoToDomain(dbLaunch);
     }
 
     async function verifyLaunchExists(
