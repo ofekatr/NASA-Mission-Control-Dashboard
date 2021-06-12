@@ -8,14 +8,15 @@ export const CustomErrorsUnion = createUnion(
     "requiredArgument",
     "invalidDateInput",
     "invalidNumber",
+    "invalidPlanet"
 );
 
 export const customErrorTypeToDataMap: CustomErrorTypeToDataMap = {
     default: {
-        toString: () => "An error has occurred",
+        toString: () => "An error has occurred.",
     },
     notFound: {
-        toString: () => "Resource not found",
+        toString: () => "The resource was not found.",
     },
     requiredArgument: {
         toString: (argument) => `${argument} can not be null or undefined.`,
@@ -24,7 +25,10 @@ export const customErrorTypeToDataMap: CustomErrorTypeToDataMap = {
         toString: (dateInput) => `${dateInput} is an invalid date input.`,
     },
     invalidNumber: {
-        toString: (value) => `${value} is not a valid number`,
+        toString: (value) => `${value} is not a valid number.`,
+    },
+    invalidPlanet: {
+        toString: (value) => `The target planet ${value} does not exist.`
     }
 }
 

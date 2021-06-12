@@ -45,10 +45,28 @@ function createPlanetRepo(
         );
     }
 
+    async function dbVerifyPlanetExistsByKeplerName(
+        keplerName: string
+    ) {
+        return !!(
+            await db.findOne(
+                {
+                    keplerName
+                },
+                {
+                    projection: {
+                        _id: 1
+                    }
+                }
+            )
+        );
+    }
+
     return deepFreezeAndSeal({
         dbGetAllPlanets,
         dbSavePlanets,
         dbSavePlanet,
+        dbVerifyPlanetExistsByKeplerName,
     })
 }
 

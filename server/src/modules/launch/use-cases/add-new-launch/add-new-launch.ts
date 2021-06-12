@@ -1,40 +1,17 @@
-import createFlightNumberFactory from "@launch/domain/values/flight-number";
-import Launch, { CreateLaunchProps } from "@launch/domain/models/launch";
-import createLaunchDateFactory from "@launch/domain/values/launch-date";
+import Launch from "@launch/domain/models/launch";
 import { AddNewLaunchDTO } from "@launch/launch.defs";
 import launchRepoFactory from "@launch/launch.repo";
+import { mapAddNewLaunchDtoToDomainFactory } from "@launch/use-cases/add-new-launch/launch.mapper";
 import { createSingletonFactory } from "@shared/utils/singleton.utils";
-import { requiredArgument } from "@shared/validators/required-argument";
-
-const extractPropsFromDTO = ({
-    launchDate,
-    mission,
-    rocket,
-    target
-}: AddNewLaunchDTO = requiredArgument("request")) => ({
-    launchDate,
-    mission,
-    rocket,
-    target,
-})
 
 function createAddNewLaunch(
     {
         launchRepo = launchRepoFactory(),
-        createLaunch = Launch.createLaunch,
-        createFlightNumber = createFlightNumberFactory(),
-        createLaunchDate = createLaunchDateFactory(),
+        mapAddNewLaunchDtoToDomain = mapAddNewLaunchDtoToDomainFactory(),
     } = {}
 ) {
     return async function addNewLaunch(request: AddNewLaunchDTO) {
-        const flightNumber = createFlightNumber();
-        const launchDate = createLaunchDate(request.launchDate);
-        const props: CreateLaunchProps = {
-            ...extractPropsFromDTO(request),
-            flightNumber,
-            launchDate,
-        }
-        const launch = createLaunch(props);
+        const launch: Launch = await mapAddNewLaunchDtoToDomain(request);
         return await launchRepo.saveLaunch(launch);
     }
 }

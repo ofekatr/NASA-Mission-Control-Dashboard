@@ -45,6 +45,7 @@ const customErrorTypeToCustomHttpErrorType: Partial<{ [key in CustomErrorType]: 
     invalidDateInput: "invalidRequest",
     invalidNumber: "invalidRequest",
     requiredArgument: "invalidRequest",
+    invalidPlanet: "invalidRequest",
     notFound: "notFound",
     default: "default",
 }
