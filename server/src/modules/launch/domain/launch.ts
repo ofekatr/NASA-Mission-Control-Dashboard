@@ -1,5 +1,29 @@
-import { CreateLaunchProps } from "@launch/launch.defs";
+import { requiredArgument } from "@shared/validators/required-argument";
 import { Column, Entity, ObjectIdColumn } from "typeorm";
+
+export interface CreateLaunchProps {
+    flightNumber: string;
+    mission: string;
+    rocket: string;
+    launchDate: string | Date | number;
+    target: string;
+}
+
+function extractCreateLaunchProps({
+    flightNumber = requiredArgument("flightNumber"),
+    launchDate = requiredArgument("launchDate"),
+    mission = requiredArgument("mission"),
+    rocket = requiredArgument("rocket"),
+    target = requiredArgument("target"),
+}: CreateLaunchProps = requiredArgument("createLaunchProps")) {
+    return {
+        flightNumber,
+        launchDate,
+        mission,
+        rocket,
+        target,
+    }
+}
 
 @Entity()
 export default class Launch {
@@ -31,9 +55,11 @@ export default class Launch {
         Object.assign(this, props);
     }
 
-    static createLaunch(props: CreateLaunchProps) {
+    static createLaunch(
+        props: CreateLaunchProps = requiredArgument("createLaunchProps")
+    ) {
         return new Launch({
-            ...props,
+            ...extractCreateLaunchProps(props),
             launchDate: new Date(props.launchDate),
         });
     }
