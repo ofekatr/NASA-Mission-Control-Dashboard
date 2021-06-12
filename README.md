@@ -8,6 +8,8 @@ A NASA dashboard app for managing and monitoring spaceflights to habitable plane
     * Applies the Clean Architecture's concepts and principles.
     * Follows the Domain-Driven-Development approach.
 
+![Untitled](https://user-images.githubusercontent.com/46415136/121783386-eb791700-cbb6-11eb-9dc4-f90b8cd42b8c.png)
+
 ## Implementation details:
 * Server
     * REST API - Implemented in TypeScript, using Express.js.
