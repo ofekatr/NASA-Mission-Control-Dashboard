@@ -1,6 +1,7 @@
 import Launch from "@launch/domain/models/launch";
 import createFlightNumberFactory from "@launch/domain/values/flight-number";
 import createLaunchDateFactory from "@launch/domain/values/launch-date";
+import createTargetFactory from "@launch/domain/values/target";
 import ILaunchMongoDto from "@launch/infra/data/db/mongo/launch.dto";
 import { createSingletonFactory } from "@shared/utils/singleton.utils";
 import { requiredArgument } from "@shared/validators/required-argument";
@@ -41,9 +42,10 @@ function createMapMongoDtoToDomain(
     {
         createFlightNumber = createFlightNumberFactory(),
         createLaunchDate = createLaunchDateFactory(),
+        createTarget = createTargetFactory(),
     } = {}
 ) {
-    return function mapMongoDtoToDomain(
+    return async function mapMongoDtoToDomain(
         {
             flightNumber = requiredArgument("flightNumber"),
             launchDate = requiredArgument("launchDate"),
@@ -54,17 +56,18 @@ function createMapMongoDtoToDomain(
             upcoming = requiredArgument("upcoming"),
             customers,
         }: ILaunchMongoDto = requiredArgument("launchMongoDTO")
-    ): Launch {
-        const parsedFlightNumber = createFlightNumber(flightNumber);
-        const parsedLaunchDate = createLaunchDate(launchDate);
+    ): Promise<Launch> {
+        const flightNumberValue = createFlightNumber(flightNumber);
+        const launchDateValue = createLaunchDate(launchDate);
+        const targetValue = await createTarget(target);
 
         return Launch.createLaunch({
-            flightNumber: parsedFlightNumber,
-            launchDate: parsedLaunchDate,
+            flightNumber: flightNumberValue,
+            launchDate: launchDateValue,
+            target: targetValue,
             mission,
             rocket,
             success,
-            target,
             upcoming,
             customers,
         });

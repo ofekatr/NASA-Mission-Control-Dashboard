@@ -14,12 +14,14 @@ function createLaunchRepo({
     mapDomainToMongoDto = mapDomainToMongoDtoFactory(),
 } = {}) {
     async function getAllLaunches(): Promise<Launch[]> {
-        return await db
-            .find()
-            .map(
-                (dbLaunch) => mapMongoDtoToDomain(dbLaunch)
-            )
-            .toArray();
+        return await Promise.all(
+            await db
+                .find()
+                .map(
+                    async (dbLaunch) => await mapMongoDtoToDomain(dbLaunch)
+                )
+                .toArray()
+        );
     }
 
     async function getLaunchByFlightNumber(
