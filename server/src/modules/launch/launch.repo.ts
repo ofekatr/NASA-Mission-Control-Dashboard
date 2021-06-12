@@ -26,12 +26,7 @@ function createLaunchRepo({
     async function verifyLaunchExists(
         flightNumber: number = requiredArgument("flightNumber")
     ) {
-        try {
-            await getLaunchByFlightNumber(flightNumber);
-            return true;
-        } catch (err) {
-            return false;
-        }
+        return !!(await db.count({ flightNumber }));
     }
 
     async function saveLaunch(launch: Launch) {
