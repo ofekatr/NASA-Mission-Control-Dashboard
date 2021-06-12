@@ -1,5 +1,7 @@
-import { verifyHabitablePlanet as verifyHabitablePlanetDep } from "@planet/domain/models/kepler-planet";
 import Planet from "@planet/domain/models/planet";
+import IKeplerDto from "@planet/infra/data/kepler/dtos/kepler";
+import mapKeplerDtoToDomainFactory from "@planet/infra/data/kepler/kepler.mapper";
+import KeplerPlanet from "@planet/infra/data/kepler/models/kepler-planet";
 import { getBasePath } from "@shared/utils/path.utils";
 import { createSingletonFactory } from "@shared/utils/singleton.utils";
 import parseDep from "csv-parse";
@@ -11,8 +13,9 @@ function createLoadKeplerPlanets(
         createReadStream = createReadStreamDep,
         join = joinDep,
         parse = parseDep,
-        verifyValidPlanet = verifyHabitablePlanetDep,
+        verifyValidPlanet = KeplerPlanet.verifyHabitablePlanetByRawData,
         createPlanet = Planet.createPlanet,
+        mapKeplerDtoToDomain = mapKeplerDtoToDomainFactory(),
     } = {}
 ) {
     return async function loadHabitablePlanet(): Promise<Planet[]> {
@@ -23,9 +26,12 @@ function createLoadKeplerPlanets(
                     comment: '#',
                     columns: true,
                 }))
-                .on('data', (data) => {
+                .on('data', (data: IKeplerDto) => {
                     if (verifyValidPlanet(data)) {
-                        habitablePlanets.push(createPlanet(data));
+                        const { keplerName } = mapKeplerDtoToDomain(data);
+                        habitablePlanets.push(
+                            createPlanet({ keplerName })
+                        );
                     }
                 })
                 .on('error', (err) => {

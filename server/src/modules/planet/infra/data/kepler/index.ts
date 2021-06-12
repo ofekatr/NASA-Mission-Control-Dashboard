@@ -1,16 +1,16 @@
-import loadKeplerPlanetsFactory from "@planet/infra/data/kepler/kepler.loader";
+import loadKeplerPlanetsFactory from "@planet/infra/data/kepler/load-kepler";
 import planetRepoFactory from "@planet/planet.repo";
 import { createSingletonFactory } from "@shared/utils/singleton.utils";
 
 function createLoadAndSavePlanets(
     {
         loadKeplerPlanets = loadKeplerPlanetsFactory(),
-        planetRepo: { dbUpsertPlanets } = planetRepoFactory(),
+        planetRepo: { dbSavePlanets } = planetRepoFactory(),
     } = {}
 ) {
     return async function loadPlanets() {
         const planets = await loadKeplerPlanets();
-        await dbUpsertPlanets(planets);
+        await dbSavePlanets(planets);
     }
 
 }

@@ -7,8 +7,9 @@ function createAbortLaunch(
         launchRepo = launchRepoFactory(),
     } = {}
 ) {
-    return async function abortLaunch(flightNumber: number) {
-        if (!await launchRepo.verifyLaunchExists(flightNumber))
+    return async function abortLaunch(flightNumber: string) {
+        const isExists = await launchRepo.verifyLaunchExists(flightNumber);
+        if (!isExists)
             notFound(`Launch flight number: ${flightNumber}`);
         let launch = await launchRepo.getLaunchByFlightNumber(flightNumber);
         launch.abortLaunch();

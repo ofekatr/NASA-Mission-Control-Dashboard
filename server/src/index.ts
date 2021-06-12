@@ -1,5 +1,4 @@
 import "@core/infra/data/db";
-import "reflect-metadata";
 import { loadDbConnection } from "@core/infra/data/db";
 import logger from "@core/infra/logs/logger";
 import config from "@shared/config";

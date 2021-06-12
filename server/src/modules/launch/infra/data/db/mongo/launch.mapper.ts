@@ -1,4 +1,6 @@
 import Launch from "@launch/domain/models/launch";
+import createFlightNumberFactory from "@launch/domain/values/flight-number";
+import createLaunchDateFactory from "@launch/domain/values/launch-date";
 import ILaunchMongoDto from "@launch/infra/data/db/mongo/launch.dto";
 import { createSingletonFactory } from "@shared/utils/singleton.utils";
 import { requiredArgument } from "@shared/validators/required-argument";
@@ -37,7 +39,8 @@ const mapDomainToMongoDtoFactory = createSingletonFactory(createMapDomainToMongo
 
 function createMapMongoDtoToDomain(
     {
-
+        createFlightNumber = createFlightNumberFactory(),
+        createLaunchDate = createLaunchDateFactory(),
     } = {}
 ) {
     return function mapMongoDtoToDomain(
@@ -52,9 +55,12 @@ function createMapMongoDtoToDomain(
             customers,
         }: ILaunchMongoDto = requiredArgument("launchMongoDTO")
     ): Launch {
+        const parsedFlightNumber = createFlightNumber(flightNumber);
+        const parsedLaunchDate = createLaunchDate(launchDate);
+
         return Launch.createLaunch({
-            flightNumber,
-            launchDate,
+            flightNumber: parsedFlightNumber,
+            launchDate: parsedLaunchDate,
             mission,
             rocket,
             success,

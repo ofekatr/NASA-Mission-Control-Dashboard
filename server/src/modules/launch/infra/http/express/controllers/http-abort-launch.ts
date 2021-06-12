@@ -10,7 +10,7 @@ function createHttpAbortLaunch(
 ) {
     return async function httpAbortLaunch(req: Request, res: Response, next: NextFunction) {
         try {
-            const flightNumber = +req.params.flightNumber ?? requiredArgument("flightNumber");
+            const flightNumber = req.params.flightNumber ?? requiredArgument("flightNumber");
             await abortLaunch(flightNumber);
             return res.status(200).json({
                 ok: true,

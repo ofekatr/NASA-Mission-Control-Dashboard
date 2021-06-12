@@ -55,5 +55,5 @@ export function mapCustomErrorToCustomHttpError(
     const customHttpErrorType: CustomHttpErrorType =
         customErrorTypeToCustomHttpErrorType[customError.customErrorType] ?? "default";
 
-    return new CustomHttpError(customHttpErrorType);
+    return new CustomHttpError(customHttpErrorType, customError.message);
 }

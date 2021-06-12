@@ -1,49 +1,55 @@
-import { getRepository } from "@core/infra/data/db/typeorm";
+import { getRepository } from "@core/infra/data/db";
 import Planet from "@planet/domain/models/planet";
+import IPlanetMongoDto from "@planet/infra/data/db/mongo/planet.dto";
+import { mapDomainToMongoDtoFactory, mapMongoDtoToDomainFactory } from "@planet/infra/data/db/mongo/planet.mapper";
 import { deepFreezeAndSeal } from "@shared/utils/object.utils";
 import { createSingletonFactory } from "@shared/utils/singleton.utils";
+import { Collection } from "mongodb";
 
 function createPlanetRepo(
     {
-        db = getRepository(Planet),
+        db = getRepository("planets") as Collection<IPlanetMongoDto>,
+        mapMongoDtoToDomain = mapMongoDtoToDomainFactory(),
+        mapDomainToMongoDto = mapDomainToMongoDtoFactory(),
     } = {}
 ) {
     async function dbGetAllPlanets() {
-        return await db.find();
+        return await db
+            .find()
+            .map(
+                (dbPlanet) => mapMongoDtoToDomain(dbPlanet)
+            )
+            .toArray();
     }
 
     async function dbSavePlanets(planets: Planet[]) {
-        await db.save(planets);
+        await Promise.all(
+            planets.map(
+                async (planet) => await dbSavePlanet(planet)
+            )
+        );
     }
 
-    async function dbUpsertPlanet(planet: Planet) {
+    async function dbSavePlanet(planet: Planet) {
+        const dbPlanet = mapDomainToMongoDto(planet);
         await db.updateOne(
             {
-                keplerName: planet.keplerName,
+                keplerName: dbPlanet.keplerName,
             },
             {
-                keplerName: planet.keplerName,
+                $set: { keplerName: dbPlanet.keplerName },
             },
             {
                 upsert: true,
             },
         );
-}
+    }
 
-async function dbUpsertPlanets(planets: Planet[]) {
-    await Promise.all(
-        planets.map(
-            async (planet) => await dbUpsertPlanet(planet),
-        )
-    );
-}
-
-return deepFreezeAndSeal({
-    dbGetAllPlanets,
-    dbSavePlanets,
-    dbUpsertPlanet,
-    dbUpsertPlanets,
-})
+    return deepFreezeAndSeal({
+        dbGetAllPlanets,
+        dbSavePlanets,
+        dbSavePlanet,
+    })
 }
 
 const planetRepoFactory = createSingletonFactory(createPlanetRepo);

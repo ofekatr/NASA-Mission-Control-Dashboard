@@ -1,6 +1,6 @@
 import { ObjectID } from "mongodb";
 
-export default interface PlanetMongoDTO {
-    _id: ObjectID;
+export default interface IPlanetMongoDto {
+    _id?: ObjectID;
     keplerName: string;
 }

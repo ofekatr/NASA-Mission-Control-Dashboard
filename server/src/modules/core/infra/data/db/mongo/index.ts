@@ -1,3 +1,4 @@
+import logger from "@core/infra/logs/logger";
 import config from "@shared/config";
 import { createUnion } from "@shared/utils/union.utils";
 import { MongoClient } from "mongodb";
@@ -16,7 +17,13 @@ async function loadDbConnection() {
         useUnifiedTopology: true,
     });
 
+    client.once(
+        "serverOpening",
+        () => logger.info("MongoDb Connection is ready.")
+    );
+
     await client.connect();
+
 }
 
 function getRepository(repoName: CollectionNames) {
@@ -27,3 +34,4 @@ export {
     loadDbConnection,
     getRepository,
 };
+
