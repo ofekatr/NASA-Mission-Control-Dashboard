@@ -6,8 +6,8 @@ function createGetAllPlanets(
         planetRepo: { dbGetAllPlanets } = planetRepoFactory(),
     } = {}
 ) {
-    return function getAllPlanets() {
-        return dbGetAllPlanets();
+    return async function getAllPlanets() {
+        return await dbGetAllPlanets();
     }
 }
 

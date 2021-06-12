@@ -7,9 +7,9 @@ function createHttpGetAllPlanets(
         getAllPlanets = getAllPlanetsFactory(),
     } = {}
 ) {
-    return function httpGetAllPlanets(_req: Request, res: Response, next: NextFunction) {
+    return async function httpGetAllPlanets(_req: Request, res: Response, next: NextFunction) {
         try {
-            return res.status(200).json(getAllPlanets());
+            return res.status(200).json(await getAllPlanets());
         } catch (err) {
             return next(err);
         }

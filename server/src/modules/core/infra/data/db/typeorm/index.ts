@@ -8,7 +8,7 @@ async function loadDbConnection() {
 }
 
 export {
-    loadDbConnection,
     getRepository,
+    loadDbConnection,
 };
 

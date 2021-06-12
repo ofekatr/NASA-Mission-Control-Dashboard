@@ -30,6 +30,7 @@
       "@launch": ["launch"],
       "@launch/*": ["launch/*"],
       "@modules": ["."],
+      "@modules/*": ["./*"],
       
     }
   },

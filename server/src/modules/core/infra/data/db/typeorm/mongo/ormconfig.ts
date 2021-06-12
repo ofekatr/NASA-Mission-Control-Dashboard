@@ -18,7 +18,7 @@ const ormConfig = {
     entities: [
         `${rootDir}/modules/**/domain/*.{js,ts}`,
     ],
-    migrations: [`${rootDir} / migrations/*.{js,ts}`],
+    migrations: [`${rootDir}/migrations/*.{js,ts}`],
     subscribers: [`${rootDir}/subscribers/*.{js,ts}`],
     cli: {
         "migrationsDir": `${rootDir}/migrations`,

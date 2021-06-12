@@ -1,39 +1,55 @@
-import applyErrorHandlingMiddleware from "@core/infra/http/express/middlewares/error-handler";
-import applyMorganMiddleware from "@core/infra/http/express/middlewares/morgan";
-import { applyLaunchApi } from "@launch";
-import { applyPlanetApi } from "@planet";
-import { getBasePath } from "@shared/utils/path.utils";
-import { json, urlencoded } from "body-parser";
-import express, { RequestHandler } from "express";
+import applyErrorHandlingMiddlewareDep from "@core/infra/http/express/middlewares/error-handler";
+import applyMorganMiddlewareDep from "@core/infra/http/express/middlewares/morgan";
+import { applyLaunchApiFactory } from "@launch";
+import { applyPlanetApiFactory } from "@planet";
+import { getBasePath as getBasePathDep } from "@shared/utils/path.utils";
+import { createSingletonFactory } from "@shared/utils/singleton.utils";
+import { json as jsonDep, urlencoded as urlencodedDep } from "body-parser";
+import expressDep, { RequestHandler } from "express";
 import path from "path";
 
-function createApp() {
-    const app = express();
+function createCreateApp(
+    {
+        applyErrorHandlingMiddleware = applyErrorHandlingMiddlewareDep,
+        applyMorganMiddleware = applyMorganMiddlewareDep,
+        applyLaunchApi = applyLaunchApiFactory(),
+        applyPlanetApi = applyPlanetApiFactory(),
+        getBasePath = getBasePathDep,
+        json = jsonDep,
+        urlencoded = urlencodedDep,
+        express = expressDep,
+    } = {}
+) {
+    return function createApp() {
+        const app = express();
 
-    app.use(
-        json(),
-        urlencoded({
-            extended: true,
-        })
-    );
+        app.use(
+            json(),
+            urlencoded({
+                extended: true,
+            })
+        );
 
-    applyMorganMiddleware(app);
+        applyMorganMiddleware(app);
 
-    const publicPath = path.join(getBasePath(), "public");
-    app.use(express.static(publicPath));
+        const publicPath = path.join(getBasePath(), "public");
+        app.use(express.static(publicPath));
 
-    app.use(express.json() as RequestHandler);
+        app.use(express.json() as RequestHandler);
 
-    app.get("/", (_req, res) => res.sendFile(path.join(publicPath, "index.html")));
+        app.get("/", (_req, res) => res.sendFile(path.join(publicPath, "index.html")));
 
-    applyPlanetApi(app);
-    applyLaunchApi(app);
+        applyPlanetApi(app);
+        applyLaunchApi(app);
 
-    app.get("/*", (_req, res) => res.sendFile(path.join(publicPath, "index.html")));
+        app.get("/*", (_req, res) => res.sendFile(path.join(publicPath, "index.html")));
 
-    applyErrorHandlingMiddleware(app);
+        applyErrorHandlingMiddleware(app);
 
-    return app;
+        return app;
+    }
 }
 
-export default createApp;
+const createCreateAppFactory = createSingletonFactory(createCreateApp);
+
+export default createCreateAppFactory;

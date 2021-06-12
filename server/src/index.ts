@@ -1,15 +1,21 @@
+import "@core/infra/data/db";
 import "reflect-metadata";
-import config from "@shared/config";
 import { loadDbConnection } from "@core/infra/data/db";
-import startServer from "@core/infra/http/server";
-import { loadModulesData } from "modules-data.loader";
 import logger from "@core/infra/logs/logger";
+import config from "@shared/config";
 
 async function main() {
     logger.info(`Environment: ${config.nodeEnv}`);
     await loadDbConnection();
-    await loadModulesData();
+
+    const startServerFactory = require("@core/infra/http/server").default;
+    const loadModuleDataFactory = require("@modules/modules-data.loader").default;
+    
+    const startServer = startServerFactory();
     startServer();
+
+    const loadModulesData = loadModuleDataFactory();
+    await loadModulesData();
 }
 
 main();

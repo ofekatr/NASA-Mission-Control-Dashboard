@@ -1,18 +1,24 @@
-import { getKeplerPlanets as getKeplerPlanetsDep } from "@planet/infra/data/kepler";
+import { getRepository } from "@core/infra/data/db/typeorm";
+import Planet from "@planet/domain/planet";
 import { deepFreezeAndSeal } from "@shared/utils/object.utils";
 import { createSingletonFactory } from "@shared/utils/singleton.utils";
 
 function createPlanetRepo(
     {
-        getKeplerPlanets = getKeplerPlanetsDep,
+        db = getRepository(Planet),
     } = {}
 ) {
-    function dbGetAllPlanets() {
-        return getKeplerPlanets();
+    async function dbGetAllPlanets() {
+        return await db.find();
+    }
+
+    async function dbSavePlanets(planets: Planet[]) {
+        await db.save(planets);
     }
 
     return deepFreezeAndSeal({
         dbGetAllPlanets,
+        dbSavePlanets,
     })
 }
 

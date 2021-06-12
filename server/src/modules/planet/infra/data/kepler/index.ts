@@ -1,20 +1,20 @@
-import createPlanetLoader from "@planet/infra/data/kepler/kepler.loader";
-import assert from "assert";
+import loadKeplerPlanetsFactory from "@planet/infra/data/kepler/kepler.loader";
+import planetRepoFactory from "@planet/planet.repo";
+import { createSingletonFactory } from "@shared/utils/singleton.utils";
 
-const planets = [];
-let isLoaded = false;
+function createLoadAndSavePlanets(
+    {
+        loadKeplerPlanets = loadKeplerPlanetsFactory(),
+        planetRepo = planetRepoFactory(),
+    } = {}
+) {
+    return async function loadPlanets() {
+        const planets = await loadKeplerPlanets();
+        await planetRepo.dbSavePlanets(planets);
+    }
 
-async function loadPlanets() {
-    await createPlanetLoader()(planets);
-    isLoaded = true;
 }
 
-function getKeplerPlanets() {
-    assert(isLoaded, "Planets are not loaded");
-    return planets;
-}
+const loadAndSavePlanetsFactory = createSingletonFactory(createLoadAndSavePlanets);
 
-export {
-    getKeplerPlanets,
-    loadPlanets,
-}
+export default loadAndSavePlanetsFactory;

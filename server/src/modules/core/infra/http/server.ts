@@ -1,17 +1,29 @@
-import createApp from "@core/infra/http/express/app";
-import config from "@shared/config";
-import logger from "core/infra/logs/logger";
-import http from "http";
+import createAppFactory from "@core/infra/http/express/app";
+import configDep from "@shared/config";
+import { createSingletonFactory } from "@shared/utils/singleton.utils";
+import loggerDep from "core/infra/logs/logger";
+import httpDep from "http";
 
+function createStartServer(
+    {
+        createApp = createAppFactory(),
+        config = configDep,
+        logger = loggerDep,
+        http = httpDep,
+    } = {}
+) {
+    return function startServer() {
+        const { port } = config;
+        const app = createApp();
+        const server = http.createServer(app);
 
-function startServer() {
-    const { port } = config;
-    const app = createApp();
-    const server = http.createServer(app);
+        return server.listen(port, () => {
+            logger.info(`Server listening on port ${port}...`);
+        });
+    }
 
-    return server.listen(port, () => {
-        logger.info(`Server listening on port ${port}...`);
-    });
 }
 
-export default startServer;
+const startServerFactory = createSingletonFactory(createStartServer);
+
+export default startServerFactory;

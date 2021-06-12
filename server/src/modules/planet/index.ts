@@ -1,11 +1,20 @@
-import applyPlanetApi from "@planet/infra/http/express";
-import { loadPlanets } from "@planet/infra/data/kepler";
+import applyPlanetApiFactory from "@planet/infra/http/express";
+import { createSingletonFactory } from "@shared/utils/singleton.utils";
 
-async function loadPlanetData() {
-    await loadPlanets();
+function createLoadPlanetData(
+    {
+        // loadAndSavePlanets = loadAndSavePlanetsFactory()
+    } = {}
+) {
+    return async function loadPlanetData() {
+        // await loadAndSavePlanets();
+    }
 }
+
+const loadPlanetDataFactory = createSingletonFactory(createLoadPlanetData);
 
 export {
-    loadPlanetData,
-    applyPlanetApi,
-}
+    loadPlanetDataFactory,
+    applyPlanetApiFactory,
+};
+

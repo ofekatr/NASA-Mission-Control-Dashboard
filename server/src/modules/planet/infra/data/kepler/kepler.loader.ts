@@ -1,11 +1,12 @@
 import { verifyHabitablePlanet as verifyHabitablePlanetDep } from "@planet/domain/kepler-planet";
 import Planet from "@planet/domain/planet";
 import { getBasePath } from "@shared/utils/path.utils";
+import { createSingletonFactory } from "@shared/utils/singleton.utils";
 import parseDep from "csv-parse";
 import { createReadStream as createReadStreamDep } from "fs";
 import { join as joinDep } from "path";
 
-function createPlanetLoader(
+function createLoadKeplerPlanets(
     {
         createReadStream = createReadStreamDep,
         join = joinDep,
@@ -14,7 +15,8 @@ function createPlanetLoader(
         createPlanet = Planet.createPlanet,
     } = {}
 ) {
-    async function loadHabitablePlanet(habitablePlanet: Planet[]) {
+    return async function loadHabitablePlanet(): Promise<Planet[]> {
+        const habitablePlanets: Planet[] = [];
         return new Promise((resolve, reject) => {
             createReadStream(join(getBasePath(), 'data', 'kepler_data.csv'))
                 .pipe(parse({
@@ -23,19 +25,19 @@ function createPlanetLoader(
                 }))
                 .on('data', (data) => {
                     if (verifyValidPlanet(data)) {
-                        habitablePlanet.push(createPlanet(data));
+                        habitablePlanets.push(createPlanet(data));
                     }
                 })
                 .on('error', (err) => {
                     reject(err);
                 })
                 .on('end', () => {
-                    resolve(habitablePlanet);
+                    resolve(habitablePlanets);
                 });
         });
     }
-
-    return loadHabitablePlanet;
 }
 
-export default createPlanetLoader;
+const loadKeplerPlanetsFactory = createSingletonFactory(createLoadKeplerPlanets)
+
+export default loadKeplerPlanetsFactory;

@@ -1,11 +1,19 @@
 
 import launchRouterFactory from "@launch/infra/http/express/launch.router";
+import { createSingletonFactory } from "@shared/utils/singleton.utils";
 import { Express } from "express";
 
-function applyLaunchApi(app: Express) {
-    const launchRouter = launchRouterFactory();
-    app.use("/launch", launchRouter);
-    return app;
+function createApplyLaunchApi(
+    {
+        launchRouter = launchRouterFactory(),
+    } = {}
+) {
+    return function applyLaunchApi(app: Express) {
+        app.use("/launch", launchRouter);
+        return app;
+    }
 }
 
-export default applyLaunchApi;
+const applyLaunchApiFactory = createSingletonFactory(createApplyLaunchApi);
+
+export default applyLaunchApiFactory;

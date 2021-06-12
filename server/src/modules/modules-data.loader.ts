@@ -1,9 +1,16 @@
-import { loadPlanetData } from "@planet";
+import { loadPlanetDataFactory } from "@planet";
+import { createSingletonFactory } from "@shared/utils/singleton.utils";
 
-async function loadModulesData() {
-    await loadPlanetData();
+function createLoadModuleData(
+    {
+        loadPlanetData = loadPlanetDataFactory(),
+    } = {}
+) {
+    return async function loadModulesData() {
+        await loadPlanetData();
+    }
 }
 
-export {
-    loadModulesData,
-}
+const loadModuleDataFactory = createSingletonFactory(createLoadModuleData);
+
+export default loadModuleDataFactory;

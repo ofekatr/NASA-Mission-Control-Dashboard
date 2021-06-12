@@ -1,5 +1,5 @@
-import applyLaunchApi from "@launch/infra/http/express";
+import applyLaunchApiFactory from "@launch/infra/http/express";
 
 export {
-    applyLaunchApi,
+    applyLaunchApiFactory as applyLaunchApiFactory,
 }
