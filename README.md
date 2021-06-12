@@ -1,7 +1,7 @@
 # NASA-Mission-Control-Dashboard
 
 ## Description:
-A NASA dashboard app for managing and monitoring flights to habitable planets in the observable universe.
+A NASA dashboard app for managing and monitoring spaceflights to habitable planets in the observable universe.
 
 ## Architecture details:
 * Server
@@ -12,6 +12,7 @@ A NASA dashboard app for managing and monitoring flights to habitable planets in
 * Server
     * REST API - Implemented in TypeScript, using Express.js.
     * Persistence by MongoDB via TypeORM.
+    * Includes a Dependency Injection mechanism implementation.
     * Consumes planets related data provided by public NASA resources.
 * Web App
    *  Implemented in TypeScript, using React.
