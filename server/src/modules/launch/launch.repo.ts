@@ -1,9 +1,9 @@
 import { getRepository } from "@core/infra/data/db/typeorm/mongo";
+import Launch from "@launch/domain/launch";
 import { deepFreezeAndSeal } from "@shared/utils/object.utils";
 import { createSingletonFactory } from "@shared/utils/singleton.utils";
 import notFound from "@shared/validators/not-found";
 import { requiredArgument } from "@shared/validators/required-argument";
-import Launch from "@launch/domain/launch";
 
 function createLaunchRepo({
     db = getRepository(Launch),
@@ -26,7 +26,13 @@ function createLaunchRepo({
     async function verifyLaunchExists(
         flightNumber: number = requiredArgument("flightNumber")
     ) {
-        return !!(await db.count({ flightNumber }));
+        return !!(
+            await db.findOne(
+                {
+                    where: { flightNumber }, select: ["flightNumber"]
+                }
+            )
+        );
     }
 
     async function saveLaunch(launch: Launch) {
