@@ -14,7 +14,7 @@ function createLaunchRepo({
     mapMongoDtoToDomain = mapMongoDtoToDomainFactory(),
     mapDomainToMongoDto = mapDomainToMongoDtoFactory(),
 } = {}) {
-    async function dbGetAllLaunches(): Promise<Launch[]> {
+    async function dbGetAll(): Promise<Launch[]> {
         return await Promise.all(
             await db
                 .find()
@@ -25,7 +25,7 @@ function createLaunchRepo({
         );
     }
 
-    async function dbGetLaunchByFlightNumber(
+    async function dbGet(
         flightNumber: string = requiredArgument("flightNumber")
     ): Promise<Launch> {
         const dbLaunch = (
@@ -39,7 +39,7 @@ function createLaunchRepo({
         return await mapMongoDtoToDomain(dbLaunch);
     }
 
-    async function dbVerifyLaunchExists(
+    async function dbCheckExists(
         flightNumber: string = requiredArgument("flightNumber")
     ) {
         return !!(
@@ -53,7 +53,7 @@ function createLaunchRepo({
         );
     }
 
-    async function dbSaveLaunch(launch: Launch) {
+    async function dbSave(launch: Launch) {
         const dbLaunch = mapDomainToMongoDto(launch);
         const { result } = await db.updateOne(
             {
@@ -72,10 +72,10 @@ function createLaunchRepo({
     }
 
     return deepFreezeAndSeal({
-        dbSaveLaunch,
-        dbGetAllLaunches,
-        dbGetLaunchByFlightNumber,
-        dbVerifyLaunchExists,
+        dbSave,
+        dbGetAll,
+        dbGet,
+        dbCheckExists,
     });
 }
 

@@ -12,7 +12,7 @@ function createAddNewLaunch(
 ) {
     return async function addNewLaunch(request: AddNewLaunchDTO) {
         const launch: Launch = await mapAddNewLaunchDtoToDomain(request);
-        return await launchRepo.dbSaveLaunch(launch);
+        return await launchRepo.dbSave(launch);
     }
 }
 
