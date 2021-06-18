@@ -1,6 +1,6 @@
 import Planet from "@planet/domain/models/planet";
 import IKeplerDto from "@planet/infra/data/kepler/dtos/kepler";
-import mapKeplerDtoToDomainFactory from "@planet/infra/data/kepler/kepler.mapper";
+import mapKeplerDtoToDomainFactory from "@planet/infra/data/kepler/mappers/kepler";
 import KeplerPlanet from "@planet/infra/data/kepler/models/kepler-planet";
 import { getBasePath } from "@shared/utils/path.utils";
 import { createSingletonFactory } from "@shared/utils/singleton.utils";
@@ -8,7 +8,7 @@ import parseDep from "csv-parse";
 import { createReadStream as createReadStreamDep } from "fs";
 import { join as joinDep } from "path";
 
-function createLoadKeplerPlanets(
+function createKeplerClient(
     {
         createReadStream = createReadStreamDep,
         join = joinDep,
@@ -18,7 +18,7 @@ function createLoadKeplerPlanets(
         mapKeplerDtoToDomain = mapKeplerDtoToDomainFactory(),
     } = {}
 ) {
-    return async function loadHabitablePlanet(): Promise<Planet[]> {
+    async function loadHabitablePlanet(): Promise<Planet[]> {
         const habitablePlanets: Planet[] = [];
         return new Promise((resolve, reject) => {
             createReadStream(join(getBasePath(), 'data', 'kepler_data.csv'))
@@ -42,8 +42,12 @@ function createLoadKeplerPlanets(
                 });
         });
     }
+
+    return {
+        loadHabitablePlanet,
+    }
 }
 
-const loadKeplerPlanetsFactory = createSingletonFactory(createLoadKeplerPlanets)
+const keplerClientFactory = createSingletonFactory(createKeplerClient)
 
-export default loadKeplerPlanetsFactory;
+export default keplerClientFactory;

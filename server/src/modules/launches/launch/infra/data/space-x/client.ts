@@ -16,7 +16,7 @@ function createSpaceXClient(
         queryLaunches: `${LAUNCHS_BASE_URL}/query`,
     });
 
-    function queryLaunches(query?: BasicObject) {
+    async function queryLaunches(query?: BasicObject) {
         logger.debug(REQUEST_TO_URL.queryLaunches, query);
     }
 
