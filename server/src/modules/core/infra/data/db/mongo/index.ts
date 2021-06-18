@@ -1,11 +1,11 @@
-import logger from "@core/infra/logs/logger";
-import config from "@shared/config";
-import { createUnion } from "@shared/utils/union.utils";
-import { MongoClient } from "mongodb";
+import logger from '@core/infra/logs/logger';
+import config from '@shared/config';
+import { createUnion } from '@shared/utils/union.utils';
+import { MongoClient } from 'mongodb';
 
 const CollectionNamesUnion = createUnion(
-    "planets",
-    "launches",
+    'planets',
+    'launches',
 )
 export type CollectionNames = typeof CollectionNamesUnion.type;
 
@@ -18,8 +18,8 @@ async function loadDbConnection() {
     });
 
     client.once(
-        "serverOpening",
-        () => logger.info("MongoDb Connection is ready.")
+        'serverOpening',
+        () => logger.info('MongoDb Connection is ready.')
     );
 
     await client.connect();

@@ -1,6 +1,6 @@
-import { createSingletonFactory } from "@shared/utils/singleton.utils";
-import assert from "assert";
-import { v4 } from "uuid";
+import { createSingletonFactory } from '@shared/utils/singleton.utils';
+import assert from 'assert';
+import { v4 } from 'uuid';
 
 function createCreateFlightNumber(
     {
@@ -11,7 +11,7 @@ function createCreateFlightNumber(
         if (flightNumber == undefined)
             return uuid();
 
-        assert(typeof flightNumber === "string", `Invalid flight number - ${flightNumber}`);
+        assert(typeof flightNumber === 'string', `Invalid flight number - ${flightNumber}`);
 
         return flightNumber;
     }

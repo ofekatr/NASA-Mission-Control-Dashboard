@@ -1,8 +1,8 @@
 
-import handleError from "@shared/errors/error-handler";
-import { verifyCustomError } from "@shared/errors/error-objects/custom-error";
-import CustomHttpError, { mapCustomErrorToCustomHttpError, verifyCustomHttpError } from "@shared/errors/error-objects/custom-http-error";
-import { Express, NextFunction, Request, Response } from "express";
+import handleError from '@shared/errors/error-handler';
+import { verifyCustomError } from '@shared/errors/error-objects/custom-error';
+import CustomHttpError, { mapCustomErrorToCustomHttpError, verifyCustomHttpError } from '@shared/errors/error-objects/custom-http-error';
+import { Express, NextFunction, Request, Response } from 'express';
 
 function errorHandlerMiddleware(err: Error, _req: Request, res: Response, _next: NextFunction) {
     handleError(err);

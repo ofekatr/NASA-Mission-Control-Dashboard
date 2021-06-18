@@ -1,5 +1,5 @@
-import { CustomErrorsUnion } from "@shared/errors/error-objects/custom-error";
-import { CustomHttpErrorsUnion } from "@shared/errors/error-objects/custom-http-error";
+import { CustomErrorsUnion } from '@shared/errors/error-objects/custom-error';
+import { CustomHttpErrorsUnion } from '@shared/errors/error-objects/custom-http-error';
 
 export interface CustomErrorData {
     toString: (..._args: any[]) => string;

@@ -1,2 +1,2 @@
-describe("Planet Model", function () {
+describe('Planet Model', function () {
 });

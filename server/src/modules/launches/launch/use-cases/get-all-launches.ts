@@ -1,5 +1,5 @@
-import launchRepoFactory from "@launch/launch.repo";
-import { createSingletonFactory } from "@shared/utils/singleton.utils";
+import launchRepoFactory from '@launch/launch.repo';
+import { createSingletonFactory } from '@shared/utils/singleton.utils';
 
 function createGetAllLaunches(
     {

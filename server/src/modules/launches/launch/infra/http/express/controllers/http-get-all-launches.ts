@@ -1,6 +1,6 @@
-import { Request, Response, NextFunction } from "express";
-import { getAllLaunchesFactory } from "@launch/use-cases";
-import { createSingletonFactory } from "@shared/utils/singleton.utils";
+import { Request, Response, NextFunction } from 'express';
+import { getAllLaunchesFactory } from '@launch/use-cases';
+import { createSingletonFactory } from '@shared/utils/singleton.utils';
 
 function createHttpGetAllLaunches(
     {

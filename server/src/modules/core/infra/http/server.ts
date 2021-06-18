@@ -1,8 +1,8 @@
-import createAppFactory from "@core/infra/http/express/app";
-import configDep from "@shared/config";
-import { createSingletonFactory } from "@shared/utils/singleton.utils";
-import loggerDep from "core/infra/logs/logger";
-import httpDep from "http";
+import createAppFactory from '@core/infra/http/express/app';
+import configDep from '@shared/config';
+import { createSingletonFactory } from '@shared/utils/singleton.utils';
+import loggerDep from 'core/infra/logs/logger';
+import httpDep from 'http';
 
 function createStartServer(
     {

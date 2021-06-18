@@ -1,7 +1,7 @@
 
-import planetRepoFactory from "@planet/planet.repo";
-import { createSingletonFactory } from "@shared/utils/singleton.utils";
-import keplerClientFactory from "./client";
+import planetRepoFactory from '@planet/planet.repo';
+import { createSingletonFactory } from '@shared/utils/singleton.utils';
+import keplerClientFactory from './client';
 
 function createLoadKeplerData(
     {

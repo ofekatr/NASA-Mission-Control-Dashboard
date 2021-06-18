@@ -1,4 +1,4 @@
-import { requiredArgument } from "@shared/validators/required-argument";
+import { requiredArgument } from '@shared/validators/required-argument';
 
 export interface CreateLaunchProps {
     flightNumber: string;
@@ -12,14 +12,14 @@ export interface CreateLaunchProps {
 }
 
 function extractCreateLaunchProps({
-    flightNumber = requiredArgument("flightNumber"),
-    launchDate = requiredArgument("launchDate"),
-    mission = requiredArgument("mission"),
-    rocket = requiredArgument("rocket"),
-    target = requiredArgument("target"),
+    flightNumber = requiredArgument('flightNumber'),
+    launchDate = requiredArgument('launchDate'),
+    mission = requiredArgument('mission'),
+    rocket = requiredArgument('rocket'),
+    target = requiredArgument('target'),
     success = true,
     upcoming = true,
-}: CreateLaunchProps = requiredArgument("createLaunchProps")) {
+}: CreateLaunchProps = requiredArgument('createLaunchProps')) {
     return {
         flightNumber,
         launchDate,
@@ -46,7 +46,7 @@ export default class Launch {
     }
 
     static createLaunch(
-        props: CreateLaunchProps = requiredArgument("createLaunchProps")
+        props: CreateLaunchProps = requiredArgument('createLaunchProps')
     ) {
         return new Launch({
             ...extractCreateLaunchProps(props),

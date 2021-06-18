@@ -1,16 +1,16 @@
-import { getRepository } from "@core/infra/data/db";
-import Launch from "@launch/domain/models/launch";
-import ILaunchMongoDto from "@launch/infra/data/db/mongo/launch.dto";
-import { mapDomainToMongoDtoFactory, mapMongoDtoToDomainFactory } from "@launch/infra/data/db/mongo/launch.mapper";
-import { deepFreezeAndSeal } from "@shared/utils/object.utils";
-import { createSingletonFactory } from "@shared/utils/singleton.utils";
-import notFound from "@shared/validators/not-found";
-import { requiredArgument } from "@shared/validators/required-argument";
-import assert from "assert";
-import { Collection } from "mongodb";
+import { getRepository } from '@core/infra/data/db';
+import Launch from '@launch/domain/models/launch';
+import ILaunchMongoDto from '@launch/infra/data/db/mongo/launch.dto';
+import { mapDomainToMongoDtoFactory, mapMongoDtoToDomainFactory } from '@launch/infra/data/db/mongo/launch.mapper';
+import { deepFreezeAndSeal } from '@shared/utils/object.utils';
+import { createSingletonFactory } from '@shared/utils/singleton.utils';
+import notFound from '@shared/validators/not-found';
+import { requiredArgument } from '@shared/validators/required-argument';
+import assert from 'assert';
+import { Collection } from 'mongodb';
 
 function createLaunchRepo({
-    db = getRepository("launches") as Collection<ILaunchMongoDto>,
+    db = getRepository('launches') as Collection<ILaunchMongoDto>,
     mapMongoDtoToDomain = mapMongoDtoToDomainFactory(),
     mapDomainToMongoDto = mapDomainToMongoDtoFactory(),
 } = {}) {
@@ -26,7 +26,7 @@ function createLaunchRepo({
     }
 
     async function dbGet(
-        flightNumber: string = requiredArgument("flightNumber")
+        flightNumber: string = requiredArgument('flightNumber')
     ): Promise<Launch> {
         const dbLaunch = (
             await db.findOne(
@@ -40,7 +40,7 @@ function createLaunchRepo({
     }
 
     async function dbCheckExists(
-        flightNumber: string = requiredArgument("flightNumber")
+        flightNumber: string = requiredArgument('flightNumber')
     ) {
         return !!(
             await db.findOne(

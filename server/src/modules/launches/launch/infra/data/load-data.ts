@@ -1,5 +1,5 @@
-import loadSpaceXLaunchesFactory from "@launch/infra/data/space-x/load-data";
-import { createSingletonFactory } from "@shared/utils/singleton.utils";
+import loadSpaceXLaunchesFactory from '@launch/infra/data/space-x/load-data';
+import { createSingletonFactory } from '@shared/utils/singleton.utils';
 
 function createLoadLaunchModuleData(
     {

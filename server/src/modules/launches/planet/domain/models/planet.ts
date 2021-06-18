@@ -1,8 +1,8 @@
-import { CreatePlanetProps } from "@planet/planet.defs";
-import { requiredArgument } from "@shared/validators/required-argument";
+import { CreatePlanetProps } from '@planet/planet.defs';
+import { requiredArgument } from '@shared/validators/required-argument';
 
 const extractAndAssertCreatePlanetProps = ({
-    keplerName = requiredArgument("keplerName"),
+    keplerName = requiredArgument('keplerName'),
 }: CreatePlanetProps) => ({
     keplerName,
 });

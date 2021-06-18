@@ -3,9 +3,9 @@ import {
     httpAbortLaunchFactory,
     httpAddNewLaunchFactory,
     httpGetAllLaunchesFactory
-} from "@launch/infra/http/express/controllers";
-import { createSingletonFactory } from "@shared/utils/singleton.utils";
-import { Router as expressRouter } from "express";
+} from '@launch/infra/http/express/controllers';
+import { createSingletonFactory } from '@shared/utils/singleton.utils';
+import { Router as expressRouter } from 'express';
 
 function createLaunchRouter(
     {
@@ -16,11 +16,11 @@ function createLaunchRouter(
     } = {}) {
     const launchRouter = Router();
 
-    launchRouter.get("/", httpGetAllLaunches);
+    launchRouter.get('/', httpGetAllLaunches);
 
-    launchRouter.post("/", httpAddNewLaunch);
+    launchRouter.post('/', httpAddNewLaunch);
 
-    launchRouter.delete("/:flightNumber", httpAbortLaunch);
+    launchRouter.delete('/:flightNumber', httpAbortLaunch);
 
     return launchRouter;
 }

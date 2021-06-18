@@ -1,6 +1,6 @@
-import { loadPlanetModuleDataFactory } from "@planet";
-import { loadLaunchDataFactory } from "@launch";
-import { createSingletonFactory } from "@shared/utils/singleton.utils";
+import { loadPlanetModuleDataFactory } from '@planet';
+import { loadLaunchDataFactory } from '@launch';
+import { createSingletonFactory } from '@shared/utils/singleton.utils';
 
 function createLoadModuleData(
     {

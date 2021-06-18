@@ -1,4 +1,4 @@
-import { deepFreezeAndSeal } from "@shared/utils/object.utils";
+import { deepFreezeAndSeal } from '@shared/utils/object.utils';
 
 type UnionElementsType = string | number;
 

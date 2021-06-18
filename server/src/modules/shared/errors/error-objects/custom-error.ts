@@ -1,22 +1,22 @@
-import { CustomErrorType, CustomErrorTypeToDataMap } from "@shared/definitions/errors";
-import { createUnion } from "@shared/utils/union.utils";
+import { CustomErrorType, CustomErrorTypeToDataMap } from '@shared/definitions/errors';
+import { createUnion } from '@shared/utils/union.utils';
 
 
 export const CustomErrorsUnion = createUnion(
-    "default",
-    "notFound",
-    "requiredArgument",
-    "invalidDateInput",
-    "invalidNumber",
-    "invalidPlanet"
+    'default',
+    'notFound',
+    'requiredArgument',
+    'invalidDateInput',
+    'invalidNumber',
+    'invalidPlanet'
 );
 
 export const customErrorTypeToDataMap: CustomErrorTypeToDataMap = {
     default: {
-        toString: () => "An error has occurred.",
+        toString: () => 'An error has occurred.',
     },
     notFound: {
-        toString: () => "The resource was not found.",
+        toString: () => 'The resource was not found.',
     },
     requiredArgument: {
         toString: (argument) => `${argument} can not be null or undefined.`,
@@ -39,7 +39,7 @@ export abstract class BaseAbstractCustomError extends Error {
 }
 
 export default class CustomError extends BaseAbstractCustomError {
-    constructor(customErrorType: CustomErrorType = "default", ...args: any) {
+    constructor(customErrorType: CustomErrorType = 'default', ...args: any) {
         super(customErrorType, customErrorTypeToDataMap[customErrorType]?.toString(args)!);
 
         if (Error.captureStackTrace) {

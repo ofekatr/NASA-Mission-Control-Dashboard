@@ -1,6 +1,6 @@
-import launchRepoFactory from "@launch/launch.repo";
-import { createSingletonFactory } from "@shared/utils/singleton.utils";
-import notFound from "@shared/validators/not-found";
+import launchRepoFactory from '@launch/launch.repo';
+import { createSingletonFactory } from '@shared/utils/singleton.utils';
+import notFound from '@shared/validators/not-found';
 
 function createAbortLaunch(
     {

@@ -1,7 +1,7 @@
 
-import planetRouterFactory from "@planet/infra/http/express/planet.router";
-import { createSingletonFactory } from "@shared/utils/singleton.utils";
-import { Express } from "express";
+import planetRouterFactory from '@planet/infra/http/express/planet.router';
+import { createSingletonFactory } from '@shared/utils/singleton.utils';
+import { Express } from 'express';
 
 function createApplyPlanetApi(
     {
@@ -9,7 +9,7 @@ function createApplyPlanetApi(
     } = {}
 ) {
     return function applyPlanetApi(app: Express): Express {
-        app.use("/planet", planetRouter);
+        app.use('/planet', planetRouter);
         return app;
     }
 }

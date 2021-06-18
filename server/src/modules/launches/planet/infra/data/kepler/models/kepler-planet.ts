@@ -1,5 +1,5 @@
-import IKeplerDto from "@planet/infra/data/kepler/dtos/kepler";
-import { requiredArgument } from "@shared/validators/required-argument";
+import IKeplerDto from '@planet/infra/data/kepler/dtos/kepler';
+import { requiredArgument } from '@shared/validators/required-argument';
 
 export interface CreateKeplerPlanetProps {
     keplerName: string;
@@ -7,8 +7,8 @@ export interface CreateKeplerPlanetProps {
 
 const extractCreateKeplerPlanetProps = (
     {
-        keplerName = requiredArgument("keplerPlanet"),
-    }: CreateKeplerPlanetProps = requiredArgument("createKeplerPlanetProps")
+        keplerName = requiredArgument('keplerPlanet'),
+    }: CreateKeplerPlanetProps = requiredArgument('createKeplerPlanetProps')
 ): CreateKeplerPlanetProps => ({
     keplerName
 })
@@ -21,7 +21,7 @@ export default class KeplerPlanet {
     keplerName: string;
 
     static createKeplerPlanet(
-        props: CreateKeplerPlanetProps = requiredArgument("createKeplerPlanetProps"),
+        props: CreateKeplerPlanetProps = requiredArgument('createKeplerPlanetProps'),
     ): KeplerPlanet {
         return new KeplerPlanet(
             extractCreateKeplerPlanetProps(props)

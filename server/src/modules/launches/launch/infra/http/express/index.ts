@@ -1,7 +1,7 @@
 
-import launchRouterFactory from "@launch/infra/http/express/launch.router";
-import { createSingletonFactory } from "@shared/utils/singleton.utils";
-import { Express } from "express";
+import launchRouterFactory from '@launch/infra/http/express/launch.router';
+import { createSingletonFactory } from '@shared/utils/singleton.utils';
+import { Express } from 'express';
 
 function createApplyLaunchApi(
     {
@@ -9,7 +9,7 @@ function createApplyLaunchApi(
     } = {}
 ) {
     return function applyLaunchApi(app: Express) {
-        app.use("/launch", launchRouter);
+        app.use('/launch', launchRouter);
         return app;
     }
 }

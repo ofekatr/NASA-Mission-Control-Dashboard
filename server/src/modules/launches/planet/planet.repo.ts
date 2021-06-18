@@ -1,17 +1,17 @@
-import { getRepository } from "@core/infra/data/db";
-import Planet from "@planet/domain/models/planet";
-import IPlanetMongoDto from "@planet/infra/data/db/mongo/planet.dto";
-import { mapDomainToMongoDtoFactory, mapMongoDtoToDomainFactory } from "@planet/infra/data/db/mongo/planet.mapper";
-import { deepFreezeAndSeal } from "@shared/utils/object.utils";
-import { createSingletonFactory } from "@shared/utils/singleton.utils";
-import notFound from "@shared/validators/not-found";
-import { requiredArgument } from "@shared/validators/required-argument";
-import assert from "assert";
-import { Collection } from "mongodb";
+import { getRepository } from '@core/infra/data/db';
+import Planet from '@planet/domain/models/planet';
+import IPlanetMongoDto from '@planet/infra/data/db/mongo/planet.dto';
+import { mapDomainToMongoDtoFactory, mapMongoDtoToDomainFactory } from '@planet/infra/data/db/mongo/planet.mapper';
+import { deepFreezeAndSeal } from '@shared/utils/object.utils';
+import { createSingletonFactory } from '@shared/utils/singleton.utils';
+import notFound from '@shared/validators/not-found';
+import { requiredArgument } from '@shared/validators/required-argument';
+import assert from 'assert';
+import { Collection } from 'mongodb';
 
 function createPlanetRepo(
     {
-        db = getRepository("planets") as Collection<IPlanetMongoDto>,
+        db = getRepository('planets') as Collection<IPlanetMongoDto>,
         mapMongoDtoToDomain = mapMongoDtoToDomainFactory(),
         mapDomainToMongoDto = mapDomainToMongoDtoFactory(),
     } = {}

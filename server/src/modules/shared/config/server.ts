@@ -1,5 +1,5 @@
 function extractServerConfigFromEnv({
-    NODE_ENV = "development",
+    NODE_ENV = 'development',
     PORT = 8080,
 }: any) {
     return {

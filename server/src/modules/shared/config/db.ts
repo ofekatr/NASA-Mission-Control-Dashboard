@@ -1,7 +1,7 @@
-import { requiredArgument } from "@shared/validators/required-argument";
+import { requiredArgument } from '@shared/validators/required-argument';
 
 function extractDbConfigFromEnv({
-    DB_URL = requiredArgument("DB_URL"),
+    DB_URL = requiredArgument('DB_URL'),
 }: any) {
     return {
         url: DB_URL,

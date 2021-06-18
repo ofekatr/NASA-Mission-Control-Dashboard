@@ -1,4 +1,4 @@
-import { ObjectID } from "mongodb";
+import { ObjectID } from 'mongodb';
 
 export default interface ILaunchMongoDto {
     _id?: ObjectID;

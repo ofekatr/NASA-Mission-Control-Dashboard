@@ -1,5 +1,5 @@
-import planetRepoFactory from "@planet/planet.repo";
-import { createSingletonFactory } from "@shared/utils/singleton.utils";
+import planetRepoFactory from '@planet/planet.repo';
+import { createSingletonFactory } from '@shared/utils/singleton.utils';
 
 function createGetAllPlanets(
     {

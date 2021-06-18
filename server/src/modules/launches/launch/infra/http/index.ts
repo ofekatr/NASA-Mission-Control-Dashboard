@@ -1,4 +1,4 @@
-import applyLaunchApiFactory from "./express";
+import applyLaunchApiFactory from './express';
 
 export {
     applyLaunchApiFactory,

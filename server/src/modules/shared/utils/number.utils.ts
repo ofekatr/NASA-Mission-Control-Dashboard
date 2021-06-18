@@ -1,9 +1,9 @@
-import CustomError from "@shared/errors/error-objects/custom-error";
+import CustomError from '@shared/errors/error-objects/custom-error';
 
 
 function assertNumber(val: any): asserts val is number {
     if (!isNumber(val)) {
-        throw new CustomError("invalidNumber", val);
+        throw new CustomError('invalidNumber', val);
     }
 }
 

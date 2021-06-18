@@ -1,4 +1,4 @@
-import { getRepository, loadDbConnection } from "@core/infra/data/db/mongo";
+import { getRepository, loadDbConnection } from '@core/infra/data/db/mongo';
 
 export {
     getRepository,

@@ -1,6 +1,6 @@
-import { getAllPlanetsFactory } from "@planet/use-cases";
-import { createSingletonFactory } from "@shared/utils/singleton.utils";
-import { NextFunction, Request, Response } from "express";
+import { getAllPlanetsFactory } from '@planet/use-cases';
+import { createSingletonFactory } from '@shared/utils/singleton.utils';
+import { NextFunction, Request, Response } from 'express';
 
 function createHttpGetAllPlanets(
     {

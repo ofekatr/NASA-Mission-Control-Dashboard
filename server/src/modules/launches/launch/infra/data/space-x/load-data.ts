@@ -1,5 +1,5 @@
-import { createSingletonFactory } from "@shared/utils/singleton.utils";
-import spaceXClientFactory from "@launch/infra/data/space-x/client";
+import { createSingletonFactory } from '@shared/utils/singleton.utils';
+import spaceXClientFactory from '@launch/infra/data/space-x/client';
 
 function createLoadSpaceXLaunches(
     {
