@@ -54,7 +54,7 @@ function createPlanetRepo(
         );
 
         assert(
-            result.nModified === 1 && result.ok === 1,
+            result.nModified <= 1 && result.ok === 1,
             `Planet Kepler Name: ${planet.keplerName} - Failed to save`
         );
     }
