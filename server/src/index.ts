@@ -10,11 +10,11 @@ async function main() {
     const { startServerFactory } = require('@core/infra/http');
     const { loadModuleDataFactory } = require('@modules');
 
-    const startServer = startServerFactory();
-    startServer();
-
     const loadModulesData = loadModuleDataFactory();
     await loadModulesData();
+
+    const startServer = startServerFactory();
+    startServer();
 }
 
 main();

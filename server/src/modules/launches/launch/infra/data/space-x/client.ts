@@ -1,5 +1,3 @@
-import logger from '@core/infra/logs/logger';
-import { BasicObject } from '@shared/definitions/general';
 import { deepFreezeAndSeal } from '@shared/utils/object.utils';
 import { createSingletonFactory } from '@shared/utils/singleton.utils';
 import axios from 'axios';
@@ -17,9 +15,14 @@ function createSpaceXClient(
         queryLaunches: `${LAUNCHS_BASE_URL}/query`,
     });
 
-    async function queryLaunches(query?: BasicObject) {
-        logger.debug(REQUEST_TO_URL.queryLaunches, query);
-        const data = await axios.post(REQUEST_TO_URL.queryLaunches)
+    async function queryLaunches({
+        query = {},
+        options = {}
+    } = {}) {
+        return await axios.post(REQUEST_TO_URL.queryLaunches, {
+            query,
+            options,
+        });
     }
 
     return deepFreezeAndSeal({
