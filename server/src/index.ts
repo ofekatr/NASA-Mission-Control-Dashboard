@@ -7,9 +7,9 @@ async function main() {
     logger.info(`Environment: ${config.nodeEnv}`);
     await loadDbConnection();
 
-    const startServerFactory = require("@core/infra/http/server").default;
-    const loadModuleDataFactory = require("@modules/load-modules-data").default;
-    
+    const { startServerFactory } = require("@core/infra/http");
+    const { loadModuleDataFactory } = require("@modules");
+
     const startServer = startServerFactory();
     startServer();
 
