@@ -7,9 +7,19 @@ function createLoadSpaceXLaunches(
     } = {}
 ) {
     return async function loadSpaceXLaunches() {
-        await queryLaunches();
+        await queryLaunches({
+            options: {
+                populate: [
+                    {
+                        path: 'rocket',
+                        select: {
+                            name: 1,
+                        }
+                    }
+                ]
+            },
+        })
     }
-
 }
 
 const loadSpaceXLaunchesFactory = createSingletonFactory(createLoadSpaceXLaunches);
