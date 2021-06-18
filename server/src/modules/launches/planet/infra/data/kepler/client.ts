@@ -13,7 +13,7 @@ function createKeplerClient(
         createReadStream = createReadStreamDep,
         join = joinDep,
         parse = parseDep,
-        verifyValidPlanet = KeplerPlanet.verifyHabitablePlanetByRawData,
+        verifyValidPlanet = KeplerPlanet.checkHabitablePlanetByRawData,
         createPlanet = Planet.createPlanet,
         mapKeplerDtoToDomain = mapKeplerDtoToDomainFactory(),
     } = {}

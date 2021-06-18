@@ -11,7 +11,7 @@ function createMapAddNewLaunchDtoToDomain(
         createFlightNumber = createFlightNumberFactory(),
         createLaunchDate = createLaunchDateFactory(),
         createTarget = createTargetFactory(),
-        createLaunch = Launch.createLaunch,
+        scheduleLaunch = Launch.schedule,
     } = {}
 ) {
     return async function mapAddNewLaunchDtoToDomain(
@@ -24,12 +24,12 @@ function createMapAddNewLaunchDtoToDomain(
     ): Promise<Launch> {
         const flightNumberValue = createFlightNumber();
         const launchDateValue = createLaunchDate(launchDate);
-        const targetValue = await createTarget(target);
+        const targetValue = await createTarget({ target, upcoming: true });
 
-        return createLaunch({
+        return scheduleLaunch({
             flightNumber: flightNumberValue,
             launchDate: launchDateValue,
-            target: targetValue,
+            target: targetValue!,
             mission,
             rocket,
         })

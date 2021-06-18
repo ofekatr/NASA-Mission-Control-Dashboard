@@ -67,12 +67,21 @@ function createLaunchRepo({
             }
         );
 
-        assert(result.ok === 1 && result.nModified === 1,
+        assert(result.ok === 1 && result.nModified <= 1,
             `Flight Number: ${launch.flightNumber} - Failed to save launch`);
+    }
+
+    async function dbSaveAll(launches: Launch[]) {
+        return await Promise.all(
+            launches.map(
+                async (planet) => await dbSave(planet)
+            )
+        );
     }
 
     return deepFreezeAndSeal({
         dbSave,
+        dbSaveAll,
         dbGetAll,
         dbGet,
         dbCheckExists,

@@ -1,6 +1,6 @@
 import { BasicObject } from '@shared/definitions/general';
 
-function checkIfObjectHasNullProperties(object: BasicObject): boolean {
+function checkObjectHasNullProperties(object: BasicObject): boolean {
     return [...Object.values(object)].some(value => value == null);
 }
 
@@ -18,16 +18,20 @@ function deepFreezeAndSeal<T extends BasicObject>(obj: T) {
     return freezeAndSeal(obj);
 }
 
-const objectUtils = {
-    freezeAndSeal,
-    deepFreezeAndSeal,
-    checkIfObjectHasNullProperties,
+function extractProperties<T extends BasicObject, U extends keyof T>(
+    obj: T,
+    properties: U[]
+) {
+    const res: { [key in typeof properties[number]]: T[key] } = {} as { [key in typeof properties[number]]: T[key] };
+    properties.forEach((property) => {
+        res[property] = obj[property];
+    });
+    return res;
 }
 
 export {
     freezeAndSeal,
     deepFreezeAndSeal,
-    checkIfObjectHasNullProperties,
+    checkObjectHasNullProperties,
+    extractProperties,
 };
-
-export default objectUtils;

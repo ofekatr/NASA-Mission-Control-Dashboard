@@ -11,9 +11,9 @@ function createCreateFlightNumber(
         if (flightNumber == undefined)
             return uuid();
 
-        assert(typeof flightNumber === 'string', `Invalid flight number - ${flightNumber}`);
+        assert(typeof flightNumber != 'undefined', `Invalid flight number - ${flightNumber}`);
 
-        return flightNumber;
+        return `${flightNumber}`;
     }
 }
 

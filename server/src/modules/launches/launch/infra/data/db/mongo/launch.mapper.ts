@@ -18,8 +18,8 @@ function createMapDomainToMongoDto(
             mission = requiredArgument('mission'),
             rocket = requiredArgument('rocket'),
             success = requiredArgument('success'),
-            target = requiredArgument('target'),
             upcoming = requiredArgument('upcoming'),
+            target,
             customers,
         }: Launch = requiredArgument('launch')
     ): ILaunchMongoDto {
@@ -59,9 +59,9 @@ function createMapMongoDtoToDomain(
     ): Promise<Launch> {
         const flightNumberValue = createFlightNumber(flightNumber);
         const launchDateValue = createLaunchDate(launchDate);
-        const targetValue = await createTarget(target);
+        const targetValue = await createTarget({ target, upcoming });
 
-        return Launch.createLaunch({
+        return Launch.create({
             flightNumber: flightNumberValue,
             launchDate: launchDateValue,
             target: targetValue,
