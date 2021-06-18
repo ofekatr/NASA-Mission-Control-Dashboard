@@ -6,8 +6,8 @@ function createGetAllLaunches(
         launchRepo = launchRepoFactory(),
     } = {},
 ) {
-    async function getAllLaunches() {
-        return await launchRepo.dbGetAll();
+    async function getAllLaunches({ page = 1, limit = 10 } = {}) {
+        return await launchRepo.dbGetAll({ page, limit });
     }
 
     return getAllLaunches;

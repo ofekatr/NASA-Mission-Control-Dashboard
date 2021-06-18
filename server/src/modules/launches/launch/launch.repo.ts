@@ -14,10 +14,12 @@ function createLaunchRepo({
     mapMongoDtoToDomain = mapMongoDtoToDomainFactory(),
     mapDomainToMongoDto = mapDomainToMongoDtoFactory(),
 } = {}) {
-    async function dbGetAll(): Promise<Launch[]> {
+    async function dbGetAll({ page = 1, limit = 10 } = {}): Promise<Launch[]> {
         return await Promise.all(
             await db
                 .find()
+                .skip((page - 1) * limit)
+                .limit(limit)
                 .map(
                     async (dbLaunch) => await mapMongoDtoToDomain(dbLaunch)
                 )
