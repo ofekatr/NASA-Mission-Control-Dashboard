@@ -3,11 +3,11 @@ import { createSingletonFactory } from "@shared/utils/singleton.utils";
 
 function createGetAllPlanets(
     {
-        planetRepo: { dbGetAllPlanets } = planetRepoFactory(),
+        planetRepo: { dbGetAll } = planetRepoFactory(),
     } = {}
 ) {
     return async function getAllPlanets() {
-        return await dbGetAllPlanets();
+        return await dbGetAll();
     }
 }
 

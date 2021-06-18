@@ -4,6 +4,9 @@ import IPlanetMongoDto from "@planet/infra/data/db/mongo/planet.dto";
 import { mapDomainToMongoDtoFactory, mapMongoDtoToDomainFactory } from "@planet/infra/data/db/mongo/planet.mapper";
 import { deepFreezeAndSeal } from "@shared/utils/object.utils";
 import { createSingletonFactory } from "@shared/utils/singleton.utils";
+import notFound from "@shared/validators/not-found";
+import { requiredArgument } from "@shared/validators/required-argument";
+import assert from "assert";
 import { Collection } from "mongodb";
 
 function createPlanetRepo(
@@ -13,7 +16,7 @@ function createPlanetRepo(
         mapDomainToMongoDto = mapDomainToMongoDtoFactory(),
     } = {}
 ) {
-    async function dbGetAllPlanets() {
+    async function dbGetAll(): Promise<Planet[]> {
         return await db
             .find()
             .map(
@@ -22,15 +25,21 @@ function createPlanetRepo(
             .toArray();
     }
 
-    async function dbSavePlanets(planets: Planet[]) {
-        await Promise.all(
-            planets.map(
-                async (planet) => await dbSavePlanet(planet)
+    async function dbGet(
+        keplerName: string = requiredArgument('keplerName')
+    ): Promise<Planet> {
+        const planet = (
+            await db.findOne(
+                {
+                    keplerName,
+                }
             )
-        );
+        ) ?? notFound(`Planet Kepler Name: ${keplerName}`);
+
+        return mapMongoDtoToDomain(planet);
     }
 
-    async function dbSavePlanet(planet: Planet) {
+    async function dbSave(planet: Planet) {
         const dbPlanet = mapDomainToMongoDto(planet);
         const { result } = await db.updateOne(
             {
@@ -44,10 +53,21 @@ function createPlanetRepo(
             },
         );
 
-        return result.nModified === 1 && result.ok === 1;
+        assert(
+            result.nModified === 1 && result.ok === 1,
+            `Planet Kepler Name: ${planet.keplerName} - Failed to save`
+        );
     }
 
-    async function dbVerifyPlanetExistsByKeplerName(
+    async function dbSaveAll(planets: Planet[]): Promise<void> {
+        await Promise.all(
+            planets.map(
+                async (planet) => await dbSave(planet)
+            )
+        );
+    }
+
+    async function dbCheckExists(
         keplerName: string
     ) {
         return !!(
@@ -65,10 +85,11 @@ function createPlanetRepo(
     }
 
     return deepFreezeAndSeal({
-        dbGetAllPlanets,
-        dbSavePlanets,
-        dbSavePlanet,
-        dbVerifyPlanetExistsByKeplerName,
+        dbGet,
+        dbGetAll,
+        dbSave,
+        dbSaveAll,
+        dbCheckExists,
     })
 }
 

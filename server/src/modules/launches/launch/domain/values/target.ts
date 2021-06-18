@@ -5,14 +5,13 @@ import { requiredArgument } from "@shared/validators/required-argument";
 
 function createCreateTarget(
     {
-        planetRepo = planetRepoFactory(),
+        planetRepo: { dbCheckExists } = planetRepoFactory(),
     } = {}
 ) {
     return async function createTarget(
         target: string = requiredArgument("target")
     ): Promise<string> {
-        const isTargetPlanetExists =
-            await planetRepo.dbVerifyPlanetExistsByKeplerName(target);
+        const isTargetPlanetExists = await dbCheckExists(target);
         if (!isTargetPlanetExists)
             throw new CustomError("invalidPlanet", target);
         return target;
